@@ -121,4 +121,21 @@ class OrdersController extends Controller
             ]);
         }
     }
+
+    public function order(Request $request)
+    {
+        try {
+            $order = Order::find($request->id);
+            return response()->json([
+                'success' => true,
+                'post' => $order
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
 }

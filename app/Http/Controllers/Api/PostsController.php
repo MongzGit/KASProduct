@@ -138,6 +138,22 @@ class PostsController extends Controller
         }
     }
 
+    public function post(Request $request)
+    {
+        try {
+            $post = Post::find($request->id);
+            return response()->json([
+                'success' => true,
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
 
 
     public function myPosts()
