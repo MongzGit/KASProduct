@@ -83,6 +83,7 @@ class AuthController extends Controller
             $user->lastname = $request->lastname;
             $user->email = $request->email;
             $user->address = $request->address;
+            $user->location = $request->location;
             $user->password = $request->password;
             $user->phone_number = $request->phone_number;
             $photo = '';
@@ -117,9 +118,11 @@ class AuthController extends Controller
             $user->business_registered = $request->business_registered;
 
             $user->business_name = $request->business_name;
+            $user->business_desc = $request->business_desc;
             $user->business_password = $request->business_password;
             $user->business_email = $request->business_email;
             $user->business_address = $request->business_address;
+            $user->business_location = $request->business_location;
             $user->business_phone_number = $request->business_phone_number;
             $business_photo = '';
             //check if user provided photo

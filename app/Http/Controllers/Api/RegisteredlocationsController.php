@@ -22,7 +22,7 @@ class RegisteredlocationsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'registered_location',
-                'post' => $registeredlocations
+                'registered_locations' => $registeredlocations
             ]);
         } catch (Exception $e) {
             return response()->Json([
