@@ -20,20 +20,21 @@ return new class extends Migration
             $table->string('photo')->default('');
             $table->string('email')->unique()->nullable();
             $table->string('address')->default('');
-            $table->string('location')->default(''); //just added
+            $table->string('location')->default('');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default('');
             $table->string('phone_number')->default('');
             $table->boolean('business_registered')->default(false);
             $table->string('business_name')->default('');
-            $table->string('business_desc')->default(''); //just added
+            $table->string('business_desc')->default('');
             $table->string('business_password')->default('');
             $table->string('business_photo')->default('');
             $table->string('business_email')->unique()->nullable();
             $table->timestamp('business_email_verified_at')->nullable();
             $table->string('business_address')->default('');
-            $table->string('business_location')->default(''); //just added
+            $table->string('business_location')->default('');
             $table->string('business_phone_number')->default('');
+            $table->String('business_type')->default('');
             $table->rememberToken();
             $table->timestamps();
         });

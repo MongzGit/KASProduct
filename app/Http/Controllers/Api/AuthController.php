@@ -124,6 +124,7 @@ class AuthController extends Controller
             $user->business_address = $request->business_address;
             $user->business_location = $request->business_location;
             $user->business_phone_number = $request->business_phone_number;
+            $user->business_type = $request->business_type;
             $business_photo = '';
             //check if user provided photo
             if ($request->business_photo != '') {
