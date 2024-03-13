@@ -16,21 +16,21 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
              $table->unsignedBigInteger('user_id');
-            $table->string('consumable_prod_name');
-            $table->string('business_type')->default('');
-            $table->string('consumable_prod_desc')->default('');
-            $table->unsignedDouble('consumable_prod_price')->default(0.0);
-            $table->string('consumable_prod_photo')->default('');
-            $table->string('consumable_prod_location')->default('');
-            $table->string('news_paper_name')->default('');
-            $table->string('news_title')->default('');
-            $table->string('news_headline')->default('');
-            $table->string('news_byline')->default('');
-            $table->string('news_lead_paragraph')->default('');
-            $table->string('news_explanation_paragraph')->default('');
-            $table->string('news_additional_explanation')->default('');
-            $table->string('news_photo1')->default('');
-            $table->string('news_photo2')->default('');
+            $table->string('consumable_prod_name')->default('')->nullable();
+            $table->string('business_type')->default('')->nullable();
+            $table->string('consumable_prod_desc')->default('')->nullable();
+            $table->unsignedDouble('consumable_prod_price')->default(0.0)->nullable();
+            $table->string('consumable_prod_photo')->default('')->nullable();
+            $table->string('consumable_prod_location')->default('')->nullable();
+            $table->string('news_paper_name')->default('')->nullable();
+            $table->string('news_title')->default('')->nullable();
+            $table->string('news_headline')->default('')->nullable();
+            $table->string('news_byline')->default('')->nullable();
+            $table->string('news_lead_paragraph')->default('')->nullable();
+            $table->string('news_explanation_paragraph')->default('')->nullable();
+            $table->string('news_additional_explanation')->default('')->nullable();
+            $table->string('news_photo1')->default('')->nullable();
+            $table->string('news_photo2')->default('')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')
