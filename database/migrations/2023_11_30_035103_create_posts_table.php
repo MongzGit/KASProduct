@@ -15,13 +15,22 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->string('type')->default('');
-            $table->string('desc')->default('');
-            $table->unsignedDouble('price')->default(0.0);
-            $table->string('photo')->default('');
-            $table->string('location')->default('');
+             $table->unsignedBigInteger('user_id');
+            $table->string('consumable_prod_name');
+            $table->string('business_type')->default('');
+            $table->string('consumable_prod_desc')->default('');
+            $table->unsignedDouble('consumable_prod_price')->default(0.0);
+            $table->string('consumable_prod_photo')->default('');
+            $table->string('consumable_prod_location')->default('');
+            $table->string('news_paper_name')->default('');
+            $table->string('news_title')->default('');
+            $table->string('news_headline')->default('');
+            $table->string('news_byline')->default('');
+            $table->string('news_lead_paragraph')->default('');
+            $table->string('news_explanation_paragraph')->default('');
+            $table->string('news_additional_explanation')->default('');
+            $table->string('news_photo1')->default('');
+            $table->string('news_photo2')->default('');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')

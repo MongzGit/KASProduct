@@ -16,20 +16,42 @@ class PostsController extends Controller
         try {
             $post = new Post;
             $post->user_id = Auth::user()->id;
-            $post->desc = $request->desc;
-            $post->name = $request->name;
-            $post->type = $request->type;
-            $post->price = $request->price;
-            $post->location = $request->location;
+            $post->consumable_prod_desc = $request->consumable_prod_desc;
+            $post->consumable_prod_name = $request->consumable_prod_name;
+            $post->business_type = $request->business_type;
+            $post->consumable_prod_price = $request->consumable_prod_price;
+            $post->consumable_prod_location = $request->consumable_prod_location;
+
+            $post->news_paper_name = $request->news_paper_name;
+            $post->news_title = $request->news_title;
+            $post->news_headline = $request->news_headline;
+            $post->news_byline = $request->news_byline;
+            $post->news_lead_paragraph = $request->news_lead_paragraph;
+            $post->news_explanation_paragraph = $request->news_explanation_paragraph;
+            $post->news_additional_explanation = $request->news_additional_explanation;
 
             //check if post has photo
-            if ($request->photo != '') {
+            if ($request->consumable_prod_photo != '') {
                 //choose a unique name for photo
-                $photo = time() . '.jpg';
-                file_put_contents('storage/posts/' . $photo, base64_decode($request->photo));
-                $post->photo = $photo;
+                $consumable_prod_photo = time() . '.jpg';
+                file_put_contents('storage/posts/' . $consumable_prod_photo, base64_decode($request->consumable_prod_photo));
+                $post->consumable_prod_photo = $consumable_prod_photo;
             }
-            //mistake
+
+            if ($request->news_photo1 != '') {
+                //choose a unique name for photo
+                $news_photo1 = time() . '.jpg';
+                file_put_contents('storage/posts/' . $news_photo1, base64_decode($request->news_photo1));
+                $post->news_photo1 = $news_photo1;
+            }
+
+            if ($request->news_photo2 != '') {
+                //choose a unique name for photo
+                $news_photo2 = time() . '.jpg';
+                file_put_contents('storage/posts/' . $news_photo2, base64_decode($request->news_photo2));
+                $post->news_photo2 = $news_photo2;
+            }
+
             $post->save();
             $post->user;
             return response()->json([
@@ -58,11 +80,20 @@ class PostsController extends Controller
                     'message' => 'unauthorized access'
                 ]);
             }
-            $post->desc = $request->desc;
-            $post->name = $request->name;
-            $post->type = $request->type;
-            $post->price = $request->price;
-            $post->location = $request->location;
+            $post->consumable_prod_desc = $request->consumable_prod_desc;
+            $post->consumable_prod_name = $request->consumable_prod_name;
+            $post->business_type = $request->business_type;
+            $post->consumable_prod_price = $request->consumable_prod_price;
+            $post->consumable_prod_location = $request->consumable_prod_location;
+
+            $post->news_paper_name = $request->news_paper_name;
+            $post->news_title = $request->news_title;
+            $post->news_headline = $request->news_headline;
+            $post->news_byline = $request->news_byline;
+            $post->news_lead_paragraph = $request->news_lead_paragraph;
+            $post->news_explanation_paragraph = $request->news_explanation_paragraph;
+            $post->news_additional_explanation = $request->news_additional_explanation;
+
             $post->update();
             return response()->json([
                 'success' => true,
@@ -153,8 +184,6 @@ class PostsController extends Controller
             ]);
         }
     }
-
-
 
     public function myPosts()
     {
