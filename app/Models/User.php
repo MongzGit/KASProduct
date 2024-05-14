@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\PostBI;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,6 +54,10 @@ class User extends Authenticatable implements JWTSubject
     }
     public function posts(){
         return $this->hasMany(Post::class);
+    }
+
+    public function postBIs(){
+        return $this->hasMany(PostBI::class);
     }
     public function comments(){
         return $this->hasMany(Comment::class);

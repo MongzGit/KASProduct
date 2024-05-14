@@ -34,21 +34,21 @@ class PostsController extends Controller
             if ($request->consumable_prod_photo != '') {
                 //choose a unique name for photo
                 $consumable_prod_photo = time() . '.jpeg';
-                file_put_contents('storage/posts/' . $consumable_prod_photo, base64_decode($request->consumable_prod_photo));
+                file_put_contents('storage/app/public/images/' . $consumable_prod_photo, base64_decode($request->consumable_prod_photo));
                 $post->consumable_prod_photo = $consumable_prod_photo;
             }
 
             if ($request->news_photo1 != '') {
                 //choose a unique name for photo
                 $news_photo1 = time() . '.jpeg';
-                file_put_contents('storage/posts/' . $news_photo1, base64_decode($request->news_photo1));
+                file_put_contents('storage/app/public/images/posts/' . $news_photo1, base64_decode($request->news_photo1));
                 $post->news_photo1 = $news_photo1;
             }
 
             if ($request->news_photo2 != '') {
                 //choose a unique name for photo
-                $news_photo2 = time() . '.jpeg';
-                file_put_contents('storage/posts/' . $news_photo2, base64_decode($request->news_photo2));
+                $news_photo2 = time() . '.jpg';
+                file_put_contents('storage/app/public/images/posts/' . $news_photo2, base64_decode($request->news_photo2));
                 $post->news_photo2 = $news_photo2;
             }
 
