@@ -56,3 +56,4 @@ Route::post('registeredlocations/delete','App\Http\Controllers\Api\Registeredloc
 Route::get('registeredlocationslist','App\Http\Controllers\Api\RegisteredlocationsController@registeredlocationslist')->middleware('jwtAuth');
 
 Route::post('post_b_i_s/create','App\Http\Controllers\Api\PostBIsController@create')->middleware('jwtAuth');
+Route::get('post_b_i_s','App\Http\Controllers\Api\PostBIsController@postBIs')->middleware('jwtAuth');

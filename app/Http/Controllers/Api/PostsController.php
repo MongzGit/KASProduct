@@ -9,10 +9,8 @@ use Auth;
 use Storage;
 use Exception;
 
-class PostsController extends Controller
-{
-    public function create(Request $request)
-    {
+class PostsController extends Controller{
+    public function create(Request $request) {
         try {
             $post = new Post;
             $post->user_id = Auth::user()->id;
@@ -21,7 +19,6 @@ class PostsController extends Controller
             $post->business_type = $request->business_type;
             $post->consumable_prod_price = $request->consumable_prod_price;
             $post->consumable_prod_location = $request->consumable_prod_location;
-
             $post->news_paper_name = $request->news_paper_name;
             $post->news_title = $request->news_title;
             $post->news_headline = $request->news_headline;
@@ -66,8 +63,6 @@ class PostsController extends Controller
             ]);
         }
     }
-
-
     public function update(Request $request)
     {
         try {
@@ -106,7 +101,6 @@ class PostsController extends Controller
             ]);
         }
     }
-
     public function delete(Request $request)
     {
         try {
@@ -118,7 +112,6 @@ class PostsController extends Controller
                     'message' => 'unauthorized access'
                 ]);
             }
-
             //check if post has photo to delete
             if ($post->photo != '') {
                 Storage::delete('public/posts/' . $post->photo);
@@ -135,7 +128,6 @@ class PostsController extends Controller
             ]);
         }
     }
-
     public function posts()
     {
         try {
@@ -154,7 +146,6 @@ class PostsController extends Controller
                         $post['selfLike'] = true;
                     }
                 }
-
             }
 
             return response()->json([
