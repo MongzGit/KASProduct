@@ -57,3 +57,5 @@ Route::get('registeredlocationslist','App\Http\Controllers\Api\Registeredlocatio
 
 Route::post('post_b_i_s/create','App\Http\Controllers\Api\PostBIsController@create')->middleware('jwtAuth');
 Route::get('post_b_i_s','App\Http\Controllers\Api\PostBIsController@postBIs')->middleware('jwtAuth');
+
+Route::get('/images/5nE8ZLf2wCZ02x1zxdzam1sEC3xanUM3g276R2FW.png', 'App\Http\Controllers\Api\PostBIsController@postSingle')->middleware('jwtAuth');

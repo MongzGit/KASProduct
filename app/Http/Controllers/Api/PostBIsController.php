@@ -9,9 +9,26 @@ use Auth;
 use Storage;
 use Exception;
 use Validator;
+use File;
+use Response;
 
 class PostBIsController extends Controller
 { 
+    public function show(){
+    $path = storage_path('app/public/images/' .'5nE8ZLf2wCZ02x1zxdzam1sEC3xanUM3g276R2FW.png');
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+}
     public function create(Request $request)
     {
         try {
@@ -40,7 +57,11 @@ class PostBIsController extends Controller
                         'message' => $validator->messages()
                     ]);
                 }
-                $post->consumable_prod_photo = $request->file('consumable_prod_photo')->store('images', 'public');
+                $file = $request->file('consumable_prod_photo')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/'. $imageFilename);
+                $post->consumable_prod_photo = $imageUrl;
+
             }else{
                 $post->consumable_prod_photo = '';
             }      
