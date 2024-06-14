@@ -56,6 +56,9 @@ Route::post('registeredlocations/delete','App\Http\Controllers\Api\Registeredloc
 Route::get('registeredlocationslist','App\Http\Controllers\Api\RegisteredlocationsController@registeredlocationslist')->middleware('jwtAuth');
 
 Route::post('post_b_i_s/create','App\Http\Controllers\Api\PostBIsController@create')->middleware('jwtAuth');
+Route::post('post_b_i_s/create_consumable','App\Http\Controllers\Api\PostBIsController@create_consumable')->middleware('jwtAuth');
+Route::post('post_b_i_s/create_news','App\Http\Controllers\Api\PostBIsController@create_news')->middleware('jwtAuth');
+Route::post('post_b_i_s/create_taxi','App\Http\Controllers\Api\PostBIsController@create_taxi')->middleware('jwtAuth');
+Route::post('post_b_i_s/create_event','App\Http\Controllers\Api\PostBIsController@create_event')->middleware('jwtAuth');
 Route::get('post_b_i_s','App\Http\Controllers\Api\PostBIsController@postBIs')->middleware('jwtAuth');
-
-Route::get('/images/5nE8ZLf2wCZ02x1zxdzam1sEC3xanUM3g276R2FW.png', 'App\Http\Controllers\Api\PostBIsController@postSingle')->middleware('jwtAuth');
+Route::post('post_b_i_s/update','App\Http\Controllers\Api\PostBIsController@update')->middleware('jwtAuth');

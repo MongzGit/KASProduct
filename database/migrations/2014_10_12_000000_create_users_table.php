@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name')->default('');
             $table->string('lastname')->default('');
             $table->string('photo')->default('');
+            $table->unsignedDouble('photo_width')->default(0.0)->nullable();
+            $table->unsignedDouble('photo_height')->default(0.0)->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('address')->default('');
             $table->string('location')->default('');
@@ -29,6 +31,8 @@ return new class extends Migration
             $table->string('business_desc')->default('');
             $table->string('business_password')->default('');
             $table->string('business_photo')->default('');
+            $table->unsignedDouble('business_photo_width')->default(0.0)->nullable();
+            $table->unsignedDouble('business_photo_height')->default(0.0)->nullable();
             $table->string('business_email')->unique()->nullable();
             $table->timestamp('business_email_verified_at')->nullable();
             $table->string('business_address')->default('');
