@@ -894,7 +894,7 @@ class PostBIsController extends Controller
                 $post->taxi_desination_stop5 = null;
             }
             
-            if(request->taxi_desination_stop6 != null){
+            if($request->taxi_desination_stop6 != null){
             $post->taxi_desination_stop6 = $request->taxi_desination_stop6;
             }else{
                 $post->taxi_desination_stop6 = null;

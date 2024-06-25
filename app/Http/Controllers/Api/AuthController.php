@@ -78,6 +78,8 @@ class AuthController extends Controller
     public function saveUserInfo(Request $request)
     {
         try {
+            $validator3 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+
             $user = User::find(Auth::user()->id);
             $user->name = $request->name;
             $user->lastname = $request->lastname;
@@ -86,22 +88,35 @@ class AuthController extends Controller
             $user->location = $request->location;
             $user->password = $request->password;
             $user->phone_number = $request->phone_number;
-            $photo = '';
-            //check if user provided photo
-            if ($request->photo != '') {
-                // user time for photo name to prevent name duplication
-                $photo = time() . '.jpg';
-                // decode photo string and save to storage/profiles
-                file_put_contents('storage/profiles/' . $photo, base64_decode($request->photo));
-                $user->photo = $photo;
+
+            $user->photo_width = $request->photo_width;
+            $user->photo_height = $request->photo_height;
+
+            if ($request->file('photo') != null) {
+                if ($validator3->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator3->messages()
+                    ]);
+                }
+                $file = $request->file('photo')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $user->photo = $imageUrl;
+
+            } else {
+                $user->photo = null;
             }
+
+            
 
             $user->update();
 
             return response()->json([
                 'success' => true,
-                'photo' => $photo
+                'user' => $user
             ]);
+
         } catch (Exception $e) {
             return response()->Json([
                 'success' => false,
@@ -114,6 +129,7 @@ class AuthController extends Controller
     public function saveUserBusinessRegistered(Request $request)
     {
         try {
+            $validator4 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $user = User::find(Auth::user()->id);
             $user->business_registered = $request->business_registered;
 
@@ -125,21 +141,31 @@ class AuthController extends Controller
             $user->business_location = $request->business_location;
             $user->business_phone_number = $request->business_phone_number;
             $user->business_type = $request->business_type;
-            $business_photo = '';
-            //check if user provided photo
-            if ($request->business_photo != '') {
-                // user time for photo name to prevent name duplication
-                $business_photo = time() . '.jpg';
-                // decode photo string and save to storage/profiles
-                file_put_contents('storage/profiles/' . $business_photo, base64_decode($request->business_photo));
-                $user->business_photo = $business_photo;
+
+            $user->business_photo_width = $request->business_photo_width;
+            $user->business_photo_height = $request->business_photo_height;
+            
+            if ($request->file('business_photo') != null) {
+                if ($validator4->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator4->messages()
+                    ]);
+                }
+                $file = $request->file('business_photo')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $user->business_photo = $imageUrl;
+
+            } else {
+                $user->business_photo = null;
             }
 
             $user->update();
 
             return response()->json([
                 'success' => true,
-                'business photo' => $business_photo
+                'user' => $user
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -163,5 +189,4 @@ class AuthController extends Controller
             ]);
         }
     }
-
 }
