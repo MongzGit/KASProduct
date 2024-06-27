@@ -34,7 +34,9 @@ class PostBIsController extends Controller
     {
         try {
             $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
-            $validator2 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['advert_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator4 = Validator::make($request->all(), ['advert_photo_logo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $post = new PostBI;
             $post->user_id = Auth::user()->id;
             $post->post_type = $request->post_type;
@@ -99,10 +101,8 @@ class PostBIsController extends Controller
             $post->advert_name = $request->advert_name;
             $post->advert_title = $request->advert_title;
             $post->advert_desc = $request->advert_desc;
-            $post->advert_photo_logo = $request->advert_photo_logo;
             $post->advert_photo_logo_width = $request->advert_photo_logo_width;
             $post->advert_photo_logo_height = $request->advert_photo_logo_height;
-            $post->advert_photo1 = $request->advert_photo1;
             $post->advert_photo1_width = $request->advert_photo1_width;
             $post->advert_photo1_height = $request->advert_photo1_height;
 
@@ -139,7 +139,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo1') != null) {
-                if ($validator1->fails()) {
+                if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -155,7 +155,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo_logo') != null) {
-                if ($validator1->fails()) {
+                if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -192,7 +192,9 @@ class PostBIsController extends Controller
     {
         try {
             $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
-            $validator2 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['advert_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator4 = Validator::make($request->all(), ['advert_photo_logo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $post = new PostBI;
             $post->user_id = Auth::user()->id;
             $post->post_type = $request->post_type;
@@ -215,10 +217,8 @@ class PostBIsController extends Controller
             $post->advert_name = $request->advert_name;
             $post->advert_title = $request->advert_title;
             $post->advert_desc = $request->advert_desc;
-            $post->advert_photo_logo = $request->advert_photo_logo;
             $post->advert_photo_logo_width = $request->advert_photo_logo_width;
             $post->advert_photo_logo_height = $request->advert_photo_logo_height;
-            $post->advert_photo1 = $request->advert_photo1;
             $post->advert_photo1_width = $request->advert_photo1_width;
             $post->advert_photo1_height = $request->advert_photo1_height;
 
@@ -256,7 +256,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo1') != null) {
-                if ($validator1->fails()) {
+                if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -272,7 +272,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo_logo') != null) {
-                if ($validator1->fails()) {
+                if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -309,7 +309,9 @@ class PostBIsController extends Controller
     {
         try {
             $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
-            $validator2 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['advert_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator4 = Validator::make($request->all(), ['advert_photo_logo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $post = new PostBI;
             $post->user_id = Auth::user()->id;
             $post->post_type = $request->post_type;
@@ -333,7 +335,6 @@ class PostBIsController extends Controller
             $post->advert_name = $request->advert_name;
             $post->advert_title = $request->advert_title;
             $post->advert_desc = $request->advert_desc;
-            $post->advert_photo_logo = $request->advert_photo_logo;
             $post->advert_photo_logo_width = $request->advert_photo_logo_width;
             $post->advert_photo_logo_height = $request->advert_photo_logo_height;
             $post->advert_photo1 = $request->advert_photo1;
@@ -373,7 +374,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo1') != null) {
-                if ($validator1->fails()) {
+                if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -389,7 +390,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo_logo') != null) {
-                if ($validator1->fails()) {
+                if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -426,7 +427,9 @@ class PostBIsController extends Controller
     {
         try {
             $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
-            $validator2 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['advert_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator4 = Validator::make($request->all(), ['advert_photo_logo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $post = new PostBI;
             $post->user_id = Auth::user()->id;
             $post->post_type = $request->post_type;
@@ -464,7 +467,6 @@ class PostBIsController extends Controller
             $post->advert_name = $request->advert_name;
             $post->advert_title = $request->advert_title;
             $post->advert_desc = $request->advert_desc;
-            $post->advert_photo_logo = $request->advert_photo_logo;
             $post->advert_photo_logo_width = $request->advert_photo_logo_width;
             $post->advert_photo_logo_height = $request->advert_photo_logo_height;
             $post->advert_photo1 = $request->advert_photo1;
@@ -504,7 +506,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo1') != null) {
-                if ($validator1->fails()) {
+                if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -520,7 +522,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo_logo') != null) {
-                if ($validator1->fails()) {
+                if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -557,7 +559,9 @@ class PostBIsController extends Controller
     {
         try {
             $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
-            $validator2 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['advert_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator4 = Validator::make($request->all(), ['advert_photo_logo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $post = new PostBI;
             $post->user_id = Auth::user()->id;
             $post->post_type = $request->post_type;
@@ -582,7 +586,6 @@ class PostBIsController extends Controller
             $post->advert_name = $request->advert_name;
             $post->advert_title = $request->advert_title;
             $post->advert_desc = $request->advert_desc;
-            $post->advert_photo_logo = $request->advert_photo_logo;
             $post->advert_photo_logo_width = $request->advert_photo_logo_width;
             $post->advert_photo_logo_height = $request->advert_photo_logo_height;
             $post->advert_photo1 = $request->advert_photo1;
@@ -622,7 +625,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo1') != null) {
-                if ($validator1->fails()) {
+                if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()
@@ -638,7 +641,7 @@ class PostBIsController extends Controller
             }
 
             if ($request->file('advert_photo_logo') != null) {
-                if ($validator1->fails()) {
+                if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
                         'message' => $validator1->messages()

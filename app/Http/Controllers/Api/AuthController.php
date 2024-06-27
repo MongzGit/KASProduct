@@ -78,15 +78,13 @@ class AuthController extends Controller
     public function saveUserInfo(Request $request)
     {
         try {
-            $validator3 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
 
             $user = User::find(Auth::user()->id);
-            $user->name = $request->name;
             $user->lastname = $request->lastname;
-            $user->email = $request->email;
+            $user->email = $request->email; //handle duplicate errors in android app
             $user->address = $request->address;
             $user->location = $request->location;
-            $user->password = $request->password;
             $user->phone_number = $request->phone_number;
 
             $user->photo_width = $request->photo_width;
@@ -108,8 +106,6 @@ class AuthController extends Controller
                 $user->photo = null;
             }
 
-            
-
             $user->update();
 
             return response()->json([
@@ -129,12 +125,12 @@ class AuthController extends Controller
     public function saveUserBusinessRegistered(Request $request)
     {
         try {
-            $validator4 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $user = User::find(Auth::user()->id);
-            $user->business_registered = $request->business_registered;
 
+            $user->business_registered = $request->business_registered;//correct as it just shows string
             $user->business_name = $request->business_name;
-            $user->business_desc = $request->business_desc;
+            $user->business_desc = $request->business_desc;//remember to add slogan
             $user->business_password = $request->business_password;
             $user->business_email = $request->business_email;
             $user->business_address = $request->business_address;
@@ -181,6 +177,28 @@ class AuthController extends Controller
             return response()->json([
                 'success' => true,
                 'user' => Auth::user()
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateNamePassword(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $encryptedPass = Hash::make($request->password);
+            $user->name = $request->name;
+            $user->password = $encryptedPass;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
             ]);
         } catch (Exception $e) {
             return response()->Json([

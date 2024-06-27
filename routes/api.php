@@ -20,6 +20,7 @@ Route::get('logout','App\Http\Controllers\Api\AuthController@logout');
 Route::post('save_user_info','App\Http\Controllers\Api\AuthController@saveUserInfo')->middleware('jwtAuth');
 Route::post('save_user_business_registered','App\Http\Controllers\Api\AuthController@saveUserBusinessRegistered')->middleware('jwtAuth');
 Route::get('get_user_info','App\Http\Controllers\Api\AuthController@getUserInfo')->middleware('jwtAuth');
+Route::post('update_name_password', 'App\Http\Controllers\Api\AuthController@updateNamePassword')->middleware('jwtAuth'); 
 
 //for posts
 Route::post('posts/create','App\Http\Controllers\Api\PostsController@create')->middleware('jwtAuth');
@@ -62,3 +63,6 @@ Route::post('post_b_i_s/create_taxi','App\Http\Controllers\Api\PostBIsController
 Route::post('post_b_i_s/create_event','App\Http\Controllers\Api\PostBIsController@create_event')->middleware('jwtAuth');
 Route::get('post_b_i_s','App\Http\Controllers\Api\PostBIsController@postBIs')->middleware('jwtAuth');
 Route::post('post_b_i_s/update','App\Http\Controllers\Api\PostBIsController@update')->middleware('jwtAuth');
+Route::get('post_b_i_s/post','App\Http\Controllers\Api\PostBIsController@post')->middleware('jwtAuth');
+Route::get('post_b_i_s/my_posts','App\Http\Controllers\Api\PostBIsController@myPosts')->middleware('jwtAuth');
+Route::post('post_b_i_s/delete','App\Http\Controllers\Api\PostBIsController@delete')->middleware('jwtAuth');
