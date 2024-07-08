@@ -142,7 +142,7 @@ class PostBIsController extends Controller
                 if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator3->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo1')->store('images', 'public');
@@ -158,7 +158,7 @@ class PostBIsController extends Controller
                 if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator4->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo_logo')->store('images', 'public');
@@ -197,16 +197,16 @@ class PostBIsController extends Controller
             $validator4 = Validator::make($request->all(), ['advert_photo_logo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $post = new PostBI;
             $post->user_id = Auth::user()->id;
-            $post->post_type = $request->post_type;
+            $post->post_type = $request->post_type;//for upper level sorting
             $post->consumable_business_name = $request->consumable_business_name;
             $post->consumable_prod_name = $request->consumable_prod_name;
             $post->consumable_prod_desc = $request->consumable_prod_desc;
             $post->consumable_prod_special = $request->consumable_prod_special;
             $post->consumable_prod_status = $request->consumable_prod_status;
-            $post->consumable_prod_item_desc = $request->consumable_prod_item_desc;
+            $post->consumable_prod_item_desc = $request->consumable_prod_item_desc;//for internal desection and sorting
             $post->consumable_prod_price = $request->consumable_prod_price;
             $post->consumable_prod_location = $request->consumable_prod_location;
-            $post->post_general_infor1 = $request->post_general_infor1;
+            $post->post_general_infor1 = $request->post_general_infor1;//for priority handling
             $post->post_general_infor2 = $request->post_general_infor2;
             $post->post_general_infor3 = $request->post_general_infor3;
             $post->post_photo1_width = $request->post_photo1_width;
@@ -259,7 +259,7 @@ class PostBIsController extends Controller
                 if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator3->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo1')->store('images', 'public');
@@ -275,7 +275,7 @@ class PostBIsController extends Controller
                 if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator4->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo_logo')->store('images', 'public');
@@ -509,7 +509,7 @@ class PostBIsController extends Controller
                 if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator3->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo1')->store('images', 'public');
@@ -525,7 +525,7 @@ class PostBIsController extends Controller
                 if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator4->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo_logo')->store('images', 'public');
@@ -628,7 +628,7 @@ class PostBIsController extends Controller
                 if ($validator3->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator3->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo1')->store('images', 'public');
@@ -644,7 +644,7 @@ class PostBIsController extends Controller
                 if ($validator4->fails()) {
                     return response()->Json([
                         'success' => false,
-                        'message' => $validator1->messages()
+                        'message' => $validator4->messages()
                     ]);
                 }
                 $file = $request->file('advert_photo_logo')->store('images', 'public');
@@ -663,6 +663,257 @@ class PostBIsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'posted',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updatePostType(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->post_type = $request->post_type;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Type',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updatePostGeneralInfor(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->post_general_infor1 = $request->post_general_infor1;
+            $post->post_general_infor2 = $request->post_general_infor2;
+            $post->post_general_infor3 = $request->post_general_infor3;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Type',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updatePostAdvert(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $validator3 = Validator::make($request->all(), ['advert_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator4 = Validator::make($request->all(), ['advert_photo_logo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            
+            $post->advert_business_name = $request->advert_business_name;
+            $post->advert_name = $request->advert_name;
+            $post->advert_title = $request->advert_title;
+            $post->advert_desc = $request->advert_desc;
+            $post->advert_photo_logo_width = $request->advert_photo_logo_width;
+            $post->advert_photo_logo_height = $request->advert_photo_logo_height;
+            $post->advert_photo1_width = $request->advert_photo1_width;
+            $post->advert_photo1_height = $request->advert_photo1_height;
+
+            if ($request->file('advert_photo1') != null) {
+                if ($validator3->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator3->messages()
+                    ]);
+                }
+                $file = $request->file('advert_photo1')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $post->advert_photo1 = $imageUrl;
+
+            } else {
+                $post->advert_photo1 = null;
+            }
+
+            if ($request->file('advert_photo_logo') != null) {
+                if ($validator4->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator4->messages()
+                    ]);
+                }
+                $file = $request->file('advert_photo_logo')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $post->advert_photo_logo = $imageUrl;
+
+            } else {
+                $post->advert_photo_logo = null;
+            }
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Type',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+    
+
+    public function updatePostPhoto(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+
+            $post->post_photo1_width = $request->post_photo1_width;
+            $post->post_photo1_height = $request->post_photo1_height;
+            $post->post_photo2_width = $request->post_photo2_width;
+            $post->post_photo2_height = $request->post_photo2_height;
+
+            if ($request->file('post_photo1') != null) {
+                if ($validator1->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator1->messages()
+                    ]);
+                }
+                $file = $request->file('post_photo1')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $post->post_photo1 = $imageUrl;
+
+            } else {
+                $post->post_photo1 = null;
+            }
+
+            if ($request->file('post_photo2') != null) {
+                if ($validator2->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator2->messages()
+                    ]);
+                }
+                $file = $request->file('post_photo2')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $post->post_photo2 = $imageUrl;
+            } else {
+                $post->post_photo2 = null;
+            }
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Type',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateConsumableProdItemDesc(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->consumable_prod_item_desc = $request->consumable_prod_item_desc;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Type',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateConsumableProdInfor(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->consumable_business_name = $request->consumable_business_name;
+            $post->consumable_prod_name = $request->consumable_prod_name;
+            $post->consumable_prod_desc = $request->consumable_prod_desc;
+            $post->consumable_prod_special = $request->consumable_prod_special;
+            $post->consumable_prod_status = $request->consumable_prod_status;
+            //$post->consumable_prod_item_desc = $request->consumable_prod_item_desc;//for internal desection and sorting
+            $post->consumable_prod_price = $request->consumable_prod_price;
+            $post->consumable_prod_location = $request->consumable_prod_location;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Type',
                 'post' => $post
             ]);
         } catch (Exception $e) {
@@ -1018,6 +1269,7 @@ class PostBIsController extends Controller
 
 
             $post->update();
+
             return response()->json([
                 'success' => true,
                 'message' => 'post edited'
