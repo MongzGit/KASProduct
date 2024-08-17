@@ -61,7 +61,7 @@ Route::post('post_b_i_s/create_consumable','App\Http\Controllers\Api\PostBIsCont
 Route::post('post_b_i_s/create_news','App\Http\Controllers\Api\PostBIsController@create_news')->middleware('jwtAuth');
 Route::post('post_b_i_s/create_taxi','App\Http\Controllers\Api\PostBIsController@create_taxi')->middleware('jwtAuth');
 Route::post('post_b_i_s/create_event','App\Http\Controllers\Api\PostBIsController@create_event')->middleware('jwtAuth');
-Route::get('post_b_i_s','App\Http\Controllers\Api\PostBIsController@postBIs')->middleware('jwtAuth');
+Route::get('post_b_i_s','App\Http\Control1lers\Api\PostBIsController@postBIs')->middleware('jwtAuth');
 Route::post('post_b_i_s/update','App\Http\Controllers\Api\PostBIsController@update')->middleware('jwtAuth');
 Route::get('post_b_i_s/post','App\Http\Controllers\Api\PostBIsController@post')->middleware('jwtAuth');
 Route::get('post_b_i_s/my_posts','App\Http\Controllers\Api\PostBIsController@myPosts')->middleware('jwtAuth');
@@ -72,3 +72,4 @@ Route::post('post_b_i_s/update_post_advert','App\Http\Controllers\Api\PostBIsCon
 Route::post('post_b_i_s/update_post_photo','App\Http\Controllers\Api\PostBIsController@updatePostPhoto')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_consumable_prod_item_desc','App\Http\Controllers\Api\PostBIsController@updateConsumableProdItemDesc')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_consumable_prod_infor','App\Http\Controllers\Api\PostBIsController@updateConsumableProdInfor')->middleware('jwtAuth');
+Route::post('pots_b_i_s/update_relation_counter', 'App\Http\Controllers\Api\PostBIsController@updateRelationCounter')->middleware('jwtAuth');

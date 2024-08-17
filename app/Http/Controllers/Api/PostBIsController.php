@@ -797,8 +797,7 @@ class PostBIsController extends Controller
             ]);
         }
     }
-    
-
+   
     public function updatePostPhoto(Request $request){
 
         try{
@@ -924,7 +923,7 @@ class PostBIsController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request)//this function logic is not used  for updates you might wanna use a different kind
     {
         try {
             $post = PostBI::find($request->id);
@@ -1375,4 +1374,34 @@ class PostBIsController extends Controller
             ]);
         }
     }
+    
+    public function updateRelationCounter(Request $request)
+    {
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            
+            $post->relation_counter = $request->relation_counter;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated relation counter',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+
 }

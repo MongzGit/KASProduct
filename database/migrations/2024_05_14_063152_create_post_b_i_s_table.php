@@ -86,6 +86,7 @@ return new class extends Migration
             $table->string('advert_photo1')->default('')->nullable();
             $table->unsignedDouble('advert_photo1_width')->default(0.0)->nullable();
             $table->unsignedDouble('advert_photo1_height')->default(0.0)->nullable();
+            $table->integer('relation_counter')->default(0)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')
