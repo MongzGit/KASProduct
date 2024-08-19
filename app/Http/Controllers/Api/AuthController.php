@@ -48,8 +48,15 @@ class AuthController extends Controller
         try {
             $user->name = $request->name;
             $user->password = $encryptedPass;
+            $user->phone_number = $request->phone_number;
+            $user->location = $request->location;
             $user->save();
-            return $this->login($request);
+
+            $request_login = Request::create('/login', 'POST', [
+                'name' => $request->name,
+                'password' => $request->password
+            ]);
+            return $this->login($request_login);
         } catch (Exception $e) {
             return response()->Json([
                 'success' => false,

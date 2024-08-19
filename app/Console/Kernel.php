@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\PostBI;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,7 +24,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Schedule for posts with posty_type 'a'
+        $schedule->command('command:incrementCounter')
+            ->everyTenMinutes()
+            ->when(function () {
+                return PostBI::where('post_type', 'b')->exists();
+            });
+
+        // Schedule for posts with posty_type 'b'
+        $schedule->command('command:incrementCounter')
+            ->everyFifteenMinutes()
+            ->when(function () {
+                return PostBI::where('post_type', 'c')->exists();
+            });
     }
 
     /**
@@ -33,7 +46,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
