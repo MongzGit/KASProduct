@@ -26,16 +26,23 @@ class Kernel extends ConsoleKernel
     {
         // Schedule for posts with posty_type 'a'
         $schedule->command('command:incrementCounter')
+            ->everyFiveMinutes()
+            ->when(function () {
+                return PostBI::where('post_general_infor1', 'a')->exists();
+            });
+
+        // Schedule for posts with posty_type 'b'
+        $schedule->command('command:incrementCounter')
             ->everyTenMinutes()
             ->when(function () {
-                return PostBI::where('post_type', 'b')->exists();
+                return PostBI::where('post_general_infor1', 'b')->exists();
             });
 
         // Schedule for posts with posty_type 'b'
         $schedule->command('command:incrementCounter')
             ->everyFifteenMinutes()
             ->when(function () {
-                return PostBI::where('post_type', 'c')->exists();
+                return PostBI::where('post_general_infor1', 'c')->exists();
             });
     }
 

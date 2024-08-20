@@ -105,6 +105,7 @@ class PostBIsController extends Controller
             $post->advert_photo_logo_height = $request->advert_photo_logo_height;
             $post->advert_photo1_width = $request->advert_photo1_width;
             $post->advert_photo1_height = $request->advert_photo1_height;
+            $post->relation_counter = $request->relation_counter;
 
             //check if post has photo
             if ($request->file('post_photo1') != null) {
@@ -221,6 +222,7 @@ class PostBIsController extends Controller
             $post->advert_photo_logo_height = $request->advert_photo_logo_height;
             $post->advert_photo1_width = $request->advert_photo1_width;
             $post->advert_photo1_height = $request->advert_photo1_height;
+            $post->relation_counter = $request->relation_counter;
 
             //check if post has photo
 
@@ -340,6 +342,7 @@ class PostBIsController extends Controller
             $post->advert_photo1 = $request->advert_photo1;
             $post->advert_photo1_width = $request->advert_photo1_width;
             $post->advert_photo1_height = $request->advert_photo1_height;
+            $post->relation_counter = $request->relation_counter;
 
             //check if post has photo
             if ($request->file('post_photo1') != null) {
@@ -472,6 +475,7 @@ class PostBIsController extends Controller
             $post->advert_photo1 = $request->advert_photo1;
             $post->advert_photo1_width = $request->advert_photo1_width;
             $post->advert_photo1_height = $request->advert_photo1_height;
+            $post->relation_counter = $request->relation_counter;
 
             //check if post has photo
             if ($request->file('post_photo1') != null) {
@@ -591,6 +595,7 @@ class PostBIsController extends Controller
             $post->advert_photo1 = $request->advert_photo1;
             $post->advert_photo1_width = $request->advert_photo1_width;
             $post->advert_photo1_height = $request->advert_photo1_height;
+            $post->relation_counter = $request->relation_counter;
 
             //check if post has photo
             if ($request->file('post_photo1') != null) {
