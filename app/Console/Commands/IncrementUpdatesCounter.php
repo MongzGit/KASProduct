@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\PostBI;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class IncrementUpdatesCounter extends Command
 {
@@ -29,17 +30,9 @@ class IncrementUpdatesCounter extends Command
 
     public function handle()
     {
-        // Increment for post_general_infor1 'a'
-        $aCount = PostBI::where('post_general_infor1', 'a')->increment('relation_counter');
-        Log::info('Incremented updates_counter for post_general_infor1 a', ['count' => $aCount]);
+        $currentDateMinusTenMin = Carbon::now()->subMinutes(10);
 
-        // Increment for post_general_infor1 'b'
-        $bCount = PostBI::where('post_general_infor1', 'b')->increment('relation_counter');
-        Log::info('Incremented updates_counter for post_general_infor1 b', ['count' => $bCount]);
-
-        // Increment for post_general_infor1 'c'
-        $cCount = PostBI::where('post_general_infor1', 'c')->increment('relation_counter');
-        Log::info('Incremented relation_counter for post_general_infor1 c', ['count' => $cCount]);
+        $aCount = PostBI::where('post_general_infor1', 'a')->where('updated_at', '<' , $currentDateMinusTenMin)->increment('relation_counter');
 
         $this->info('Updated relation_counter for all posts based on post_general_infor1.');
     }

@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\IncrementUpdatesCounter::class,
+        \APP\Console\Commands\updatePostGenInforB::class,
+        \APP\Console\Commands\updatePostGenInforB::class,
     ];
     /**
      * Define the application's command schedule.
@@ -32,14 +34,14 @@ class Kernel extends ConsoleKernel
             });
 
         // Schedule for posts with posty_type 'b'
-        $schedule->command('command:incrementCounter')
+        $schedule->command('command:updatePostGenInforB')
             ->everyTenMinutes()
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'b')->exists();
             });
 
         // Schedule for posts with posty_type 'b'
-        $schedule->command('command:incrementCounter')
+        $schedule->command('command:updatePostGenInforC')
             ->everyFifteenMinutes()
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'c')->exists();
