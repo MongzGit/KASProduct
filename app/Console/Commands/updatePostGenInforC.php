@@ -25,10 +25,7 @@ class updatePostGenInforC extends Command
     
     public function handle()
     {
-        $currentDateMinusTwentyFiveMin = Carbon::now()->subMinutes(25);
-
-        PostBI::where('post_general_infor1', 'c')->where('updated_at', '<' , $currentDateMinusTwentyFiveMin)->increment('relation_counter');
-
+        PostBI::where('post_general_infor1', 'c')->increment('relation_counter');
         $this->info('updated post_general_infor1 at c');
     }
 }

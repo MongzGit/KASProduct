@@ -16,7 +16,11 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\IncrementUpdatesCounter::class,
         \APP\Console\Commands\updatePostGenInforB::class,
-        \APP\Console\Commands\updatePostGenInforB::class,
+        \APP\Console\Commands\updatePostGenInforC::class,
+        \APP\Console\Commands\updatePostGenInforD::class,
+        \APP\Console\Commands\updatePostGenInforE::class,
+        \APP\Console\Commands\updatePostGenInforF::class,
+        \APP\Console\Commands\updatePostGenInforG::class,
     ];
     /**
      * Define the application's command schedule.
@@ -28,23 +32,45 @@ class Kernel extends ConsoleKernel
     {
         // Schedule for posts with posty_type 'a'
         $schedule->command('command:incrementCounter')
-            ->everyFiveMinutes()
+            ->everyTwoHours()
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'a')->exists();
             });
 
         // Schedule for posts with posty_type 'b'
         $schedule->command('command:updatePostGenInforB')
-            ->everyTenMinutes()
+            ->everyFourHours()
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'b')->exists();
             });
 
         // Schedule for posts with posty_type 'b'
         $schedule->command('command:updatePostGenInforC')
-            ->everyFifteenMinutes()
+            ->everySixHours()
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'c')->exists();
+            });
+
+            $schedule->command('command:updatePostGenInforD')
+            ->cron('0 */10 * * *')
+            ->when(function () {
+                return PostBI::where('post_general_infor1', 'd')->exists();
+            });
+
+            $schedule->command('command:updatePostGenInforE')
+            ->cron('0 */14 * * *')
+            ->when(function () {
+                return PostBI::where('post_general_infor1', 'e')->exists();
+            });
+            $schedule->command('command:updatePostGenInforF')
+            ->cron('0 */18 * * *')
+            ->when(function () {
+                return PostBI::where('post_general_infor1', 'f')->exists();
+            });
+            $schedule->command('command:updatePostGenInforG')
+            ->cron('0 */22 * * *')
+            ->when(function () {
+                return PostBI::where('post_general_infor1', 'g')->exists();
             });
     }
 

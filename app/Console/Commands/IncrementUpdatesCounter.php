@@ -30,10 +30,7 @@ class IncrementUpdatesCounter extends Command
 
     public function handle()
     {
-        $currentDateMinusTenMin = Carbon::now()->subMinutes(10);
-
-        $aCount = PostBI::where('post_general_infor1', 'a')->where('updated_at', '<' , $currentDateMinusTenMin)->increment('relation_counter');
-
-        $this->info('Updated relation_counter for all posts based on post_general_infor1.');
+        PostBI::where('post_general_infor1', 'a')->increment('relation_counter');
+        $this->info('updated post_general_infor1 at a');
     }
 }
