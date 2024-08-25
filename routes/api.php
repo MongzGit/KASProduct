@@ -54,7 +54,7 @@ Route::post('orders/comment_orders','App\Http\Controllers\Api\CommentOrdersContr
 //for registeredlocations
 Route::post('registeredlocations/create','App\Http\Controllers\Api\RegisteredlocationsController@create')->middleware('jwtAuth');
 Route::post('registeredlocations/delete','App\Http\Controllers\Api\RegisteredlocationsController@delete')->middleware('jwtAuth');
-Route::get('registeredlocationslist','App\Http\Controllers\Api\RegisteredlocationsController@registeredlocationslist')->middleware('jwtAuth');
+Route::get('registeredlocationslist','App\Http\Controllers\Api\RegisteredlocationsController@registeredlocationslist');
 
 Route::post('post_b_i_s/create','App\Http\Controllers\Api\PostBIsController@create')->middleware('jwtAuth');
 Route::post('post_b_i_s/create_consumable','App\Http\Controllers\Api\PostBIsController@create_consumable')->middleware('jwtAuth');
