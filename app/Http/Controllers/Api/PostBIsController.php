@@ -894,6 +894,87 @@ class PostBIsController extends Controller
         }
     }
 
+    public function updateNewsStatus(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->news_status = $request->news_status;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updatePostGeneralInfor1(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->post_general_infor1 = $request->post_general_infor1;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updatePostGeneralInfor2(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->post_general_infor2 = $request->post_general_infor2;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
     public function updateConsumableProdInfor(Request $request){
 
         try{
