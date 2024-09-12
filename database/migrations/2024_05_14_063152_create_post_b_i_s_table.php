@@ -70,6 +70,7 @@ return new class extends Migration
             $table->string('post_general_infor1')->default('')->nullable();
             $table->string('post_general_infor2')->default('')->nullable();
             $table->unsignedDouble('post_general_infor3')->default(0.0)->nullable();
+            $table->string('post_general_infor4')->default('')->nullable();
             $table->string('post_photo1')->default('')->nullable();
             $table->unsignedDouble('post_photo1_width')->default(0.0)->nullable();
             $table->unsignedDouble('post_photo1_height')->default(0.0)->nullable();

@@ -16,6 +16,8 @@ class RegisteredlocationsController extends Controller
             $registeredlocations = new Registeredlocations;
             $registeredlocations->user_id = Auth::user()->id;
             $registeredlocations->location = $request->location;
+            $registeredlocations->city = $request->city;
+
             $registeredlocations->save();
             $registeredlocations->user;
             return response()->json([

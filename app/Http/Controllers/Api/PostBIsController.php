@@ -93,6 +93,7 @@ class PostBIsController extends Controller
             $post->post_general_infor1 = $request->post_general_infor1;
             $post->post_general_infor2 = $request->post_general_infor2;
             $post->post_general_infor3 = $request->post_general_infor3;
+            $post->post_general_infor4 = $request->post_general_infor4;
             $post->post_photo1_width = $request->post_photo1_width;
             $post->post_photo1_height = $request->post_photo1_height;
             $post->post_photo2_width = $request->post_photo2_width;
@@ -210,6 +211,7 @@ class PostBIsController extends Controller
             $post->post_general_infor1 = $request->post_general_infor1;//for priority handling
             $post->post_general_infor2 = $request->post_general_infor2;
             $post->post_general_infor3 = $request->post_general_infor3;
+            $post->post_general_infor4 = $request->post_general_infor4;
             $post->post_photo1_width = $request->post_photo1_width;
             $post->post_photo1_height = $request->post_photo1_height;
             $post->post_photo2_width = $request->post_photo2_width;
@@ -329,6 +331,7 @@ class PostBIsController extends Controller
             $post->post_general_infor1 = $request->post_general_infor1;
             $post->post_general_infor2 = $request->post_general_infor2;
             $post->post_general_infor3 = $request->post_general_infor3;
+            $post->post_general_infor4 = $request->post_general_infor4;
             $post->post_photo1_width = $request->post_photo1_width;
             $post->post_photo1_height = $request->post_photo1_height;
             $post->post_photo2_width = $request->post_photo2_width;
@@ -462,6 +465,7 @@ class PostBIsController extends Controller
             $post->post_general_infor1 = $request->post_general_infor1;
             $post->post_general_infor2 = $request->post_general_infor2;
             $post->post_general_infor3 = $request->post_general_infor3;
+            $post->post_general_infor4 = $request->post_general_infor4;
             $post->post_photo1_width = $request->post_photo1_width;
             $post->post_photo1_height = $request->post_photo1_height;
             $post->post_photo2_width = $request->post_photo2_width;
@@ -582,6 +586,7 @@ class PostBIsController extends Controller
             $post->post_general_infor1 = $request->post_general_infor1;
             $post->post_general_infor2 = $request->post_general_infor2;
             $post->post_general_infor3 = $request->post_general_infor3;
+            $post->post_general_infor4 = $request->post_general_infor4;
             $post->post_photo1_width = $request->post_photo1_width;
             $post->post_photo1_height = $request->post_photo1_height;
             $post->post_photo2_width = $request->post_photo2_width;
@@ -718,6 +723,7 @@ class PostBIsController extends Controller
             $post->post_general_infor1 = $request->post_general_infor1;
             $post->post_general_infor2 = $request->post_general_infor2;
             $post->post_general_infor3 = $request->post_general_infor3;
+            $post->post_general_infor4 = $request->post_general_infor4;
 
             $post->update();
 
@@ -959,6 +965,58 @@ class PostBIsController extends Controller
                 ]);
             }
             $post->post_general_infor2 = $request->post_general_infor2;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updatePostGeneralInfor3(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->post_general_infor3 = $request->post_general_infor3;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updatePostGeneralInfor4(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->post_general_infor4 = $request->post_general_infor4;
 
             $post->update();
 

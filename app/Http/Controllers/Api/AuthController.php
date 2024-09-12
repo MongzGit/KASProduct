@@ -49,7 +49,7 @@ class AuthController extends Controller
             $user->name = $request->name;
             $user->password = $encryptedPass;
             $user->phone_number = $request->phone_number;
-            $user->location = $request->location;
+            $user->address_location = $request->address_location;
             $user->save();
 
             $request_login = Request::create('/login', 'POST', [
@@ -90,8 +90,12 @@ class AuthController extends Controller
             $user = User::find(Auth::user()->id);
             $user->lastname = $request->lastname;
             $user->email = $request->email; //handle duplicate errors in android app
-            $user->address = $request->address;
-            $user->location = $request->location;
+            $user->address_house_number = $request->address_house_number;
+            $user->address_street_name = $request->address_street_name;
+            $user->address_zone = $request->address_zone;
+            $user->address_location = $request->address_location;
+            $user->address_city = $request->address_city;
+            $user->address_postal_code = $request->address_postal_code;
             $user->phone_number = $request->phone_number;
 
             $user->photo_width = $request->photo_width;
@@ -129,6 +133,33 @@ class AuthController extends Controller
 
     }
 
+    public function updateUserAddress(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);;
+            $user->address_house_number = $request->address_house_number;
+            $user->address_street_name = $request->address_street_name;
+            $user->address_zone = $request->address_zone;
+            $user->address_location = $request->address_location;
+            $user->address_city = $request->address_city;
+            $user->address_postal_code = $request->address_postal_code;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+
+    }
+
     public function saveUserBusinessRegistered(Request $request)
     {
         try {
@@ -140,8 +171,12 @@ class AuthController extends Controller
             $user->business_desc = $request->business_desc;//remember to add slogan
             $user->business_password = $request->business_password;
             $user->business_email = $request->business_email;
-            $user->business_address = $request->business_address;
-            $user->business_location = $request->business_location;
+            $user->business_address_house_number = $request->business_address_house_number;
+            $user->business_address_street_name = $request->business_address_street_name;
+            $user->business_address_zone = $request->business_address_zone;
+            $user->business_address_location = $request->business_address_location;
+            $user->business_address_city = $request->business_address_city;
+            $user->business_address_postal_code = $request->business_address_postal_code;
             $user->business_phone_number = $request->business_phone_number;
             $user->business_type = $request->business_type;
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('location')->default('');
+            $table->string('city')->default('');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')
