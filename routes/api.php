@@ -46,6 +46,13 @@ Route::post('orders/create','App\Http\Controllers\Api\OrdersController@create')-
 Route::post('orders/delete','App\Http\Controllers\Api\OrdersController@delete')->middleware('jwtAuth');
 Route::post('orders/update','App\Http\Controllers\Api\OrdersController@update')->middleware('jwtAuth');
 Route::get('orders','App\Http\Controllers\Api\OrdersController@orders')->middleware('jwtAuth');
+Route::get('order','App\Http\Controllers\Api\OrdersController@order')->middleware('jwtAuth');
+Route::get('my_orders','App\Http\Controllers\Api\OrdersController@myorders')->middleware('jwtAuth');
+Route::get('my_business_orders','App\Http\Controllers\Api\OrdersController@mybusinessorders')->middleware('jwtAuth');
+Route::post('orders/update_order_status','App\Http\Controllers\Api\OrdersController@updateOrderStatus')->middleware('jwtAuth');
+Route::post('orders/update_e_t_d','App\Http\Controllers\Api\OrdersController@updateOrderETD')->middleware('jwtAuth');
+Route::post('orders/update_e_t_p','App\Http\Controllers\Api\OrdersController@updateOrderETP')->middleware('jwtAuth');
+
 
 //for comment orders
 Route::post('comment_orders/create','App\Http\Controllers\Api\CommentOrdersController@create')->middleware('jwtAuth');
