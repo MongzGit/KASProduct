@@ -103,15 +103,13 @@ class AuthController extends Controller
 
             if ($request->file('photo') != null) {
                 if ($validator3->fails()) {
-                    return response()->Json([
-                        'success' => false,
-                        'message' => $validator3->messages()
-                    ]);
-                }
-                $file = $request->file('photo')->store('images', 'public');
+                    $user->photo = null;
+                } else {
+                    $file = $request->file('photo')->store('images', 'public');
                 $imageFilename = $file; // Replace with your actual image filename
                 $imageUrl = asset('storage/' . $imageFilename);
                 $user->photo = $imageUrl;
+                }
 
             } else {
                 $user->photo = null;
@@ -143,6 +141,33 @@ class AuthController extends Controller
             $user->address_location = $request->address_location;
             $user->address_city = $request->address_city;
             $user->address_postal_code = $request->address_postal_code;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+
+    }
+
+    public function updateUserBusinessAddress(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);;
+            $user->business_address_house_number = $request->business_address_house_number;
+            $user->business_address_street_name = $request->business_address_street_name;
+            $user->business_address_zone = $request->business_address_zone;
+            $user->business_address_location = $request->business_address_location;
+            $user->business_address_city = $request->business_address_city;
+            $user->business_address_postal_code = $request->business_address_postal_code;
 
             $user->update();
 

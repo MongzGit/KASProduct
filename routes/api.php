@@ -22,7 +22,7 @@ Route::post('save_user_business_registered','App\Http\Controllers\Api\AuthContro
 Route::get('get_user_info','App\Http\Controllers\Api\AuthController@getUserInfo')->middleware('jwtAuth');
 Route::post('update_name_password', 'App\Http\Controllers\Api\AuthController@updateNamePassword')->middleware('jwtAuth');
 Route::post('update_user_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
-
+Route::post('update_user_business_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
 
 //for posts
 Route::post('posts/create','App\Http\Controllers\Api\PostsController@create')->middleware('jwtAuth');
@@ -65,6 +65,7 @@ Route::post('registeredlocations/create','App\Http\Controllers\Api\Registeredloc
 Route::post('registeredlocations/delete','App\Http\Controllers\Api\RegisteredlocationsController@delete')->middleware('jwtAuth');
 Route::get('registeredlocationslist','App\Http\Controllers\Api\RegisteredlocationsController@registeredlocationslist');
 
+//
 Route::post('post_b_i_s/create','App\Http\Controllers\Api\PostBIsController@create')->middleware('jwtAuth');
 Route::post('post_b_i_s/create_consumable','App\Http\Controllers\Api\PostBIsController@create_consumable')->middleware('jwtAuth');
 Route::post('post_b_i_s/create_news','App\Http\Controllers\Api\PostBIsController@create_news')->middleware('jwtAuth');

@@ -138,7 +138,7 @@ class OrdersController extends Controller
                     ]);
                 }
             }
-        
+
             $order->order_estimated_time_of_delivery = $request->order_estimated_time_of_delivery;
 
             $order->update();
@@ -305,6 +305,13 @@ class OrdersController extends Controller
                     'message' => 'n'
                 ]);
             }
+
+            //get user of post
+            $order->user;
+            //comments count
+            $order['commentOrdersCount'] = count($order->commentOrders);
+
+
             return response()->json([
                 'success' => true,
                 'post' => $order
@@ -330,6 +337,13 @@ class OrdersController extends Controller
                 ]);
             }
 
+            foreach ($orders as $order) {
+                //get user of post
+                $order->user;
+                //comments count
+                $order['commentOrdersCount'] = count($order->commentOrders);
+            }
+
             return response()->json([
                 'success' => true,
                 'post' => $orders
@@ -352,6 +366,13 @@ class OrdersController extends Controller
                     'success' => false,
                     'message' => 'n'
                 ]);
+            }
+
+            foreach ($orders as $order) {
+                //get user of post
+                $order->user;
+                //comments count
+                $order['commentOrdersCount'] = count($order->commentOrders);
             }
 
             return response()->json([
