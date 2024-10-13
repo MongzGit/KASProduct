@@ -20,7 +20,17 @@ return new class extends Migration
 
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('post_user_id');
-            $table->string('comment_infor')->default('')->nullable();
+            $table->string('comment_infor1')->default('')->nullable();
+            $table->string('comment_infor2')->default('')->nullable();
+            $table->string('commentOrder_post_post_type')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_business_name')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_prod_name')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_prod_desc')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_prod_special')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_prod_status')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_prod_item_desc')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_prod_price')->default('')->nullable();
+            $table->string('commentOrder_post_consumable_prod_quantity')->default('')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')

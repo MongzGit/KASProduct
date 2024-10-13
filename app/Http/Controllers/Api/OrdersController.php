@@ -22,41 +22,6 @@ class OrdersController extends Controller
             $order->order_estimated_time_of_preparation = $request->order_estimated_time_of_preparation;
             $order->order_estimated_time_of_delivery = $request->order_estimated_time_of_delivery;
 
-            // $order->order_post_post_type = $request->order_post_post_type;
-            // $order->order_post_consumable_business_name = $request->order_post_consumable_business_name;
-            // $order->order_post_consumable_prod_name = $request->order_post_consumable_prod_name;
-            // $order->order_post_consumable_prod_desc = $request->order_post_consumable_prod_desc;
-            // $order->order_post_consumable_prod_special = $request->order_post_consumable_prod_special;
-            // $order->order_post_consumable_prod_status = $request->order_post_consumable_prod_status;
-            // $order->order_post_consumable_prod_item_desc = $request->order_post_consumable_prod_item_desc;
-            // $order->order_post_consumable_prod_price = $request->order_post_consumable_prod_price;
-            // $order->order_post_post_general_infor1 = $request->order_post_post_general_infor1;
-            // $order->order_post_post_general_infor2 = $request->order_post_post_general_infor2;
-            // $order->order_post_post_general_infor3 = $request->order_post_post_general_infor3;
-            // $order->order_post_post_general_infor4 = $request->order_post_post_general_infor4;
-            // $order->order_post_post_photo1 = $request->order_post_post_photo1;
-            // $order->order_post_post_photo1_width = $request->order_post_post_photo1_width;
-            // $order->order_post_post_photo1_height = $request->order_post_post_photo1_height;
-            // $order->order_post_post_photo2 = $request->order_post_post_photo2;
-            // $order->order_post_post_photo2_width = $request->order_post_post_photo2_width;
-            // $order->order_post_post_photo2_height = $request->order_post_post_photo2_height;
-            // $order->order_post_relation_counter = $request->order_post_relation_counter;
-
-            // $order->poster_business_name = $request->poster_business_name;
-            // $order->poster_business_desc = $request->poster_business_desc;
-            // $order->poster_business_photo = $request->poster_business_photo;
-            // $order->poster_business_photo_width = $request->poster_business_photo_width;
-            // $order->poster_business_photo_height = $request->poster_business_photo_height;
-            // $order->poster_business_email = $request->poster_business_email;
-            // $order->poster_business_address_house_number = $request->poster_business_address_house_number;
-            // $order->poster_business_address_street_name = $request->poster_business_address_street_name;
-            // $order->poster_business_address_zone = $request->poster_business_address_zone;
-            // $order->poster_business_address_location = $request->poster_business_address_location;
-            // $order->poster_business_address_city = $request->poster_business_address_city;
-            // $order->poster_business_address_postal_code = $request->poster_business_address_postal_code;
-            // $order->poster_business_phone_number = $request->poster_business_phone_number;
-            // $order->poster_business_type = $request->poster_business_type;
-
             $order->save();
 
             $order->user;
@@ -314,7 +279,7 @@ class OrdersController extends Controller
 
             return response()->json([
                 'success' => true,
-                'post' => $order
+                'order' => $order
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -346,7 +311,7 @@ class OrdersController extends Controller
 
             return response()->json([
                 'success' => true,
-                'post' => $orders
+                'orders' => $orders
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -377,7 +342,7 @@ class OrdersController extends Controller
 
             return response()->json([
                 'success' => true,
-                'post' => $orders
+                'orders' => $orders
             ]);
         } catch (Exception $e) {
             return response()->Json([
