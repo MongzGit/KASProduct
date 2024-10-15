@@ -18,6 +18,15 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
 
             $table->unsignedBigInteger('order_post_user_id');
+            $table->string('order_post_user_business_name')->default('')->nullable();
+            $table->string('order_post_user_business_desc')->default('')->nullable();
+            $table->string('order_post_user_business_email')->default('')->nullable();
+            $table->string('order_post_user_business_address_house_number')->default('')->nullable();
+            $table->string('order_post_user_business_address_street_name')->default('')->nullable();
+            $table->string('order_post_user_business_address_zone')->default('')->nullable();
+            $table->string('order_post_user_business_address_location')->default('')->nullable();
+            $table->string('order_post_user_business_address_city')->default('')->nullable();
+            $table->string('order_post_user_business_phone_number')->default('')->nullable();
             $table->string('order_status')->default('')->nullable();
             $table->string('order_estimated_time_of_preparation')->default('')->nullable();
             $table->string('order_estimated_time_of_delivery')->default('')->nullable();

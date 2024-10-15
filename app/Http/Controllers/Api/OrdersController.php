@@ -19,6 +19,15 @@ class OrdersController extends Controller
 
             $order->order_post_user_id = $request->order_post_user_id;//the business the order is directed to
             $order->order_status = $request->order_status;
+            $order->order_post_user_business_name = $request->order_post_user_business_name;
+            $order->order_post_user_business_desc = $request->order_post_user_business_desc;
+            $order->order_post_user_business_email = $request->order_post_user_business_email;
+            $order->order_post_user_business_address_house_number = $request->order_post_user_business_address_house_number;
+            $order->order_post_user_business_address_street_name = $request->order_post_user_business_address_street_name;
+            $order->order_post_user_business_address_zone = $request->order_post_user_business_address_zone;
+            $order->order_post_user_business_address_location = $request->order_post_user_business_address_location;
+            $order->order_post_user_business_address_city = $request->order_post_user_business_address_city;
+            $order->order_post_user_business_phone_number = $request->order_post_user_business_phone_number;
             $order->order_estimated_time_of_preparation = $request->order_estimated_time_of_preparation;
             $order->order_estimated_time_of_delivery = $request->order_estimated_time_of_delivery;
 
@@ -140,6 +149,7 @@ class OrdersController extends Controller
                     ]);
                 }
             }
+            
             $order->order_estimated_time_of_preparation = $request->order_estimated_time_of_preparation;
 
             $order->update();
