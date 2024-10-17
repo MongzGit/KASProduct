@@ -23,6 +23,9 @@ Route::get('get_user_info','App\Http\Controllers\Api\AuthController@getUserInfo'
 Route::post('update_name_password', 'App\Http\Controllers\Api\AuthController@updateNamePassword')->middleware('jwtAuth');
 Route::post('update_user_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
 Route::post('update_user_business_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
+Route::post('update_user_photo', 'App\Http\Controllers\Api\AuthController@updateUserPhoto')->middleware('jwtAuth');
+Route::post('update_user_business_photo', 'App\Http\Controllers\Api\AuthController@updateUserBusinessPhoto')->middleware('jwtAuth');
+Route::post('update_delivery_std_cost_infor', 'App\Http\Controllers\Api\AuthController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
 
 //for posts
 Route::post('posts/create','App\Http\Controllers\Api\PostsController@create')->middleware('jwtAuth');
@@ -52,6 +55,7 @@ Route::get('my_business_orders','App\Http\Controllers\Api\OrdersController@mybus
 Route::post('orders/update_order_status','App\Http\Controllers\Api\OrdersController@updateOrderStatus')->middleware('jwtAuth');
 Route::post('orders/update_e_t_d','App\Http\Controllers\Api\OrdersController@updateOrderETD')->middleware('jwtAuth');
 Route::post('orders/update_e_t_p','App\Http\Controllers\Api\OrdersController@updateOrderETP')->middleware('jwtAuth');
+Route::post('orders/update_delivery_std_cost_infor','App\Http\Controllers\Api\OrdersController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
 
 
 //for comment orders
@@ -83,3 +87,5 @@ Route::post('post_b_i_s/update_post_photo','App\Http\Controllers\Api\PostBIsCont
 Route::post('post_b_i_s/update_consumable_prod_item_desc','App\Http\Controllers\Api\PostBIsController@updateConsumableProdItemDesc')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_consumable_prod_infor','App\Http\Controllers\Api\PostBIsController@updateConsumableProdInfor')->middleware('jwtAuth');
 Route::post('pots_b_i_s/update_relation_counter', 'App\Http\Controllers\Api\PostBIsController@updateRelationCounter')->middleware('jwtAuth');
+Route::post('pots_b_i_s/update_delivery_std_cost_infor', 'App\Http\Controllers\Api\PostBIsController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
+

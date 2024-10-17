@@ -115,6 +115,9 @@ class AuthController extends Controller
             $user->business_address_postal_code = $request->business_address_postal_code;
             $user->business_phone_number = $request->business_phone_number;
             $user->business_type = $request->business_type;
+            $user->business_delivery_infor1 = $request->business_delivery_infor1;
+            $user->business_delivery_infor2 = $request->business_delivery_infor2;
+            $user->business_delivery_std_cost = $request->business_delivery_std_cost;
 
             // $user->business_photo_width = $request->business_photo_width;
             // $user->business_photo_height = $request->business_photo_height;
@@ -228,7 +231,7 @@ class AuthController extends Controller
     }
 
     public function updateUserBusinessAddress(Request $request)
-    {
+    {  
         try {
             $user = User::find(Auth::user()->id);;
             $user->business_address_house_number = $request->business_address_house_number;
@@ -373,6 +376,30 @@ class AuthController extends Controller
             ]);
         }
 
+    }
+
+    public function updateDeliveryStdCostInfor(Request $request)
+    {
+        try {
+
+            $user = User::find(Auth::user()->id);
+           
+            $user->business_delivery_infor1 = $request->business_delivery_infor1;
+            $user->business_delivery_infor2 = $request->business_delivery_infor2;
+            $user->business_delivery_std_cost = $request->business_delivery_std_cost;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'business edited'
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
     }
 
 }

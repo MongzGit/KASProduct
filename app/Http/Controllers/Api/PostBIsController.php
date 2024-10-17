@@ -47,6 +47,9 @@ class PostBIsController extends Controller
             $post->consumable_prod_status = $request->consumable_prod_status;
             $post->consumable_prod_item_desc = $request->consumable_prod_item_desc;
             $post->consumable_prod_price = $request->consumable_prod_price;
+            $post->consumable_prod_delivery_infor1 = $request->consumable_prod_delivery_infor1;
+            $post->consumable_prod_delivery_infor2 = $request->consumable_prod_delivery_infor2;
+            $post->consumable_prod_delivery_std_cost = $request->consumable_prod_delivery_std_cost;
             $post->consumable_prod_location = $request->consumable_prod_location;
             $post->news_paper_name = $request->news_paper_name;
             $post->news_title = $request->news_title;
@@ -207,6 +210,9 @@ class PostBIsController extends Controller
             $post->consumable_prod_status = $request->consumable_prod_status;
             $post->consumable_prod_item_desc = $request->consumable_prod_item_desc;//for internal desection and sorting
             $post->consumable_prod_price = $request->consumable_prod_price;
+            $post->consumable_prod_delivery_infor1 = $request->consumable_prod_delivery_infor1;
+            $post->consumable_prod_delivery_infor2 = $request->consumable_prod_delivery_infor2;
+            $post->consumable_prod_delivery_std_cost = $request->consumable_prod_delivery_std_cost;
             $post->consumable_prod_location = $request->consumable_prod_location;
             $post->post_general_infor1 = $request->post_general_infor1;//for priority handling
             $post->post_general_infor2 = $request->post_general_infor2;
@@ -1472,7 +1478,7 @@ class PostBIsController extends Controller
                 }
 
             }
-
+ 
             return response()->json([
                 'success' => true,
                 'posts' => $posts
@@ -1531,6 +1537,45 @@ class PostBIsController extends Controller
             }
             
             $post->relation_counter = $request->relation_counter;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated relation counter',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateDeliveryStdCostInfor(Request $request)
+    {
+        try{
+            $post = PostBI::find($request->id);
+
+            if ($post == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'n'
+                ]);
+            }
+
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            
+            
+            $post->consumable_prod_delivery_infor1 = $request->consumable_prod_delivery_infor1;
+            $post->consumable_prod_delivery_infor2 = $request->consumable_prod_delivery_infor2;
+            $post->consumable_prod_delivery_std_cost = $request->consumable_prod_delivery_std_cost;
 
             $post->update();
 

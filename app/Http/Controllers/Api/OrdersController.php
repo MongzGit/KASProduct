@@ -19,6 +19,9 @@ class OrdersController extends Controller
 
             $order->order_post_user_id = $request->order_post_user_id;//the business the order is directed to
             $order->order_status = $request->order_status;
+            $order->order_delivery_infor1 = $request->order_delivery_infor1;
+            $order->order_delivery_infor2 = $request->order_delivery_infor2;
+            $order->order_delivery_std_cost = $request->order_delivery_std_cost;
             $order->order_post_user_business_name = $request->order_post_user_business_name;
             $order->order_post_user_business_desc = $request->order_post_user_business_desc;
             $order->order_post_user_business_email = $request->order_post_user_business_email;
@@ -72,8 +75,20 @@ class OrdersController extends Controller
                     ]);
                 }
             }
-            $order->order_post_user_id = $request->order_post_user_id;
+            $order->order_post_user_id = $request->order_post_user_id;//the business the order is directed to
             $order->order_status = $request->order_status;
+            $order->order_delivery_infor1 = $request->order_delivery_infor1;
+            $order->order_delivery_infor2 = $request->order_delivery_infor2;
+            $order->order_delivery_std_cost = $request->order_delivery_std_cost;
+            $order->order_post_user_business_name = $request->order_post_user_business_name;
+            $order->order_post_user_business_desc = $request->order_post_user_business_desc;
+            $order->order_post_user_business_email = $request->order_post_user_business_email;
+            $order->order_post_user_business_address_house_number = $request->order_post_user_business_address_house_number;
+            $order->order_post_user_business_address_street_name = $request->order_post_user_business_address_street_name;
+            $order->order_post_user_business_address_zone = $request->order_post_user_business_address_zone;
+            $order->order_post_user_business_address_location = $request->order_post_user_business_address_location;
+            $order->order_post_user_business_address_city = $request->order_post_user_business_address_city;
+            $order->order_post_user_business_phone_number = $request->order_post_user_business_phone_number;
             $order->order_estimated_time_of_preparation = $request->order_estimated_time_of_preparation;
             $order->order_estimated_time_of_delivery = $request->order_estimated_time_of_delivery;
 
@@ -193,6 +208,46 @@ class OrdersController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Order Status Edited'
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateDeliveryStdCostInfor(Request $request)
+    {
+        try {
+
+            $order = Order::find($request->id);
+
+            if ($order == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'n'
+                ]);
+            }
+
+            if ((Auth::user()->id != $order->user_id)) {
+                if ($order->order_post_user_id != Auth::user()->id) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'unauthorized access for order update'
+                    ]);
+                }
+            }
+           
+            $order->order_delivery_infor1 = $request->order_delivery_infor1;
+            $order->order_delivery_infor2 = $request->order_delivery_infor2;
+            $order->order_delivery_std_cost = $request->order_delivery_std_cost;
+
+            $order->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'order edited'
             ]);
         } catch (Exception $e) {
             return response()->Json([
