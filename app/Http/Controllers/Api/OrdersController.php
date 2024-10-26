@@ -18,6 +18,7 @@ class OrdersController extends Controller
             $order->user_id = Auth::user()->id;
 
             $order->order_post_user_id = $request->order_post_user_id;//the business the order is directed to
+            $order->order_number = $request->order_number;
             $order->order_status = $request->order_status;
             $order->order_delivery_infor1 = $request->order_delivery_infor1;
             $order->order_delivery_infor2 = $request->order_delivery_infor2;
@@ -76,6 +77,7 @@ class OrdersController extends Controller
                 }
             }
             $order->order_post_user_id = $request->order_post_user_id;//the business the order is directed to
+            $order->order_number = $request->order_number;
             $order->order_status = $request->order_status;
             $order->order_delivery_infor1 = $request->order_delivery_infor1;
             $order->order_delivery_infor2 = $request->order_delivery_infor2;

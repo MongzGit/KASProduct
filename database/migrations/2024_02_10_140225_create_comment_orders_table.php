@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('commentOrder_post_consumable_prod_special')->default('')->nullable();
             $table->string('commentOrder_post_consumable_prod_status')->default('')->nullable();
             $table->string('commentOrder_post_consumable_prod_item_desc')->default('')->nullable();
-            $table->string('commentOrder_post_consumable_prod_price')->default('')->nullable();
-            $table->string('commentOrder_post_consumable_prod_quantity')->default('')->nullable();
+            $table->unsignedDouble('commentOrder_post_consumable_prod_price')->default(0.0)->nullable();
+            $table->unsignedInteger('commentOrder_post_consumable_prod_quantity')->default(0)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')
