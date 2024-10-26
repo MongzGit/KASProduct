@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('order_post_user_id');
             $table->string('order_number')->default('')->nullable();
+            $table->string('order_type')->default('')->nullable();
             $table->string('order_post_user_business_name')->default('')->nullable();
             $table->string('order_post_user_business_desc')->default('')->nullable();
             $table->string('order_post_user_business_email')->default('')->nullable();
