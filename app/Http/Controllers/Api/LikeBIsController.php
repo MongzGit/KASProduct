@@ -13,7 +13,7 @@ class LikeBIsController extends Controller
     public function like(Request $request)
     {
         try {
-            $likeBI = LikeBI::where('post_id', $request->id)->where('user_id', Auth::user()->id)->get();
+            $likeBI = LikeBI::where('post_b_i_id', $request->id)->where('user_id', Auth::user()->id)->get();
             //check if it returns 0 then this post is not liked and else unliked
             if (count($likeBI) > 0) {
                 //bcz we cant have likes more than one
@@ -25,7 +25,7 @@ class LikeBIsController extends Controller
             }
             $likeBI = new LikeBI;
             $likeBI->user_id = Auth::user()->id;
-            $likeBI->post_id = $request->id;
+            $likeBI->post_b_i_id = $request->id;
             $likeBI->save();
 
             return response()->json([

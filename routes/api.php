@@ -89,3 +89,5 @@ Route::post('post_b_i_s/update_consumable_prod_infor','App\Http\Controllers\Api\
 Route::post('pots_b_i_s/update_relation_counter', 'App\Http\Controllers\Api\PostBIsController@updateRelationCounter')->middleware('jwtAuth');
 Route::post('pots_b_i_s/update_delivery_std_cost_infor', 'App\Http\Controllers\Api\PostBIsController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
 
+//for likeBIs
+Route::post('post_b_i_s/like','App\Http\Controllers\Api\LikeBIsController@like')->middleware('jwtAuth');

@@ -332,7 +332,7 @@ class AuthController extends Controller
     public function updateUserBusinessPhoto(Request $request)
     {
         try {
-            $validator3 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['9' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
 
             $user = User::find(Auth::user()->id);
             // $user->lastname = $request->lastname;
