@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('post_type')->default('')->nullable();
             $table->string('consumable_business_name')->default('')->nullable();
             $table->string('consumable_prod_name')->default('')->nullable();
-            $table->string('consumable_prod_desc', 3000)->default('')->nullable();
+            $table->string('consumable_prod_desc', 1000)->default('')->nullable();
             $table->string('consumable_prod_special')->default('')->nullable();
             $table->string('consumable_prod_status')->default('')->nullable();
             $table->string('consumable_prod_item_desc')->default('')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('news_title')->default('')->nullable();
             $table->string('news_headline')->default('')->nullable();
             $table->string('news_byline')->default('')->nullable();
-            $table->string('news_lead_paragraph')->default('')->nullable();
+            $table->string('news_lead_paragraph', 1000)->default('')->nullable();
             $table->string('news_explanation_paragraph')->default('')->nullable();
             $table->string('news_additional_explanation')->default('')->nullable();
             $table->string('news_special')->default('')->nullable();
