@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('post_type')->default('')->nullable();
             $table->string('consumable_business_name')->default('')->nullable();
             $table->string('consumable_prod_name')->default('')->nullable();
-            $table->string('consumable_prod_desc')->default('')->nullable();
+            $table->string('consumable_prod_desc', 3000)->default('')->nullable();
             $table->string('consumable_prod_special')->default('')->nullable();
             $table->string('consumable_prod_status')->default('')->nullable();
             $table->string('consumable_prod_item_desc')->default('')->nullable();

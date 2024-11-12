@@ -91,3 +91,9 @@ Route::post('pots_b_i_s/update_delivery_std_cost_infor', 'App\Http\Controllers\A
 
 //for likeBIs
 Route::post('post_b_i_s/like','App\Http\Controllers\Api\LikeBIsController@like')->middleware('jwtAuth');
+
+//for comments
+Route::post('comment_b_i_s/create','App\Http\Controllers\Api\CommentBIsController@create')->middleware('jwtAuth');
+Route::post('comment_b_i_s/delete','App\Http\Controllers\Api\CommentBIsController@delete')->middleware('jwtAuth');
+Route::post('comment_b_i_s/update','App\Http\Controllers\Api\CommentBIsController@update')->middleware('jwtAuth');
+Route::post('posts/comment_b_i_s','App\Http\Controllers\Api\CommentBIsController@comments')->middleware('jwtAuth');
