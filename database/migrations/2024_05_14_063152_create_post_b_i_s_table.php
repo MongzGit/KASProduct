@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('prod_business_name')->default('')->nullable();
             $table->string('prod_name')->default('')->nullable();
             $table->string('prod_desc', 1500)->default('')->nullable();
+            $table->unsignedDouble('prod_price')->default(0.0)->nullable();
+            $table->string('prod_status')->default('')->nullable();
             $table->string('consumable_prod_special')->default('')->nullable();
-            $table->string('consumable_prod_status')->default('')->nullable();
             $table->string('consumable_prod_item_desc')->default('')->nullable();
-            $table->unsignedDouble('consumable_prod_price')->default(0.0)->nullable();
             $table->String('consumable_prod_delivery_infor1')->default('')->nullable();
             $table->String('consumable_prod_delivery_infor2')->default('')->nullable();
             $table->unsignedDouble('consumable_prod_delivery_std_cost')->default(0.0)->nullable();
