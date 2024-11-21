@@ -26,10 +26,10 @@ class PostBIsController extends Controller
             $post->prod_business_name = $request->prod_business_name;
             $post->prod_name = $request->prod_name;
             $post->prod_desc = $request->prod_desc;
+            $post->prod_price = $request->prod_price;
+            $post->prod_status = $request->prod_status;
             $post->consumable_prod_special = $request->consumable_prod_special;
-            $post->consumable_prod_status = $request->consumable_prod_status;
             $post->consumable_prod_item_desc = $request->consumable_prod_item_desc;
-            $post->consumable_prod_price = $request->consumable_prod_price;
             $post->consumable_prod_delivery_infor1 = $request->consumable_prod_delivery_infor1;
             $post->consumable_prod_delivery_infor2 = $request->consumable_prod_delivery_infor2;
             $post->consumable_prod_delivery_std_cost = $request->consumable_prod_delivery_std_cost;
