@@ -48,9 +48,13 @@ return new class extends Migration
             $table->string('event_date')->default('')->nullable();
             $table->string('event_time')->default('')->nullable();
             $table->unsignedDouble('event_ticket_price_general')->default(0.0)->nullable();
+            $table->string('event_ticket_price_general_desc')->default('')->nullable();
             $table->unsignedDouble('event_ticket_price_golden')->default(0.0)->nullable();
+            $table->string('event_ticket_price_golden_desc')->default('')->nullable();
             $table->unsignedDouble('event_ticket_price_vip')->default(0.0)->nullable();
+            $table->string('event_ticket_price_vip_desc')->default('')->nullable();
             $table->unsignedDouble('event_ticket_price_vvip')->default(0.0)->nullable(); 
+            $table->string('event_ticket_price_vvip_desc')->default('')->nullable();
             $table->string('event_artist_lineup', 1500)->default('')->nullable();
             $table->string('event_specials')->default('')->nullable();
             $table->string('post_general_infor1')->default('')->nullable(); //used for sorting internally and grouping with item description.

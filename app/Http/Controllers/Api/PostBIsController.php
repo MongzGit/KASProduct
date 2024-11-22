@@ -54,9 +54,13 @@ class PostBIsController extends Controller
             $post->event_date = $request->event_date;
             $post->event_time = $request->event_time;
             $post->event_ticket_price_general = $request->event_ticket_price_general;
+            $post->event_ticket_price_general_desc = $request->event_ticket_price_general_desc;
             $post->event_ticket_price_golden = $request->event_ticket_price_golden;
+            $post->event_ticket_price_golden_desc = $request->event_ticket_price_golden_desc;
             $post->event_ticket_price_vip = $request->event_ticket_price_vip;
+            $post->event_ticket_price_vip_desc = $request->event_ticket_price_vip_desc;
             $post->event_ticket_price_vvip = $request->event_ticket_price_vvip;
+            $post->event_ticket_price_vvip_desc = $request->event_ticket_price_vvip_desc;
             $post->event_artist_lineup = $request->event_artist_lineup;
             $post->event_specials = $request->event_specials;
             $post->post_general_infor1 = $request->post_general_infor1;
@@ -162,6 +166,48 @@ class PostBIsController extends Controller
                 ]);
             }
             $post->post_type = $request->post_type;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Type',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateEventTicketInfor(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+
+            $post->event_ticket_price_general = $request->event_ticket_price_general;
+            
+            $post->event_ticket_price_general_desc = $request->event_ticket_price_general_desc;
+            
+            $post->event_ticket_price_golden = $request->event_ticket_price_golden;
+            
+            $post->event_ticket_price_golden_desc = $request->event_ticket_price_golden_desc;
+            
+            $post->event_ticket_price_vip = $request->event_ticket_price_vip;
+            
+            $post->event_ticket_price_vip_desc = $request->event_ticket_price_vip_desc;
+            
+            $post->event_ticket_price_vvip = $request->event_ticket_price_vvip;
+            
+            $post->event_ticket_price_vvip_desc = $request->event_ticket_price_vvip_desc;
 
             $post->update();
 
