@@ -24,7 +24,8 @@ class TeamsController extends Controller
             $team->team_name = $request->team_name;
             $team->team_aka_name = $request->team_aka_name;
             $team->team_desc = $request->team_desc;
-            $team->team_infor = $request->team_infor;
+            $team->team_info = $request->team_info;
+            $team->team_info2 = $request->team_info2;
             $team->matches_played = $request->matches_played;
             $team->matches_won = $request->matches_won;
             $team->matches_drawn = $request->matches_drawn;

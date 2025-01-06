@@ -14,7 +14,6 @@ use Response;
 
 class PostBIsController extends Controller
 {
-
     public function create(Request $request)
     {
         try {
