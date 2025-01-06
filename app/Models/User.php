@@ -69,5 +69,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(CommentOrder::class);
     }    
 
+    public function teams(){
+        return $this->hasMany(Team::class);
+    } 
+
+    public function players(){
+        return $this->hasMany(Player::class);
+    } 
 
 }

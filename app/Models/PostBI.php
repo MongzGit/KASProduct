@@ -22,4 +22,8 @@ class PostBI extends Model
     public function likeBIs(){
         return $this->hasMany(LikeBI::class);
     }
+
+    public function teams(){
+        return $this->hasMany(Team::class);
+    }
 }

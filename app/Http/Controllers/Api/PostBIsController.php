@@ -854,10 +854,15 @@ class PostBIsController extends Controller
                     'message' => 'unauthorized access'
                 ]);
             }
-            //check if post has photo to delete
-            if ($post->photo != null) {
-                Storage::delete('public/posts/' . $post->photo);
+            //check if post has photo1 to delete
+            if ($post->post_photo1 != null) {
+                Storage::delete('public/posts/' . $post->post_photo1);
             }
+            //check if post has photo2 to delete
+            if ($post->post_photo2 != null) {
+                Storage::delete('public/posts/' . $post->post_photo2);
+            }
+
             $post->delete();
             return response()->json([
                 'success' => true,
@@ -878,6 +883,7 @@ class PostBIsController extends Controller
             foreach ($posts as $post) {
                 //get user of post
                 $post->user;
+                $post['teamsCount'] = count($post->teams);
                 //comments count
                 $post['commentsCount'] = count($post->commentBIs);
                 //likes count

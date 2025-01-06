@@ -88,7 +88,7 @@ Route::post('post_b_i_s/update_consumable_prod_item_desc','App\Http\Controllers\
 Route::post('post_b_i_s/update_consumable_prod_infor','App\Http\Controllers\Api\PostBIsController@updateConsumableProdInfor')->middleware('jwtAuth');
 Route::post('pots_b_i_s/update_relation_counter', 'App\Http\Controllers\Api\PostBIsController@updateRelationCounter')->middleware('jwtAuth');
 Route::post('pots_b_i_s/update_delivery_std_cost_infor', 'App\Http\Controllers\Api\PostBIsController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
-
+       
 //for likeBIs
 Route::post('post_b_i_s/like','App\Http\Controllers\Api\LikeBIsController@like')->middleware('jwtAuth');
 
@@ -97,3 +97,49 @@ Route::post('comment_b_i_s/create','App\Http\Controllers\Api\CommentBIsControlle
 Route::post('comment_b_i_s/delete','App\Http\Controllers\Api\CommentBIsController@delete')->middleware('jwtAuth');
 Route::post('comment_b_i_s/update','App\Http\Controllers\Api\CommentBIsController@update')->middleware('jwtAuth');
 Route::post('posts/comment_b_i_s','App\Http\Controllers\Api\CommentBIsController@comments')->middleware('jwtAuth');
+
+Route::post('teams/create','App\Http\Controllers\Api\TeamsController@create')->middleware('jwtAuth');
+Route::post('teams/update','App\Http\Controllers\Api\TeamsController@update')->middleware('jwtAuth');
+Route::post('teams/update_team_name','App\Http\Controllers\Api\TeamsController@updateTeamName')->middleware('jwtAuth');
+Route::post('teams/update_team_aka_name','App\Http\Controllers\Api\TeamsController@updateTeamAkaName')->middleware('jwtAuth');
+Route::post('teams/update_team_desc','App\Http\Controllers\Api\TeamsController@updateTeamDesc')->middleware('jwtAuth');
+Route::post('teams/update_team_info','App\Http\Controllers\Api\TeamsController@updateTeamInfo')->middleware('jwtAuth');
+Route::post('teams/update_team_info2','App\Http\Controllers\Api\TeamsController@updateTeamInfo2')->middleware('jwtAuth');
+Route::post('teams/update_matches_played','App\Http\Controllers\Api\TeamsController@updateMatchesPlayed')->middleware('jwtAuth');
+Route::post('teams/update_matches_won','App\Http\Controllers\Api\TeamsController@updateMatchesWon')->middleware('jwtAuth');
+Route::post('teams/update_matches_drawn','App\Http\Controllers\Api\TeamsController@updateMatchesDrawn')->middleware('jwtAuth');
+Route::post('teams/update_matches_lost','App\Http\Controllers\Api\TeamsController@updateMatchesLost')->middleware('jwtAuth');
+Route::post('teams/update_points','App\Http\Controllers\Api\TeamsController@updatePoints')->middleware('jwtAuth');
+Route::post('teams/update_goals','App\Http\Controllers\Api\TeamsController@updateGoals')->middleware('jwtAuth');
+Route::post('teams/update_current_news','App\Http\Controllers\Api\TeamsController@updateCurrentNews')->middleware('jwtAuth');
+Route::post('teams/update_post_photo','App\Http\Controllers\Api\TeamsController@updatePostPhoto')->middleware('jwtAuth');
+Route::get('teams','App\Http\Controllers\Api\TeamsController@teams')->middleware('jwtAuth');
+Route::get('teams/team','App\Http\Controllers\Api\TeamsController@team')->middleware('jwtAuth');
+Route::get('teams/my_teams','App\Http\Controllers\Api\TeamsController@myTeams')->middleware('jwtAuth');
+Route::post('teams/delete','App\Http\Controllers\Api\TeamsController@delete')->middleware('jwtAuth');
+
+
+Route::post('players/create','App\Http\Controllers\Api\PlayersController@create')->middleware('jwtAuth');
+Route::post('players/update','App\Http\Controllers\Api\PlayersController@update')->middleware('jwtAuth');
+Route::post('players/update_player_name','App\Http\Controllers\Api\PlayersController@UpdatePlayerName')->middleware('jwtAuth');
+Route::post('players/update_player_lastname','App\Http\Controllers\Api\PlayersController@updatePlayerLastName')->middleware('jwtAuth');
+Route::post('players/update_player_age','App\Http\Controllers\Api\PlayersController@updatePlayerAge')->middleware('jwtAuth');
+Route::post('players/update_player_height','App\Http\Controllers\Api\PlayersController@updatePlayerHeight')->middleware('jwtAuth');
+Route::post('players/update_player_weight','App\Http\Controllers\Api\PlayersController@updatePlayerWeight')->middleware('jwtAuth');
+Route::post('players/update_matches_played','App\Http\Controllers\Api\PlayersController@updateMatchesPlayed')->middleware('jwtAuth');
+Route::post('players/update_player_address','App\Http\Controllers\Api\PlayersController@updatePlayerAddress')->middleware('jwtAuth');
+Route::post('players/update_player_position','App\Http\Controllers\Api\PlayersController@updatePlayerPosition')->middleware('jwtAuth');
+Route::post('players/update_jersey_number','App\Http\Controllers\Api\PlayersController@updateJerseyNumber')->middleware('jwtAuth');
+Route::post('players/update_running_speed','App\Http\Controllers\Api\PlayersController@updateRunningSpeed')->middleware('jwtAuth');
+Route::post('players/update_goals','App\Http\Controllers\Api\PlayersController@updateGoals')->middleware('jwtAuth');
+Route::post('players/update_assists','App\Http\Controllers\Api\PlayersController@updateAssists')->middleware('jwtAuth');
+Route::post('players/update_player_info','App\Http\Controllers\Api\PlayersController@updatePlayerInfo')->middleware('jwtAuth');
+Route::post('players/update_player_info2','App\Http\Controllers\Api\PlayersController@updatePlayerInfo2')->middleware('jwtAuth');
+Route::post('players/update_post_photo','App\Http\Controllers\Api\PlayersController@updatePlayerInfo')->middleware('jwtAuth');
+Route::post('players/delete','App\Http\Controllers\Api\PlayersController@delete')->middleware('jwtAuth');
+
+
+
+
+Route::get('players','App\Http\Controllers\Api\PlayersController@players')->middleware('jwtAuth');
+Route::get('players/player','App\Http\Controllers\Api\PlayersController@player')->middleware('jwtAuth');
