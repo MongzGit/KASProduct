@@ -20,8 +20,9 @@ class PlayersController extends Controller
             $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $player = new Player;
             $player->user_id = Auth::user()->id;
-            $player->player_id = $request->player_id;
+            $player->team_id = $request->team_id;
             $player->name = $request->name;
+            $player->lastname = $request->lastname;
             $player->age = $request->age;
             $player->height = $request->height;
             $player->weight = $request->weight;
@@ -619,8 +620,6 @@ class PlayersController extends Controller
     {
         try {
             $player = Player::find($request->id);
-
-            $player['playersCount'] = count($player->players);
 
             return response()->json([
                 'success' => true,

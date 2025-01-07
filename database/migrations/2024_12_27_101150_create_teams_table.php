@@ -22,12 +22,12 @@ return new class extends Migration
             $table->string('team_desc')->default('')->nullable();
             $table->string('team_info')->default('')->nullable();
             $table->string('team_info2')->default('')->nullable();
-            $table->string('matches_played')->default('')->nullable();
-            $table->string('matches_won')->default('')->nullable();
-            $table->string('matches_drawn')->default('')->nullable();
-            $table->string('matches_lost')->default('')->nullable();
-            $table->string('points')->default('')->nullable();
-            $table->string('goals')->default('')->nullable();
+            $table->unsignedInteger('matches_played')->default(0)->nullable();
+            $table->unsignedInteger('matches_won')->default(0)->nullable();
+            $table->unsignedInteger('matches_drawn')->default(0)->nullable();
+            $table->unsignedInteger('matches_lost')->default(0)->nullable();
+            $table->unsignedInteger('points')->default(0)->nullable();
+            $table->unsignedInteger('goals')->default(0)->nullable();
             $table->string('current_news')->default('')->nullable();
             $table->string('post_photo1')->default('')->nullable();
             $table->unsignedDouble('post_photo1_width')->default(0.0)->nullable();

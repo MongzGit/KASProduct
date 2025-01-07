@@ -109,7 +109,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -135,7 +135,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -162,7 +162,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -189,7 +189,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -216,7 +216,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -243,7 +243,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -270,7 +270,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -296,7 +296,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -322,7 +322,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -347,8 +347,7 @@ class TeamsController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -374,7 +373,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -400,7 +399,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -426,7 +425,7 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated',
-                'post' => $team
+                'team' => $team
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -540,6 +539,7 @@ class TeamsController extends Controller
 
                 $team['playersCount'] = count($team->players);
 
+                $team['gamesCount'] = count($team->games);
             }
             return response()->json([
                 'success' => true,
@@ -559,6 +559,8 @@ class TeamsController extends Controller
             $team = Team::find($request->id);
 
             $team['playersCount'] = count($team->players);
+
+            $team['gamesCount'] = count($team->games);
 
             return response()->json([
                 'success' => true,

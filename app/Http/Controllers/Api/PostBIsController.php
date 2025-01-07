@@ -253,7 +253,7 @@ class PostBIsController extends Controller
         }
     } 
 
-        public function updatePostPhoto(Request $request){
+    public function updatePostPhoto(Request $request){
 
         try{
             $post = PostBI::find($request->id);
@@ -913,6 +913,11 @@ class PostBIsController extends Controller
     {
         try {
             $post = PostBI::find($request->id);
+            $post['teamsCount'] = count($post->teams);
+                //comments count
+                $post['commentsCount'] = count($post->commentBIs);
+                //likes count
+                $post['likesCount'] = count($post->likeBIs);
             return response()->json([
                 'success' => true,
                 'post' => $post
@@ -929,6 +934,25 @@ class PostBIsController extends Controller
     {
         try {
             $posts = PostBI::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+            
+            foreach ($posts as $post) {
+                //get user of post
+                $post->user;
+                $post['teamsCount'] = count($post->teams);
+                //comments count
+                $post['commentsCount'] = count($post->commentBIs);
+                //likes count
+                $post['likesCount'] = count($post->likeBIs);
+                //check if users liked his own post
+                $post['selfLike'] = false;
+                foreach ($post->likeBIs as $like) {
+                    if ($like->user_id == Auth::user()->id) {
+                        $post['selfLike'] = true;
+                    }
+                }
+
+            }
+
             $user = Auth::user();
             return response()->json([
                 'success' => true,
