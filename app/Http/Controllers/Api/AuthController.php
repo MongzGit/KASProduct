@@ -286,15 +286,6 @@ class AuthController extends Controller
             $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
 
             $user = User::find(Auth::user()->id);
-            // $user->lastname = $request->lastname;
-            // $user->email = $request->email; //handle duplicate errors in android app
-            // $user->address_house_number = $request->address_house_number;
-            // $user->address_street_name = $request->address_street_name;
-            // $user->address_zone = $request->address_zone;
-            // $user->address_location = $request->address_location;
-            // $user->address_city = $request->address_city;
-            // $user->address_postal_code = $request->address_postal_code;
-            // $user->phone_number = $request->phone_number;
 
             $user->photo_width = $request->photo_width;
             $user->photo_height = $request->photo_height;
@@ -335,16 +326,7 @@ class AuthController extends Controller
             $validator3 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
 
             $user = User::find(Auth::user()->id);
-            // $user->lastname = $request->lastname;
-            // $user->email = $request->email; //handle duplicate errors in android app
-            // $user->address_house_number = $request->address_house_number;
-            // $user->address_street_name = $request->address_street_name;
-            // $user->address_zone = $request->address_zone;
-            // $user->address_location = $request->address_location;
-            // $user->address_city = $request->address_city;
-            // $user->address_postal_code = $request->address_postal_code;
-            // $user->phone_number = $request->phone_number;
-
+            
             $user->business_photo_width = $request->business_photo_width;
             $user->business_photo_height = $request->business_photo_height;
 

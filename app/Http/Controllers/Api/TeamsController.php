@@ -347,6 +347,7 @@ class TeamsController extends Controller
 
             return response()->json([
                 'success' => true,
+                'message' => 'updated',
                 'team' => $team
             ]);
         } catch (Exception $e) {
@@ -486,7 +487,7 @@ class TeamsController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'updated Post Type',
+                'message' => 'updated Photo',
                 'team' => $team
             ]);
         } catch (Exception $e) {
@@ -519,7 +520,7 @@ class TeamsController extends Controller
             $team->delete();
             return response()->json([
                 'success' => true,
-                'message' => 'post deleted'
+                'message' => 'team deleted'
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -593,4 +594,29 @@ class TeamsController extends Controller
         }
     }
 
+    public function leagueTeams(Request $request)
+    {
+        try {
+            $teams = Team::where('post_b_i_id', $request->id)->orderBy('id', 'desc')->get();;
+            foreach ($teams as $team) {
+                //get user of post
+                $team->user;
+
+                $team['playersCount'] = count($team->players);
+
+                $team['gamesCount'] = count($team->games);
+            }
+
+            return response()->json([
+                'success' => true,
+                'teams' => $teams
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
 }
