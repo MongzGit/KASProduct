@@ -18,14 +18,15 @@ class CommentOrdersController extends Controller
             $commentOrder->order_id = $request->order_id; //order id that the commentOrder product belongs
             $commentOrder->post_id = $request->post_id; //post/product id actually ordered
             $commentOrder->post_user_id = $request->post_user_id; // the business that the refered product/post belongs to
-            $commentOrder->comment_infor1 = $request->comment_infor1; //additional product comments
-            $commentOrder->comment_infor2 = $request->comment_infor2; //additional product comments
+            $commentOrder->comment_info1 = $request->comment_info1; //additional product comments
+            $commentOrder->comment_info2 = $request->comment_info2; //additional product comments
             
             $commentOrder->commentOrder_post_post_type = $request->commentOrder_post_post_type;
             $commentOrder->commentOrder_post_consumable_business_name = $request->commentOrder_post_consumable_business_name;
             $commentOrder->commentOrder_post_consumable_prod_name = $request->commentOrder_post_consumable_prod_name;
             $commentOrder->commentOrder_post_consumable_prod_desc = $request->commentOrder_post_consumable_prod_desc;
-            $commentOrder->commentOrder_post_consumable_prod_special = $request->commentOrder_post_consumable_prod_special;           $commentOrder->commentOrder_post_consumable_prod_status = $request->commentOrder_post_consumable_prod_status;
+            $commentOrder->commentOrder_post_consumable_prod_special = $request->commentOrder_post_consumable_prod_special;           
+            $commentOrder->commentOrder_post_consumable_prod_status = $request->commentOrder_post_consumable_prod_status;
             $commentOrder->commentOrder_post_consumable_prod_item_desc = $request->commentOrder_post_consumable_prod_item_desc;
             $commentOrder->commentOrder_post_consumable_prod_price = $request->commentOrder_post_consumable_prod_price;
             $commentOrder->commentOrder_post_consumable_prod_quantity = $request->commentOrder_post_consumable_prod_quantity;
@@ -46,7 +47,7 @@ class CommentOrdersController extends Controller
         }
     }
 
-    public function updateCommentInfor1(Request $request)
+    public function update(Request $request)
     {
         try {
             $commentOrder = CommentOrder::find($request->id);
@@ -60,6 +61,18 @@ class CommentOrdersController extends Controller
                 }
             }
             $commentOrder->comment_infor1 = $request->comment_infor1;
+            $commentOrder->comment_infor2 = $request->comment_infor2; //additional product comments
+            
+            $commentOrder->commentOrder_post_post_type = $request->commentOrder_post_post_type;
+            $commentOrder->commentOrder_post_consumable_business_name = $request->commentOrder_post_consumable_business_name;
+            $commentOrder->commentOrder_post_consumable_prod_name = $request->commentOrder_post_consumable_prod_name;
+            $commentOrder->commentOrder_post_consumable_prod_desc = $request->commentOrder_post_consumable_prod_desc;
+            $commentOrder->commentOrder_post_consumable_prod_special = $request->commentOrder_post_consumable_prod_special;           
+            $commentOrder->commentOrder_post_consumable_prod_status = $request->commentOrder_post_consumable_prod_status;
+            $commentOrder->commentOrder_post_consumable_prod_item_desc = $request->commentOrder_post_consumable_prod_item_desc;
+            $commentOrder->commentOrder_post_consumable_prod_price = $request->commentOrder_post_consumable_prod_price;
+            $commentOrder->commentOrder_post_consumable_prod_quantity = $request->commentOrder_post_consumable_prod_quantity;
+
             $commentOrder->update();
 
             return response()->json([
@@ -74,9 +87,7 @@ class CommentOrdersController extends Controller
         }
     }
 
-    
-
-    public function updateCommentInfor2(Request $request)
+    public function updateCommentInfo1(Request $request)
     {
         try {
             $commentOrder = CommentOrder::find($request->id);
@@ -89,7 +100,35 @@ class CommentOrdersController extends Controller
                     ]);
                 }
             }
-            $commentOrder->comment_infor2 = $request->comment_infor2;
+            $commentOrder->comment_info1 = $request->comment_info1;
+            $commentOrder->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'commentOrder edited'
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateCommentInfo2(Request $request)
+    {
+        try {
+            $commentOrder = CommentOrder::find($request->id);
+            //check if user is editing his own comment
+            if ($commentOrder->user_id != Auth::user()->id) {
+                if ($commentOrder->post_user_id != Auth::user()->id) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'unauthorize access'
+                    ]);
+                }
+            }
+            $commentOrder->comment_info2 = $request->comment_info2;
             $commentOrder->update();
 
             return response()->json([
@@ -132,11 +171,10 @@ class CommentOrdersController extends Controller
         }
     }
 
-
-    public function orderComments(Request $request)
+    public function orderCommentOrders(Request $request)
     {
         try {
-            $commentOrders = CommentOrder::where('order_id', $request->order_id)->get();
+            $commentOrders = CommentOrder::where('order_id', $request->id)->get();
 
             if ($commentOrders->isEmpty()) {
                 return response()->json([
@@ -148,6 +186,7 @@ class CommentOrdersController extends Controller
             //show user of each comment
             foreach ($commentOrders as $commentOrder) {
                 $commentOrder->user;
+                $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
             }
 
             return response()->json([
@@ -161,4 +200,95 @@ class CommentOrdersController extends Controller
             ]);
         }
     }
+    public function myCommentOrders()
+    {
+        try {
+            $commentOrders = CommentOrder::where('user_id', Auth::user()->id)->get();
+
+            if ($commentOrders->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'n'
+                ]);
+            }
+
+            //show user of each comment
+            foreach ($commentOrders as $commentOrder) {
+                $commentOrder->user;
+                    //comments count
+                    $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
+                
+            }
+
+            return response()->json([
+                'success' => true,
+                'commentOrders' => $commentOrders
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function myBusinessCommentOrders()
+    {
+        try {
+            $commentOrders = CommentOrder::where('post_user_id', Auth::user()->id)->get();
+
+            if ($commentOrders->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'n'
+                ]);
+            }
+
+            //show user of each comment
+            foreach ($commentOrders as $commentOrder) {
+                $commentOrder->user;
+                $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
+            }
+
+            return response()->json([
+                'success' => true,
+                'commentOrders' => $commentOrders
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function postCommentOrders(Request $request)
+    {
+        try {
+            $commentOrders = CommentOrder::where('post_id', $request->id)->get();
+
+            if ($commentOrders->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'n'
+                ]);
+            }
+
+            //show user of each comment
+            foreach ($commentOrders as $commentOrder) {
+                $commentOrder->user;
+                $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
+            }
+
+            return response()->json([
+                'success' => true,
+                'commentOrders' => $commentOrders
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    } 
 }

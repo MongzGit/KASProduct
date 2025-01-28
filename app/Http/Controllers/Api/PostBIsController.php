@@ -27,12 +27,12 @@ class PostBIsController extends Controller
             $post->prod_desc = $request->prod_desc;
             $post->prod_price = $request->prod_price;
             $post->prod_status = $request->prod_status;
+            $post->prod_location = $request->prod_location;
             $post->consumable_prod_special = $request->consumable_prod_special;
             $post->consumable_prod_item_desc = $request->consumable_prod_item_desc;
             $post->consumable_prod_delivery_infor1 = $request->consumable_prod_delivery_infor1;
             $post->consumable_prod_delivery_infor2 = $request->consumable_prod_delivery_infor2;
             $post->consumable_prod_delivery_std_cost = $request->consumable_prod_delivery_std_cost;
-            $post->consumable_prod_location = $request->consumable_prod_location;
             $post->news_headline = $request->news_headline;
             $post->news_byline = $request->news_byline;
             $post->news_lead_paragraph = $request->news_lead_paragraph;
@@ -104,37 +104,6 @@ class PostBIsController extends Controller
                 $post->post_photo2 = null;
             }
 
-            // if ($request->file('advert_photo1') != null) {
-            //     if ($validator3->fails()) {
-            //         return response()->Json([
-            //             'success' => false,
-            //             'message' => $validator3->messages()
-            //         ]);
-            //     }
-            //     $file = $request->file('advert_photo1')->store('images', 'public');
-            //     $imageFilename = $file; // Replace with your actual image filename
-            //     $imageUrl = asset('storage/' . $imageFilename);
-            //     $post->advert_photo1 = $imageUrl;
-
-            // } else {
-            //     $post->advert_photo1 = null;
-            // }
-
-            // if ($request->file('advert_photo_logo') != null) {
-            //     if ($validator4->fails()) {
-            //         return response()->Json([
-            //             'success' => false,
-            //             'message' => $validator4->messages()
-            //         ]);
-            //     }
-            //     $file = $request->file('advert_photo_logo')->store('images', 'public');
-            //     $imageFilename = $file; // Replace with your actual image filename
-            //     $imageUrl = asset('storage/' . $imageFilename);
-            //     $post->advert_photo_logo = $imageUrl;
-
-            // } else {
-            //     $post->advert_photo_logo = null;
-            // }
 
             $post->save();
 
@@ -171,6 +140,169 @@ class PostBIsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'updated Post Type',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateProdBusinessName(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->prod_business_name = $request->prod_business_name;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post B Name',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateProdName(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->prod_name = $request->prod_name;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Name',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateProdDesc(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+
+            $post->prod_desc = $request->prod_desc;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post desc',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateProdPrice(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->prod_price = $request->prod_price;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post price',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateProdStatus(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->prod_status = $request->prod_status;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Status',
+                'post' => $post
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateProdLocation(Request $request){
+
+        try{
+            $post = PostBI::find($request->id);
+            if (Auth::user()->id != $post->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $post->prod_location = $request->prod_location;
+
+            $post->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Post Status',
                 'post' => $post
             ]);
         } catch (Exception $e) {
@@ -882,6 +1014,9 @@ class PostBIsController extends Controller
             foreach ($posts as $post) {
                 //get user of post
                 $post->user;
+                //cpmponents vount
+                $post['componentsCount'] = count($post->components);
+                //teams count
                 $post['teamsCount'] = count($post->teams);
                 //comments count
                 $post['commentsCount'] = count($post->commentBIs);
@@ -913,6 +1048,9 @@ class PostBIsController extends Controller
     {
         try {
             $post = PostBI::find($request->id);
+            //cpmponents vount
+            $post['componentsCount'] = count($post->components);
+            //teams count
             $post['teamsCount'] = count($post->teams);
                 //comments count
                 $post['commentsCount'] = count($post->commentBIs);
@@ -938,6 +1076,9 @@ class PostBIsController extends Controller
             foreach ($posts as $post) {
                 //get user of post
                 $post->user;
+                //cpmponents count
+                $post['componentsCount'] = count($post->components);
+                //teams count
                 $post['teamsCount'] = count($post->teams);
                 //comments count
                 $post['commentsCount'] = count($post->commentBIs);

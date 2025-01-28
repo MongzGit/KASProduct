@@ -27,7 +27,7 @@ return new class extends Migration
             $table->String('consumable_prod_delivery_infor1')->default('')->nullable();
             $table->String('consumable_prod_delivery_infor2')->default('')->nullable();
             $table->unsignedDouble('consumable_prod_delivery_std_cost')->default(0.0)->nullable();
-            $table->string('consumable_prod_location')->default('')->nullable();
+            $table->string('prod_location')->default('')->nullable();
             $table->string('news_headline')->default('')->nullable();
             $table->string('news_byline')->default('')->nullable();
             $table->string('news_lead_paragraph', 1500)->default('')->nullable();

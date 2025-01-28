@@ -57,12 +57,37 @@ Route::post('orders/update_e_t_d','App\Http\Controllers\Api\OrdersController@upd
 Route::post('orders/update_e_t_p','App\Http\Controllers\Api\OrdersController@updateOrderETP')->middleware('jwtAuth');
 Route::post('orders/update_delivery_std_cost_infor','App\Http\Controllers\Api\OrdersController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
 
-
 //for comment orders
 Route::post('comment_orders/create','App\Http\Controllers\Api\CommentOrdersController@create')->middleware('jwtAuth');
 Route::post('comment_orders/delete','App\Http\Controllers\Api\CommentOrdersController@delete')->middleware('jwtAuth');
 Route::post('comment_orders/update','App\Http\Controllers\Api\CommentOrdersController@update')->middleware('jwtAuth');
-Route::post('orders/comment_orders','App\Http\Controllers\Api\CommentOrdersController@commentOrders')->middleware('jwtAuth');
+Route::post('comment_orders/update_comment_info1','App\Http\Controllers\Api\CommentOrdersController@updateCommentInfo1')->middleware('jwtAuth');
+Route::post('comment_orders/update_comment_info2','App\Http\Controllers\Api\CommentOrdersController@updateCommentInfo2')->middleware('jwtAuth');
+Route::get('comment_orders/order_comment_orders','App\Http\Controllers\Api\CommentOrdersController@orderCommentOrders')->middleware('jwtAuth');
+Route::get('comment_orders/my_comment_orders','App\Http\Controllers\Api\CommentOrdersController@myCommentOrders')->middleware('jwtAuth');
+Route::get('comment_orders/my_business_comment_orders','App\Http\Controllers\Api\CommentOrdersController@myBusinessCommentOrders')->middleware('jwtAuth');
+Route::get('comment_orders/post_comment_orders','App\Http\Controllers\Api\CommentOrdersController@postCommentOrders')->middleware('jwtAuth');
+
+//for comment orders components
+Route::post('comment_order_components/create','App\Http\Controllers\Api\CommentOrderComponentsController@create')->middleware('jwtAuth');
+Route::post('comment_order_components/delete','App\Http\Controllers\Api\CommentOrderComponentsController@delete')->middleware('jwtAuth');
+Route::post('comment_order_components/update_comment_order_id','App\Http\Controllers\Api\CommentOrderComponentsController@updateCommentOrderId')->middleware('jwtAuth');
+Route::post('comment_order_components/update_order_id','App\Http\Controllers\Api\CommentOrderComponentsController@updateOrderId')->middleware('jwtAuth');
+Route::post('comment_order_components/update_post_id','App\Http\Controllers\Api\CommentOrderComponentsController@updatePostId')->middleware('jwtAuth');
+Route::post('comment_order_components/update_component_name','App\Http\Controllers\Api\CommentOrderComponentsController@updateComponentName')->middleware('jwtAuth');
+Route::post('comment_order_components/update_component_code','App\Http\Controllers\Api\CommentOrderComponentsController@updateComponentCode')->middleware('jwtAuth');
+Route::post('comment_order_components/update_component_desc','App\Http\Controllers\Api\CommentOrderComponentsController@updateComponentDesc')->middleware('jwtAuth');
+Route::post('comment_order_components/update_component_type','App\Http\Controllers\Api\CommentOrderComponentsController@updateComponentType')->middleware('jwtAuth');
+Route::post('comment_order_components/update_component_info','App\Http\Controllers\Api\CommentOrderComponentsController@updateComponentInfo')->middleware('jwtAuth');
+Route::post('comment_order_components/update_price_per_component','App\Http\Controllers\Api\CommentOrderComponentsController@updatePricePerComponent')->middleware('jwtAuth');
+Route::post('comment_order_components/update_weight_per_component','App\Http\Controllers\Api\CommentOrderComponentsController@updateWeightPerComponent')->middleware('jwtAuth');
+Route::get('comment_order_components/order_components','App\Http\Controllers\Api\CommentOrderComponentsController@orderComponents')->middleware('jwtAuth');
+Route::get('comment_order_components/comment_order_components','App\Http\Controllers\Api\CommentOrderComponentsController@commentOrderComponents')->middleware('jwtAuth');
+Route::get('comment_order_components/components','App\Http\Controllers\Api\CommentOrderComponentsController@components')->middleware('jwtAuth');
+Route::get('comment_order_components/my_business_ordered_components','App\Http\Controllers\Api\CommentOrderComponentsController@myBusinessOrderedComponents')->middleware('jwtAuth');
+Route::get('comment_order_components/my_ordered_components','App\Http\Controllers\Api\CommentOrderComponentsController@myOrderedComponents')->middleware('jwtAuth');
+Route::get('comment_order_components/comment_order_component','App\Http\Controllers\Api\CommentOrderComponentsController@commentOrderComponent')->middleware('jwtAuth');
+
 
 //for registeredlocations
 Route::post('registeredlocations/create','App\Http\Controllers\Api\RegisteredlocationsController@create')->middleware('jwtAuth');
@@ -71,17 +96,21 @@ Route::get('registeredlocationslist','App\Http\Controllers\Api\Registeredlocatio
 
 //
 Route::post('post_b_i_s/create','App\Http\Controllers\Api\PostBIsController@create')->middleware('jwtAuth');
-Route::post('post_b_i_s/create_consumable','App\Http\Controllers\Api\PostBIsController@create_consumable')->middleware('jwtAuth');
-Route::post('post_b_i_s/create_news','App\Http\Controllers\Api\PostBIsController@create_news')->middleware('jwtAuth');
-Route::post('post_b_i_s/create_taxi','App\Http\Controllers\Api\PostBIsController@create_taxi')->middleware('jwtAuth');
-Route::post('post_b_i_s/create_event','App\Http\Controllers\Api\PostBIsController@create_event')->middleware('jwtAuth');
 Route::get('post_b_i_s','App\Http\Controllers\Api\PostBIsController@postBIs')->middleware('jwtAuth');
 Route::post('post_b_i_s/update','App\Http\Controllers\Api\PostBIsController@update')->middleware('jwtAuth');
 Route::get('post_b_i_s/post','App\Http\Controllers\Api\PostBIsController@post')->middleware('jwtAuth');
 Route::get('post_b_i_s/my_posts','App\Http\Controllers\Api\PostBIsController@myPosts')->middleware('jwtAuth');
 Route::post('post_b_i_s/delete','App\Http\Controllers\Api\PostBIsController@delete')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_post_type','App\Http\Controllers\Api\PostBIsController@updatePostType')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_prod_business_name','App\Http\Controllers\Api\PostBIsController@updateProdBusinessName')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_prod_name','App\Http\Controllers\Api\PostBIsController@updateProdName')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_prod_desc','App\Http\Controllers\Api\PostBIsController@updateProdDesc')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_prod_status','App\Http\Controllers\Api\PostBIsController@updateProdStatus')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_post_general_infor','App\Http\Controllers\Api\PostBIsController@updatePostGeneralInfor')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_post_general_infor1','App\Http\Controllers\Api\PostBIsController@updatePostGeneralInfor1')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_post_general_infor2','App\Http\Controllers\Api\PostBIsController@updatePostGeneralInfor2')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_post_general_infor3','App\Http\Controllers\Api\PostBIsController@updatePostGeneralInfor3')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_post_general_infor4','App\Http\Controllers\Api\PostBIsController@updatePostGeneralInfor4')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_post_advert','App\Http\Controllers\Api\PostBIsController@updatePostAdvert')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_post_photo','App\Http\Controllers\Api\PostBIsController@updatePostPhoto')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_consumable_prod_item_desc','App\Http\Controllers\Api\PostBIsController@updateConsumableProdItemDesc')->middleware('jwtAuth');
@@ -162,3 +191,17 @@ Route::get('games/league_games','App\Http\Controllers\Api\GamesController@league
 Route::get('games/team_games','App\Http\Controllers\Api\GamesController@teamGames')->middleware('jwtAuth');
 Route::get('games/away_team_games','App\Http\Controllers\Api\GamesController@awayTeamGames')->middleware('jwtAuth');
 
+Route::post('components/create','App\Http\Controllers\Api\ComponentsController@create')->middleware('jwtAuth');
+Route::post('components/update','App\Http\Controllers\Api\ComponentsController@update')->middleware('jwtAuth');
+Route::post('components/update_component_name','App\Http\Controllers\Api\ComponentsController@updateComponentName')->middleware('jwtAuth');
+Route::post('components/update_component_desc','App\Http\Controllers\Api\ComponentsController@updateComponentDesc')->middleware('jwtAuth');
+Route::post('components/update_component_type','App\Http\Controllers\Api\ComponentsController@updateComponentType')->middleware('jwtAuth');
+Route::post('components/update_component_info','App\Http\Controllers\Api\ComponentsController@updateComponentInfo')->middleware('jwtAuth');
+Route::post('components/update_price_per_component','App\Http\Controllers\Api\ComponentsController@updatePricePerComponent')->middleware('jwtAuth');
+Route::post('components/update_weight_per_component','App\Http\Controllers\Api\ComponentsController@updateWeightPerComponent')->middleware('jwtAuth');
+Route::post('components/delete','App\Http\Controllers\Api\ComponentsController@delete')->middleware('jwtAuth');
+Route::get('components','App\Http\Controllers\Api\ComponentsController@components')->middleware('jwtAuth');
+Route::get('components/component','App\Http\Controllers\Api\ComponentsController@component')->middleware('jwtAuth');
+Route::get('components/my_components','App\Http\Controllers\Api\ComponentsController@myComponents')->middleware('jwtAuth');
+Route::get('components/prod_components','App\Http\Controllers\Api\ComponentsController@prodComponents')->middleware('jwtAuth');
+Route::get('components/my_business_general_components','App\Http\Controllers\Api\ComponentsController@myBusinessGeneralComponents')->middleware('jwtAuth');

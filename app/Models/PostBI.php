@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Comment;
+use App\Models\CommentBI;
 use App\Models\User;
-use App\Models\Likes;
+use App\Models\LikeBI;
+use App\Models\Team;
+use App\Models\Component;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,5 +27,9 @@ class PostBI extends Model
 
     public function teams(){
         return $this->hasMany(Team::class);
+    }
+
+    public function components(){
+        return $this->hasMany(Component::class);
     }
 }

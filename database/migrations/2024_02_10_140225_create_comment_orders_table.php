@@ -17,11 +17,10 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
-
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('post_user_id');
-            $table->string('comment_infor1')->default('')->nullable();
-            $table->string('comment_infor2')->default('')->nullable();
+            $table->string('comment_info1')->default('')->nullable();
+            $table->string('comment_info2')->default('')->nullable();
             $table->string('commentOrder_post_post_type')->default('')->nullable();
             $table->string('commentOrder_post_consumable_business_name')->default('')->nullable();
             $table->string('commentOrder_post_consumable_prod_name')->default('')->nullable();
@@ -33,8 +32,8 @@ return new class extends Migration
             $table->unsignedInteger('commentOrder_post_consumable_prod_quantity')->default(0)->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')
-            ->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')
+            // ->on('users')->onDelete('cascade');
 
             $table->foreign('order_id')->references('id')
             ->on('orders')->onDelete('cascade');

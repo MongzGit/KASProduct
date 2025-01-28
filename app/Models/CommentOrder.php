@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\CommentOrderComponent;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,5 +19,9 @@ class CommentOrder extends Model
 
     public function order(){
         return $this->belongsTo(Order::class);
+    }
+
+    public function commentOrderComponents(){
+        return $this->hasMany(CommentOrderComponent::class);
     }
 }
