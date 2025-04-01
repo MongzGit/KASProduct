@@ -27,15 +27,23 @@ class NewPasswordController extends Controller
         );
 
         if ($status == Password::RESET_LINK_SENT) {
-            //return view('reset-password');
-            return [
+            return response()->json([
+                'success' => true,
+                'message' => "Reset link sent.",
                 'status' => __($status)
-            ];
+            ]);
+            // return [
+            //     'status' => __($status)
+            // ];
         }
-
-        throw ValidationException::withMessages(
-            ['email' => [trans($status)]]
-        );
+        return response()->json([
+            'success' => false,
+            'message' => "Reset link not sent.",
+            'status' => __($status)
+        ]);
+        // throw ValidationException::withMessages(
+        //     ['email' => [trans($status)]]
+        // );
     }
 
     public function reset(Request $request)
