@@ -32,13 +32,15 @@ class AuthController extends Controller
     {
         try {
             $creds = $request->only(['name', 'password']);
+            $creds2 = $request->only(['email', 'password']);
 
-            if (!$token = auth()->attempt($creds)) {
-
-                return response()->json([
-                    'success' => false,
-                    'message' => 'invalid credentials'
-                ]);
+            if (!$token = auth()->attempt(credentials: $creds)) {
+                if (!$token = auth()->attempt(credentials: $creds2)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'invalid credentials'
+                    ]);
+                }
             }
             return response()->json([
                 'success' => true,
@@ -99,7 +101,7 @@ class AuthController extends Controller
     public function saveUserBusinessRegistered(Request $request)
     {
         try {
-           // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
             $user = User::find(Auth::user()->id);
 
             $user->business_registered = $request->business_registered;//correct as it just shows string
@@ -121,7 +123,7 @@ class AuthController extends Controller
 
             // $user->business_photo_width = $request->business_photo_width;
             // $user->business_photo_height = $request->business_photo_height;
-            
+
             // if ($request->file('business_photo') != null) {
             //     if ($validator4->fails()) {
             //         return response()->Json([
@@ -151,13 +153,13 @@ class AuthController extends Controller
             ]);
         }
     }
-    
+
 
     // this function saves user name,lastname and photo
     public function saveUserInfo(Request $request)
     {
         try {
-           // $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
 
             $user = User::find(Auth::user()->id);
             $user->lastname = $request->lastname;
@@ -206,7 +208,8 @@ class AuthController extends Controller
     public function updateUserAddress(Request $request)
     {
         try {
-            $user = User::find(Auth::user()->id);;
+            $user = User::find(Auth::user()->id);
+            ;
             $user->address_house_number = $request->address_house_number;
             $user->address_street_name = $request->address_street_name;
             $user->address_zone = $request->address_zone;
@@ -231,9 +234,10 @@ class AuthController extends Controller
     }
 
     public function updateUserBusinessAddress(Request $request)
-    {  
+    {
         try {
-            $user = User::find(Auth::user()->id);;
+            $user = User::find(Auth::user()->id);
+            ;
             $user->business_address_house_number = $request->business_address_house_number;
             $user->business_address_street_name = $request->business_address_street_name;
             $user->business_address_zone = $request->business_address_zone;
@@ -295,9 +299,9 @@ class AuthController extends Controller
                     $user->photo = null;
                 } else {
                     $file = $request->file('photo')->store('images', 'public');
-                $imageFilename = $file; // Replace with your actual image filename
-                $imageUrl = asset('storage/' . $imageFilename);
-                $user->photo = $imageUrl;
+                    $imageFilename = $file; // Replace with your actual image filename
+                    $imageUrl = asset('storage/' . $imageFilename);
+                    $user->photo = $imageUrl;
                 }
 
             } else {
@@ -326,7 +330,7 @@ class AuthController extends Controller
             $validator3 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
 
             $user = User::find(Auth::user()->id);
-            
+
             $user->business_photo_width = $request->business_photo_width;
             $user->business_photo_height = $request->business_photo_height;
 
@@ -335,9 +339,9 @@ class AuthController extends Controller
                     $user->business_photo = null;
                 } else {
                     $file = $request->file('business_photo')->store('images', 'public');
-                $imageFilename = $file; // Replace with your actual image filename
-                $imageUrl = asset('storage/' . $imageFilename);
-                $user->business_photo = $imageUrl;
+                    $imageFilename = $file; // Replace with your actual image filename
+                    $imageUrl = asset('storage/' . $imageFilename);
+                    $user->business_photo = $imageUrl;
                 }
 
             } else {
@@ -365,7 +369,7 @@ class AuthController extends Controller
         try {
 
             $user = User::find(Auth::user()->id);
-           
+
             $user->business_delivery_infor1 = $request->business_delivery_infor1;
             $user->business_delivery_infor2 = $request->business_delivery_infor2;
             $user->business_delivery_std_cost = $request->business_delivery_std_cost;

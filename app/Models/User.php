@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Comment;
 use App\Models\Post;
@@ -75,6 +76,13 @@ class User extends Authenticatable implements JWTSubject
 
     public function players(){
         return $this->hasMany(Player::class);
-    } 
+    }
+
+    public function sendPasswordResetNotification($token){
+
+        $url = 'http://127.0.0.1:8000/api/reset_password?token=' . $token;//. '&email=' . urlencode($this->email);
+
+        $this->notify(new ResetPasswordNotification($url));
+    }
 
 }

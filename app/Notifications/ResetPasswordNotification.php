@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+
+class ResetPasswordNotification extends Notification
+{
+    use Queueable;
+
+    public $url;
+
+    public function __construct(string $url) {
+        $this->url = $url;
+    }
+
+    public function via($notifiable) {
+        return ['mail'];
+    }
+
+    public function toMail($notifiable) {
+        //$resetUrl = url('/password/reset', ['token' => $this->token, 'email' => $notifiable->email]);
+
+        return (new MailMessage)
+            ->subject('Your Reset Password Notification')
+            ->line('Forgot Password, reset link bellow.')
+            ->action('click to reset.', $this->url)
+            ->line('If you did not request a password reset, no further action is required.');
+    }
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
+        ];
+    }
+}
