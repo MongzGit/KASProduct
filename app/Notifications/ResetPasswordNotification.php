@@ -25,10 +25,12 @@ class ResetPasswordNotification extends Notification
         //$resetUrl = url('/password/reset', ['token' => $this->token, 'email' => $notifiable->email]);
 
         return (new MailMessage)
-            ->subject('Your Reset Password Notification')
-            ->line('Forgot Password, reset link bellow.')
-            ->action('click to reset.', $this->url)
-            ->line('If you did not request a password reset, no further action is required.');
+            ->greeting('Hello, valued user!') // Custom greeting
+            ->subject('Di LAS Reset Password Notification')
+            ->line('Forgot your password? Click the reset link below.')
+            ->action('Reset Password', $this->url)
+            ->line('If you did not request a password reset, no further action is required.')
+            ->salutation('Best regards, Di LAS Team'); // Custom regards
     }
     /**
      * Get the array representation of the notification.
