@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class NewPasswordController extends Controller
 {
     public function forgotPassword(Request $request)
     {
+        try{
         $request->validate([
             'email' => 'required|email',
         ]);
@@ -44,6 +46,13 @@ class NewPasswordController extends Controller
         // throw ValidationException::withMessages(
         //     ['email' => [trans($status)]]
         // );
+    }catch(Exception $e){
+        return response()->json([
+            'success' => false,
+            'message' => "Reset link not sent.",
+            'status' => __($status)
+        ]);
+    }
     }
 
     public function reset(Request $request)
