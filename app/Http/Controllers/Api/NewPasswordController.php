@@ -19,40 +19,40 @@ class NewPasswordController extends Controller
 {
     public function forgotPassword(Request $request)
     {
-        try{
-        $request->validate([
-            'email' => 'required|email',
-        ]);
+        try {
+            $request->validate([
+                'email' => 'required|email',
+            ]);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+            $status = Password::sendResetLink(
+                $request->only('email')
+            );
 
-        if ($status == Password::RESET_LINK_SENT) {
+            if ($status == Password::RESET_LINK_SENT) {
+                return response()->json([
+                    'success' => true,
+                    'message' => "Reset link sent.",
+                    'status' => __($status)
+                ]);
+                // return [
+                //     'status' => __($status)
+                // ];
+            }
             return response()->json([
-                'success' => true,
-                'message' => "Reset link sent.",
+                'success' => false,
+                'message' => "Reset link not sent.",
                 'status' => __($status)
             ]);
-            // return [
-            //     'status' => __($status)
-            // ];
+            // throw ValidationException::withMessages(
+            //     ['email' => [trans($status)]]
+            // );
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => "Reset link not sent.",
+                'status' => '' . $e
+            ]);
         }
-        return response()->json([
-            'success' => false,
-            'message' => "Reset link not sent.",
-            'status' => __($status)
-        ]);
-        // throw ValidationException::withMessages(
-        //     ['email' => [trans($status)]]
-        // );
-    }catch(Exception $e){
-        return response()->json([
-            'success' => false,
-            'message' => "Reset link not sent.",
-            'status' => __($status)
-        ]);
-    }
     }
 
     public function reset(Request $request)
