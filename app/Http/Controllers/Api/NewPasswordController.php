@@ -32,7 +32,7 @@ class NewPasswordController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => "Reset link sent.",
-                    'status' => __($status)
+                    //'status' => __($status)
                 ]);
                 // return [
                 //     'status' => __($status)
@@ -41,7 +41,7 @@ class NewPasswordController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => "Reset link not sent.",
-                'status' => __($status)
+                //'status' => __($status)
             ]);
             // throw ValidationException::withMessages(
             //     ['email' => [trans($status)]]
