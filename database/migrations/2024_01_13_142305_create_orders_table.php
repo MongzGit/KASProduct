@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('order_post_user_business_address_city')->default('')->nullable();
             $table->string('order_post_user_business_phone_number')->default('')->nullable();
             $table->string('order_status')->default('')->nullable();
+            $table->string('order_payment_type')->default('')->nullable();
             $table->String('order_delivery_infor1')->default('')->nullable();
             $table->String('order_delivery_infor2')->default('')->nullable();
             $table->unsignedDouble('order_delivery_std_cost')->default(0.0)->nullable();
