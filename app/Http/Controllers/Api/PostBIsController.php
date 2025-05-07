@@ -542,9 +542,11 @@ class PostBIsController extends Controller
             }
             $post->post_general_infor3 = $request->post_general_infor3;
 
+            $post->update();
+
             return response()->json([
                 'success' => true,
-                'message' => 'updated News Status',
+                'message' => 'updated',
                 'post' => $post
             ]);
         } catch (Exception $e) {

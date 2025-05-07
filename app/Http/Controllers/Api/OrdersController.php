@@ -20,6 +20,7 @@ class OrdersController extends Controller
             $order->order_number = $request->order_number;
             $order->order_type = $request->order_type;
             $order->order_status = $request->order_status;
+            $order->order_total_cost = $request->order_total_cost;
             $order->order_payment_type = $request->order_payment_type;
             $order->order_delivery_infor1 = $request->order_delivery_infor1;
             $order->order_delivery_infor2 = $request->order_delivery_infor2;
@@ -81,6 +82,7 @@ class OrdersController extends Controller
             $order->order_number = $request->order_number;
             $order->order_type = $request->order_type;
             $order->order_status = $request->order_status;
+            $order->order_total_cost = $request->order_total_cost;
             $order->order_payment_type = $request->order_payment_type;
             $order->order_delivery_infor1 = $request->order_delivery_infor1;
             $order->order_delivery_infor2 = $request->order_delivery_infor2;

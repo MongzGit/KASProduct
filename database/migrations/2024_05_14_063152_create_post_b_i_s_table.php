@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('prod_status')->default('')->nullable();
             $table->string('consumable_prod_special')->default('')->nullable();
             $table->string('consumable_prod_item_desc')->default('')->nullable();
-            $table->String('consumable_prod_delivery_infor1')->default('')->nullable();
+            $table->String('consumable_prod_delivery_infor1')->default('')->nullable();//ETD 
             $table->String('consumable_prod_delivery_infor2')->default('')->nullable();
             $table->unsignedDouble('consumable_prod_delivery_std_cost')->default(0.0)->nullable();
             $table->string('prod_location')->default('')->nullable();
@@ -60,7 +60,7 @@ return new class extends Migration
             $table->string('post_general_infor1')->default('')->nullable(); //used for sorting internally and grouping with item description.
             $table->string('post_general_infor2')->default('')->nullable();
             $table->unsignedDouble('post_general_infor3')->default(0.0)->nullable();
-            $table->string('post_general_infor4')->default('')->nullable();
+            $table->string('post_general_infor4')->default('')->nullable();//used for notifications related to product
             $table->string('post_photo1')->default('')->nullable();
             $table->unsignedDouble('post_photo1_width')->default(0.0)->nullable();
             $table->unsignedDouble('post_photo1_height')->default(0.0)->nullable();

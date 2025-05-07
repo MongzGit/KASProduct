@@ -18,6 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('location')->default('');
             $table->string('city')->default('');
+            $table->string('aka1')->default('');
+            $table->string('aka2')->default('');
+            $table->string('aka3')->default('');
+            $table->string('aka4')->default('');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')

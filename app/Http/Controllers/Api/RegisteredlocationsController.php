@@ -17,6 +17,11 @@ class RegisteredlocationsController extends Controller
             $registeredlocations->user_id = Auth::user()->id;
             $registeredlocations->location = $request->location;
             $registeredlocations->city = $request->city;
+            $registeredlocations->aka1 = $request->aka1;
+            $registeredlocations->aka2 = $request->aka2;
+            $registeredlocations->aka3 = $request->aka3;
+            $registeredlocations->aka4 = $request->aka4;
+
 
             $registeredlocations->save();
             $registeredlocations->user;
@@ -29,6 +34,112 @@ class RegisteredlocationsController extends Controller
             return response()->Json([
                 'success' => false,
                 'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateAka1(Request $request){
+
+        try{
+            $registeredlocation = Registeredlocations::find($request->id);
+            if (Auth::user()->id != $registeredlocation->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $registeredlocation->aka1 = $request->aka1;
+
+            $registeredlocation->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'location' => $registeredlocation
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateAka2(Request $request){
+        try{
+            $registeredlocation = Registeredlocations::find($request->id);
+            if (Auth::user()->id != $registeredlocation->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $registeredlocation->aka2 = $request->aka2;
+
+            $registeredlocation->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'location' => $registeredlocation
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateAka3(Request $request){
+        try{
+            $registeredlocation = Registeredlocations::find($request->id);
+            if (Auth::user()->id != $registeredlocation->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $registeredlocation->aka3 = $request->aka3;
+
+            $registeredlocation->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'location' => $registeredlocation
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function updateAka4(Request $request){
+
+        try{
+            $registeredlocation = Registeredlocations::find($request->id);
+            if (Auth::user()->id != $registeredlocation->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $registeredlocation->aka4 = $request->aka4;
+
+            $registeredlocation->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated News Status',
+                'location' => $registeredlocation
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
             ]);
         }
     }

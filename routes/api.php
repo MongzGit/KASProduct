@@ -96,6 +96,10 @@ Route::get('comment_order_components/comment_order_component','App\Http\Controll
 Route::post('registeredlocations/create','App\Http\Controllers\Api\RegisteredlocationsController@create')->middleware('jwtAuth');
 Route::post('registeredlocations/delete','App\Http\Controllers\Api\RegisteredlocationsController@delete')->middleware('jwtAuth');
 Route::get('registeredlocationslist','App\Http\Controllers\Api\RegisteredlocationsController@registeredlocationslist');
+Route::post('registeredlocations/update_aka1','App\Http\Controllers\Api\RegisteredlocationsController@updateAka1')->middleware('jwtAuth');
+Route::post('registeredlocations/update_aka2','App\Http\Controllers\Api\RegisteredlocationsController@updateAka2')->middleware('jwtAuth');
+Route::post('registeredlocations/update_aka3','App\Http\Controllers\Api\RegisteredlocationsController@updateAka3')->middleware('jwtAuth');
+Route::post('registeredlocations/update_aka4','App\Http\Controllers\Api\RegisteredlocationsController@updateAka4')->middleware('jwtAuth');
 
 //
 Route::post('post_b_i_s/create','App\Http\Controllers\Api\PostBIsController@create')->middleware('jwtAuth');
