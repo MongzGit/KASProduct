@@ -33,6 +33,7 @@ return new class extends Migration
             $table->boolean('business_registered')->default(false);
             $table->string('business_name')->default('')->nullable();
             $table->string('business_desc')->default('')->nullable();
+            $table->string('business_slogan')->default('')->nullable();
             $table->string('business_password')->default('')->nullable();
             $table->string('business_photo')->default('')->nullable();
             $table->unsignedDouble('business_photo_width')->default(0.0)->nullable();
@@ -50,6 +51,8 @@ return new class extends Migration
             $table->String('business_delivery_infor1')->default('')->nullable();//ETD business specific(PT1H30M), this diffines the time difference from when order is made
             $table->String('business_delivery_infor2')->default('')->nullable();// any information about delivery
             $table->unsignedDouble('business_delivery_std_cost')->default(0.0)->nullable();
+            $table->String('business_general_infor')->default('')->nullable();
+            $table->String('business_status')->default('')->nullable();//a- open, b-closed, c-lunch, d-sold out
             $table->rememberToken();
             $table->timestamps();
         });

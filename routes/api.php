@@ -26,9 +26,13 @@ Route::post('update_user_business_address', 'App\Http\Controllers\Api\AuthContro
 Route::post('update_user_photo', 'App\Http\Controllers\Api\AuthController@updateUserPhoto')->middleware('jwtAuth');
 Route::post('update_user_business_photo', 'App\Http\Controllers\Api\AuthController@updateUserBusinessPhoto')->middleware('jwtAuth');
 Route::post('update_delivery_std_cost_infor', 'App\Http\Controllers\Api\AuthController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
+Route::post('update_user_business_general_infor', 'App\Http\Controllers\Api\AuthController@updateBusinessGeneralInfor')->middleware('jwtAuth');
+Route::post('update_user_business_status', 'App\Http\Controllers\Api\AuthController@updateBusinessStatus')->middleware('jwtAuth');
 Route::post('forgot_password', 'App\Http\Controllers\Api\NewPasswordController@forgotPassword');
 Route::get('reset_password', 'App\Http\Controllers\Api\NewPasswordController@reset');
-Route::post('update_password.php', 'App\Http\Controllers\Api\NewPasswordController@updatePassword');
+Route::post('update_password', 'App\Http\Controllers\Api\NewPasswordController@updatePassword');
+Route::post('save_user_business_infor', 'App\Http\Controllers\Api\AuthController@saveUserBusinessInfor')->middleware('jwtAuth');
+Route::post('update_user_business_password', 'App\Http\Controllers\Api\AuthController@UpdateUserBusinessPassword')->middleware('jwtAuth');
 
 //for posts
 Route::post('posts/create','App\Http\Controllers\Api\PostsController@create')->middleware('jwtAuth');

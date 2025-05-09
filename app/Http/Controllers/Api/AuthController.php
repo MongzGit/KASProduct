@@ -107,6 +107,7 @@ class AuthController extends Controller
             $user->business_registered = $request->business_registered;//correct as it just shows string
             $user->business_name = $request->business_name;
             $user->business_desc = $request->business_desc;//remember to add slogan
+            $user->business_slogan = $request->business_slogan;
             $user->business_password = $request->business_password;
             $user->business_email = $request->business_email;
             $user->business_address_house_number = $request->business_address_house_number;
@@ -120,25 +121,8 @@ class AuthController extends Controller
             $user->business_delivery_infor1 = $request->business_delivery_infor1;
             $user->business_delivery_infor2 = $request->business_delivery_infor2;
             $user->business_delivery_std_cost = $request->business_delivery_std_cost;
-
-            // $user->business_photo_width = $request->business_photo_width;
-            // $user->business_photo_height = $request->business_photo_height;
-
-            // if ($request->file('business_photo') != null) {
-            //     if ($validator4->fails()) {
-            //         return response()->Json([
-            //             'success' => false,
-            //             'message' => $validator4->messages()
-            //         ]);
-            //     }
-            //     $file = $request->file('business_photo')->store('images', 'public');
-            //     $imageFilename = $file; // Replace with your actual image filename
-            //     $imageUrl = asset('storage/' . $imageFilename);
-            //     $user->business_photo = $imageUrl;
-
-            // } else {
-            //     $user->business_photo = null;
-            // }
+            $user->business_general_infor  = $request->business_general_infor;
+            $user->business_status = $request->business_status;
 
             $user->update();
 
@@ -153,6 +137,56 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function saveUserBusinessInfor(Request $request)
+    {
+        try {
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $user = User::find(Auth::user()->id);
+
+            $user->business_name = $request->business_name;
+            $user->business_desc = $request->business_desc;//remember to add slogan
+            $user->business_slogan = $request->business_slogan;
+            $user->business_email = $request->business_email;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function UpdateUserBusinessPassword(Request $request)
+    {
+        try {
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $user = User::find(Auth::user()->id);
+
+            $user->business_password = $request->business_password;
+
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    
 
 
     // this function saves user name,lastname and photo
@@ -209,7 +243,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-            ;
+    
             $user->address_house_number = $request->address_house_number;
             $user->address_street_name = $request->address_street_name;
             $user->address_zone = $request->address_zone;
@@ -237,7 +271,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-            ;
+            
             $user->business_address_house_number = $request->business_address_house_number;
             $user->business_address_street_name = $request->business_address_street_name;
             $user->business_address_zone = $request->business_address_zone;
@@ -386,6 +420,51 @@ class AuthController extends Controller
                 'message' => '' . $e
             ]);
         }
+    }
+
+    public function updateBusinessGeneralInfor(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            
+            $user->business_general_infor  = $request->business_general_infor;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+
+    }
+
+    public function updateBusinessStatus(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->business_status = $request->business_status;;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+
     }
 
 }
