@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('prod_name')->default('')->nullable();
             $table->string('prod_desc', 1500)->default('')->nullable();
             $table->unsignedDouble('prod_price')->default(0.0)->nullable();
-            $table->string('prod_status')->default('')->nullable();
+            $table->string('prod_status')->default('')->nullable();//a-available, b-outOfStock
             $table->string('consumable_prod_special')->default('')->nullable();
             $table->string('consumable_prod_item_desc')->default('')->nullable();
             $table->String('consumable_prod_delivery_infor1')->default('')->nullable();//ETD 
@@ -69,7 +69,6 @@ return new class extends Migration
             $table->unsignedDouble('post_photo2_height')->default(0.0)->nullable();
             $table->integer('relation_counter')->default(0)->nullable();
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')
             ->on('users')->onDelete('cascade');
         });

@@ -32,7 +32,12 @@ Route::post('forgot_password', 'App\Http\Controllers\Api\NewPasswordController@f
 Route::get('reset_password', 'App\Http\Controllers\Api\NewPasswordController@reset');
 Route::post('update_password', 'App\Http\Controllers\Api\NewPasswordController@updatePassword');
 Route::post('save_user_business_infor', 'App\Http\Controllers\Api\AuthController@saveUserBusinessInfor')->middleware('jwtAuth');
-Route::post('update_user_business_password', 'App\Http\Controllers\Api\AuthController@UpdateUserBusinessPassword')->middleware('jwtAuth');
+Route::post('update_user_business_operating_hours', 'App\Http\Controllers\Api\AuthController@updateBusinessOperatingHour')->middleware('jwtAuth');
+Route::post('update_user_business_password', 'App\Http\Controllers\Api\AuthController@updateUserBusinessPassword')->middleware('jwtAuth');
+Route::post('update_user_business_opening_operating_hours', 'App\Http\Controllers\Api\AuthController@updateBusinessOpeningOperatingHours')->middleware('jwtAuth');
+Route::post('update_user_business_closing_operating_hours', 'App\Http\Controllers\Api\AuthController@updateBusinessClosingOperatingHours')->middleware('jwtAuth');
+Route::post('update_user_business_allow_auto_operating_hours', 'App\Http\Controllers\Api\AuthController@updateBusinessAllowAutoOperatingHours')->middleware('jwtAuth');
+
 
 //for posts
 Route::post('posts/create','App\Http\Controllers\Api\PostsController@create')->middleware('jwtAuth');

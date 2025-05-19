@@ -123,6 +123,9 @@ class AuthController extends Controller
             $user->business_delivery_std_cost = $request->business_delivery_std_cost;
             $user->business_general_infor  = $request->business_general_infor;
             $user->business_status = $request->business_status;
+            $user->business_opening_operating_hours = $request->business_opening_operating_hours;
+            $user->business_closing_operating_hours = $request->business_closing_operating_hours;
+            $user->business_allow_auto_operating_hours = $request->business_allow_auto_operating_hours;
 
             $user->update();
 
@@ -163,7 +166,7 @@ class AuthController extends Controller
         }
     }
 
-    public function UpdateUserBusinessPassword(Request $request)
+    public function updateUserBusinessPassword(Request $request)
     {
         try {
             // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
@@ -449,7 +452,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-            $user->business_status = $request->business_status;;
+            $user->business_status = $request->business_status;
 
             $user->update();
 
@@ -465,6 +468,96 @@ class AuthController extends Controller
             ]);
         }
 
+    }
+
+    public function updateBusinessOperatingHour(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->business_opening_operating_hours = $request->business_opening_operating_hours;
+            $user->business_closing_operating_hours = $request->business_closing_operating_hours;
+            $user->business_allow_auto_operating_hours = $request->business_allow_auto_operating_hours;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+
+    }
+
+    public function updateBusinessOpeningOperatingHours(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->business_opening_operating_hours = $request->business_opening_operating_hours;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+
+    }
+
+    public function updateBusinessClosingOperatingHours(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+        
+            $user->business_closing_operating_hours = $request->business_closing_operating_hours;
+            
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateBusinessAllowAutoOperatingHours(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+        
+            $user->business_allow_auto_operating_hours = $request->business_allow_auto_operating_hours;
+            
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
     }
 
 }
