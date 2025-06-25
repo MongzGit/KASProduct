@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title')->default('');
             $table->string('body')->default('');
-            $table->string('hour')->default('');
-            $table->string('minute')->default('');
+            $table->unsignedInteger('hour')->default(0);
+            $table->unsignedInteger('minute')->default(0);
             $table->string('general1')->default('')->nullable();
             $table->string('general2')->default('')->nullable();
             $table->timestamps();
