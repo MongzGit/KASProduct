@@ -52,9 +52,9 @@ return new class extends Migration
             $table->String('business_delivery_infor2')->default('')->nullable();// any information about delivery
             $table->unsignedDouble('business_delivery_std_cost')->default(0.0)->nullable();
             $table->String('business_general_infor')->default('')->nullable();
-            $table->String('business_status')->default('')->nullable();//a- open, b-closed, c-lunch, d-sold out
-            $table->String('business_opening_operating_hours')->default('')->nullable();//
-            $table->String('business_closing_operating_hours')->default('')->nullable();//
+            $table->String('business_status')->default('')->nullable();//a- open, b-closed, c- Always open, d-lunch, e-sold out
+            $table->String('business_opening_operating_hours')->default('')->nullable();//null or empty is auto (saved used HH:mm formate)
+            $table->String('business_closing_operating_hours')->default('')->nullable();//null or empty is auto indefinately (saved used HH:mm formate)
             $table->String('business_allow_auto_operating_hours')->default('')->nullable();//a- allow auto, b-manual
             $table->rememberToken();
             $table->timestamps();
@@ -62,7 +62,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.  
      *
      * @return void
      */

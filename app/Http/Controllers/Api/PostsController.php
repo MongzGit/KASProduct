@@ -136,9 +136,9 @@ class PostsController extends Controller{
                 //get user of post
                 $post->user;
                 //comments count
-                $post['commentsCount'] = count($post->comments);
+                $post['commentsCount'] = $post->comments->count();
                 //likes count
-                $post['likesCount'] = count($post->likes);
+                $post['likesCount'] = $post->likes->count();
                 //check if users liked his own post
                 $post['selfLike'] = false;
                 foreach ($post->likes as $like) {

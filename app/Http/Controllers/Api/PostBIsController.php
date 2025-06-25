@@ -1017,13 +1017,13 @@ class PostBIsController extends Controller
                 //get user of post
                 $post->user;
                 //cpmponents vount
-                $post['componentsCount'] = count($post->components);
+                $post['componentsCount'] = $post->components->count();
                 //teams count
-                $post['teamsCount'] = count($post->teams);
+                $post['teamsCount'] = $post->teams->count();
                 //comments count
-                $post['commentsCount'] = count($post->commentBIs);
+                $post['commentsCount'] = $post->commentBIs->count();
                 //likes count
-                $post['likesCount'] = count($post->likeBIs);
+                $post['likesCount'] = $post->likeBIs->count();
                 //check if users liked his own post
                 $post['selfLike'] = false;
                 foreach ($post->likeBIs as $like) {
@@ -1079,13 +1079,13 @@ class PostBIsController extends Controller
                 //get user of post
                 $post->user;
                 //cpmponents count
-                $post['componentsCount'] = count($post->components);
+                $post['componentsCount'] = $post->components->count();
                 //teams count
-                $post['teamsCount'] = count($post->teams);
+                $post['teamsCount'] = $post->teams->count();
                 //comments count
-                $post['commentsCount'] = count($post->commentBIs);
+                $post['commentsCount'] = $post->commentBIs->count();
                 //likes count
-                $post['likesCount'] = count($post->likeBIs);
+                $post['likesCount'] = $post->likeBIs->count();
                 //check if users liked his own post
                 $post['selfLike'] = false;
                 foreach ($post->likeBIs as $like) {

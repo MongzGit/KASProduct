@@ -34,6 +34,8 @@ class OrdersController extends Controller
             $order->order_post_user_business_address_location = $request->order_post_user_business_address_location;
             $order->order_post_user_business_address_city = $request->order_post_user_business_address_city;
             $order->order_post_user_business_phone_number = $request->order_post_user_business_phone_number;
+            $order->order_qr_payload = $request->order_qr_payload;
+            $order->order_redeemed = $request->order_redeemed;
             $order->order_estimated_time_of_preparation = $request->order_estimated_time_of_preparation;
             $order->order_estimated_time_of_delivery = $request->order_estimated_time_of_delivery;
 
@@ -53,6 +55,82 @@ class OrdersController extends Controller
                 'message' => '' . $e
             ]);
 
+        }
+    }
+
+    public function updateQrPayload(Request $request)
+    {
+        try {
+
+            $order = Order::find($request->id);
+
+            if ($order == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'n'
+                ]);
+            }
+
+            if ((Auth::user()->id != $order->user_id)) {
+                if ($order->order_post_user_id != Auth::user()->id) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'unauthorized access for order update'
+                    ]);
+                }
+            }
+           
+            $order->order_qr_payload = $request->order_qr_payload;
+
+            $order->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'order edited'
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateRedeemed(Request $request)
+    {
+        try {
+
+            $order = Order::find($request->id);
+
+            if ($order == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'n'
+                ]);
+            }
+
+            if ((Auth::user()->id != $order->user_id)) {
+                if ($order->order_post_user_id != Auth::user()->id) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'unauthorized access for order update'
+                    ]);
+                }
+            }
+           
+            $order->order_redeemed = $request->order_redeemed;
+
+            $order->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'order edited'
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
         }
     }
 
@@ -316,7 +394,7 @@ class OrdersController extends Controller
                 //get user of post
                 $order->user;
                 //comments count
-                $order['commentOrdersCount'] = count($order->commentOrders);
+                $order['commentOrdersCount'] = $order->commentOrders->count();
             }
 
             return response()->json([
@@ -378,7 +456,7 @@ class OrdersController extends Controller
                 //get user of post
                 $order->user;
                 //comments count
-                $order['commentOrdersCount'] = count($order->commentOrders);
+                $order['commentOrdersCount'] = $order->commentOrders->count();
             }
 
             return response()->json([
@@ -409,7 +487,7 @@ class OrdersController extends Controller
                 //get user of post
                 $order->user;
                 //comments count
-                $order['commentOrdersCount'] = count($order->commentOrders);
+                $order['commentOrdersCount'] = $order->commentOrders->count();
             }
 
             return response()->json([

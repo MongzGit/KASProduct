@@ -73,7 +73,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-
         $encryptedPass = Hash::make($request->password);
 
         $user = new User;

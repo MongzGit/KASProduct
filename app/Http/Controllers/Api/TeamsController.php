@@ -538,9 +538,9 @@ class TeamsController extends Controller
                 //get user of post
                 $team->user;
 
-                $team['playersCount'] = count($team->players);
+                $team['playersCount'] = $team->players->count();
 
-                $team['gamesCount'] = count($team->games);
+                $team['gamesCount'] = $team->games->count();
             }
             return response()->json([
                 'success' => true,
@@ -602,9 +602,9 @@ class TeamsController extends Controller
                 //get user of post
                 $team->user;
 
-                $team['playersCount'] = count($team->players);
+                $team['playersCount'] = $team->players->count();
 
-                $team['gamesCount'] = count($team->games);
+                $team['gamesCount'] = $team->games->count();
             }
 
             return response()->json([

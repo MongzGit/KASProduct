@@ -68,6 +68,8 @@ Route::post('orders/update_order_status','App\Http\Controllers\Api\OrdersControl
 Route::post('orders/update_e_t_d','App\Http\Controllers\Api\OrdersController@updateOrderETD')->middleware('jwtAuth');
 Route::post('orders/update_e_t_p','App\Http\Controllers\Api\OrdersController@updateOrderETP')->middleware('jwtAuth');
 Route::post('orders/update_delivery_std_cost_infor','App\Http\Controllers\Api\OrdersController@updateDeliveryStdCostInfor')->middleware('jwtAuth');
+Route::post('orders/update_qr_payload','App\Http\Controllers\Api\OrdersController@updateQrPayload')->middleware('jwtAuth');
+Route::post('orders/update_redeemed','App\Http\Controllers\Api\OrdersController@updateRedeemed')->middleware('jwtAuth');
 
 //for comment orders
 Route::post('comment_orders/create','App\Http\Controllers\Api\CommentOrdersController@create')->middleware('jwtAuth');
@@ -221,3 +223,14 @@ Route::get('components/component','App\Http\Controllers\Api\ComponentsController
 Route::get('components/my_components','App\Http\Controllers\Api\ComponentsController@myComponents')->middleware('jwtAuth');
 Route::get('components/prod_components','App\Http\Controllers\Api\ComponentsController@prodComponents')->middleware('jwtAuth');
 Route::get('components/my_business_general_components','App\Http\Controllers\Api\ComponentsController@myBusinessGeneralComponents')->middleware('jwtAuth');
+
+Route::post('notifications/create','App\Http\Controllers\Api\NotificationsController@create')->middleware('jwtAuth');
+Route::post('notifications/delete','App\Http\Controllers\Api\NotificationsController@delete')->middleware('jwtAuth');
+Route::get('notifications','App\Http\Controllers\Api\NotificationsController@notifications')->middleware('jwtAuth');
+//Route::post('notifcations/update','App\Http\Controllers\Api\ComponentsController@update')->middleware('jwtAuth');
+//Route::post('components/update_component_name','App\Http\Controllers\Api\ComponentsController@updateComponentName')->middleware('jwtAuth');
+//Route::post('components/update_component_desc','App\Http\Controllers\Api\ComponentsController@updateComponentDesc')->middleware('jwtAuth');
+//Route::post('components/update_component_type','App\Http\Controllers\Api\ComponentsController@updateComponentType')->middleware('jwtAuth');
+//Route::post('components/update_component_info','App\Http\Controllers\Api\ComponentsController@updateComponentInfo')->middleware('jwtAuth');
+//Route::post('components/update_price_per_component','App\Http\Controllers\Api\ComponentsController@updatePricePerComponent')->middleware('jwtAuth');
+//Route::post('components/update_weight_per_component','App\Http\Controllers\Api\ComponentsController@updateWeightPerComponent')->middleware('jwtAuth');

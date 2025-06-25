@@ -186,7 +186,7 @@ class CommentOrdersController extends Controller
             //show user of each comment
             foreach ($commentOrders as $commentOrder) {
                 $commentOrder->user;
-                $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
+                $commentOrder['commentOrderComponentsCount'] = $commentOrder->commentOrderComponents->count();
             }
 
             return response()->json([
@@ -216,7 +216,7 @@ class CommentOrdersController extends Controller
             foreach ($commentOrders as $commentOrder) {
                 $commentOrder->user;
                     //comments count
-                    $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
+                    $commentOrder['commentOrderComponentsCount'] = $commentOrder->commentOrderComponents->count();
                 
             }
 
@@ -247,7 +247,7 @@ class CommentOrdersController extends Controller
             //show user of each comment
             foreach ($commentOrders as $commentOrder) {
                 $commentOrder->user;
-                $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
+                $commentOrder['commentOrderComponentsCount'] = $commentOrder->commentOrderComponents->count();
             }
 
             return response()->json([
@@ -277,7 +277,7 @@ class CommentOrdersController extends Controller
             //show user of each comment
             foreach ($commentOrders as $commentOrder) {
                 $commentOrder->user;
-                $commentOrder['commentOrderComponentsCount'] = count($commentOrder->commentOrderComponents);
+                $commentOrder['commentOrderComponentsCount'] = $commentOrder->commentOrderComponents->count();
             }
 
             return response()->json([

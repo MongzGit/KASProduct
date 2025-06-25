@@ -34,13 +34,11 @@ return new class extends Migration
             $table->String('order_delivery_infor1')->default('')->nullable();//ETD
             $table->String('order_delivery_infor2')->default('')->nullable();
             $table->unsignedDouble('order_delivery_std_cost')->default(0.0)->nullable();
+            $table->String('order_qr_payload')->default('')->nullable();
+            $table->timestamp('order_redeemed')->nullable();
             $table->string('order_estimated_time_of_preparation')->default('')->nullable();
             $table->string('order_estimated_time_of_delivery')->default('')->nullable();
-
             $table->timestamps();
-
-            // $table->foreign('user_id')->references('id')
-            // ->on('users')->onDelete('cascade');
         });
     }
 
