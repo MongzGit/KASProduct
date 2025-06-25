@@ -27,8 +27,8 @@ class NotificationsController extends Controller
             $notification->user;
             return response()->json([
                 'success' => true,
-                'message' => 'registered_location',
-                'registered_locations' => $notification
+                'message' => 'posted',
+                'notification' => $notification
             ]);
         } catch (Exception $e) {
             return response()->Json([
@@ -69,7 +69,7 @@ class NotificationsController extends Controller
             $notifications = Notification::orderBy('id')->get();
             return response()->json([
                 'success' => true,
-                'posts' => $notifications
+                'notifications' => $notifications
             ]);
         } catch (Exception $e) {
             return response()->Json([
