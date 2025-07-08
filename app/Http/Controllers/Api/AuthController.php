@@ -140,6 +140,74 @@ class AuthController extends Controller
         }
     }
 
+    public function saveWhatsappInfo(Request $request)
+    {
+        try {
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $user = User::find(Auth::user()->id);
+
+            $user->whatsapp_url = $request->whatsapp_url;
+            $user->whatsapp_enabled = $request->whatsapp_enabled;//remember to add slogan
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateWhatsappUrlInfo(Request $request)
+    {
+        try {
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $user = User::find(Auth::user()->id);
+
+            $user->whatsapp_url = $request->whatsapp_url;
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateWhatsappEnabledInfo(Request $request)
+    {
+        try {
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $user = User::find(Auth::user()->id);
+
+            $user->whatsapp_url = $request->whatsapp_url;
+            $user->whatsapp_enabled = $request->whatsapp_enabled;//remember to add slogan
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+
     public function saveUserBusinessInfor(Request $request)
     {
         try {

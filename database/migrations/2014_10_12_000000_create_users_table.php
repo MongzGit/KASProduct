@@ -30,6 +30,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default('')->nullable();
             $table->string('phone_number')->default('')->nullable();
+            $table->string('whatsapp_url')->default('')->nullable();
+            $table->string('whatsapp_enabled')->default('')->nullable();//a-true, b or null - false, else - false
             $table->boolean('business_registered')->default(false);
             $table->string('business_name')->default('')->nullable();
             $table->string('business_desc')->default('')->nullable();

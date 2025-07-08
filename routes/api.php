@@ -37,6 +37,9 @@ Route::post('update_user_business_password', 'App\Http\Controllers\Api\AuthContr
 Route::post('update_user_business_opening_operating_hours', 'App\Http\Controllers\Api\AuthController@updateBusinessOpeningOperatingHours')->middleware('jwtAuth');
 Route::post('update_user_business_closing_operating_hours', 'App\Http\Controllers\Api\AuthController@updateBusinessClosingOperatingHours')->middleware('jwtAuth');
 Route::post('update_user_business_allow_auto_operating_hours', 'App\Http\Controllers\Api\AuthController@updateBusinessAllowAutoOperatingHours')->middleware('jwtAuth');
+Route::post('save_whatsapp_info', 'App\Http\Controllers\Api\AuthController@saveWhatsappInfo')->middleware('jwtAuth');
+Route::post('update_whatsapp_url_info', 'App\Http\Controllers\Api\AuthController@updateWhatsappUrlInfo')->middleware('jwtAuth');
+Route::post('update_whatsapp_enabled_info', 'App\Http\Controllers\Api\AuthController@updateWhatsappEnabledInfo')->middleware('jwtAuth');
 
 
 //for posts
