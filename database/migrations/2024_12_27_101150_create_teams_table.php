@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('team_name')->default('')->nullable();
             $table->string('team_aka_name')->default('')->nullable();
             $table->string('team_desc')->default('')->nullable();
-            $table->string('team_info')->default('')->nullable();
+            $table->string('team_info')->default('')->nullable();//tornament groups. A, B, C, D, E etc.
             $table->string('team_info2')->default('')->nullable();
             $table->unsignedInteger('matches_played')->default(0)->nullable();
             $table->unsignedInteger('matches_won')->default(0)->nullable();

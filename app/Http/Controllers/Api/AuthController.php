@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Exception;
+use App\Providers\FCMService;
 
 class AuthController extends Controller
 {
@@ -120,7 +121,7 @@ class AuthController extends Controller
             $user->business_delivery_infor1 = $request->business_delivery_infor1;
             $user->business_delivery_infor2 = $request->business_delivery_infor2;
             $user->business_delivery_std_cost = $request->business_delivery_std_cost;
-            $user->business_general_infor  = $request->business_general_infor;
+            $user->business_general_infor = $request->business_general_infor;
             $user->business_status = $request->business_status;
             $user->business_opening_operating_hours = $request->business_opening_operating_hours;
             $user->business_closing_operating_hours = $request->business_closing_operating_hours;
@@ -256,7 +257,7 @@ class AuthController extends Controller
         }
     }
 
-    
+
 
 
     // this function saves user name,lastname and photo
@@ -313,7 +314,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-    
+
             $user->address_house_number = $request->address_house_number;
             $user->address_street_name = $request->address_street_name;
             $user->address_zone = $request->address_zone;
@@ -341,7 +342,7 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-            
+
             $user->business_address_house_number = $request->business_address_house_number;
             $user->business_address_street_name = $request->business_address_street_name;
             $user->business_address_zone = $request->business_address_zone;
@@ -496,8 +497,8 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-            
-            $user->business_general_infor  = $request->business_general_infor;
+
+            $user->business_general_infor = $request->business_general_infor;
 
             $user->update();
 
@@ -587,9 +588,9 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-        
+
             $user->business_closing_operating_hours = $request->business_closing_operating_hours;
-            
+
             $user->update();
 
             return response()->json([
@@ -609,9 +610,9 @@ class AuthController extends Controller
     {
         try {
             $user = User::find(Auth::user()->id);
-        
+
             $user->business_allow_auto_operating_hours = $request->business_allow_auto_operating_hours;
-            
+
             $user->update();
 
             return response()->json([
@@ -625,6 +626,18 @@ class AuthController extends Controller
                 'message' => '' . $e
             ]);
         }
+    }
+
+    public function broadcastNotification(FCMService $fcm)
+    {
+        $fcm->sendToTopic(
+            'all_users',
+            'New Feature Alert!',
+            'We’ve just rolled out something awesome.',
+            ['action' => 'open_feature_screen']
+        );
+
+        return response()->json(['status' => 'Notification sent']);
     }
 
 }
