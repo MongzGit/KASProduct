@@ -238,4 +238,6 @@ Route::get('notifications','App\Http\Controllers\Api\NotificationsController@not
 //Route::post('components/update_price_per_component','App\Http\Controllers\Api\ComponentsController@updatePricePerComponent')->middleware('jwtAuth');
 //Route::post('components/update_weight_per_component','App\Http\Controllers\Api\ComponentsController@updateWeightPerComponent')->middleware('jwtAuth');
 
-Route::post('/broadcast', 'App\Http\Controllers\Api\AuthController@broadcastNotification')->middleware('jwtAuth');
+Route::post('/broadcast', 'App\Http\Controllers\Api\AuthController@broadcastNotification');
+Route::get('/fcm-token', 'App\Http\Controllers\Api\AuthController@getFirebaseToken');
+

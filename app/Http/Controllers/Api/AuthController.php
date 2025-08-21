@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Exception;
 use App\Providers\FCMService;
+use App\Providers\FirebaseTokenService;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+
 
 class AuthController extends Controller
 {
@@ -628,16 +632,62 @@ class AuthController extends Controller
         }
     }
 
-    public function broadcastNotification(FCMService $fcm)
+    public function broadcastNotification(Request $request)
     {
-        $fcm->sendToTopic(
-            'all_users',
-            'New Feature Alert!',
-            'We’ve just rolled out something awesome.',
-            ['action' => 'open_feature_screen']
-        );
+        // Step 1: Validate incoming request
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+        ]);
 
-        return response()->json(['status' => 'Notification sent']);
+        // Step 2: Build payload
+        $payload = [
+            'message' => [
+                'topic' => 'all_users',
+                'notification' => [
+                    'title' => $validated['title'],
+                    'body' => $validated['body'],
+                ],
+                'android' => [
+                    'priority' => 'high' ?? 'normal',
+                ]
+            ]
+        ];
+
+        // Step 3: Generate access token
+        $tokenService = new FirebaseTokenService;
+        $accessToken = $tokenService->generateAccessToken();
+
+        $url = "https://fcm.googleapis.com/v1/projects/449417033022/messages:send";
+
+        try {
+            // Step 4: Send request to FCM
+            $response = Http::withToken($accessToken)->post($url, $payload);
+
+            // Step 5: Log and return response
+            Log::info('FCM Payload Sent:', $payload);
+            Log::info('FCM Response:', $response->json());
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (\Exception $e) {
+            // Step 6: Handle errors gracefully
+            Log::error('FCM Broadcast Error:', ['message' => $e->getMessage()]);
+
+            return response()->json([
+                'success' => false,
+                'error' => 'Failed to send notification',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getFirebaseToken(FirebaseTokenService $tokenService)
+    {
+        $token = $tokenService->generateAccessToken();
+
+        return response()->json(['access_token' => $token]);
     }
 
 }

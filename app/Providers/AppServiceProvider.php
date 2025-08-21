@@ -4,6 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Http;
+use Google\Auth\ApplicationDefaultCredentials;
+use Google\Auth\Credentials\ServiceAccountCredentials;
+use Google\Auth\Middleware\AuthTokenMiddleware;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -57,3 +62,27 @@ class FCMService
             ->json();
     }
 }
+
+class FirebaseTokenService
+{
+    protected $credentialsPath;
+
+    public function __construct()
+    {
+        $this->credentialsPath = storage_path('app/firebase/di-las-ee43cf958014.json');
+    }
+
+    public function generateAccessToken()
+    {
+        $scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
+
+        // Correct usage: pass scopes and path to JSON file
+        $credentials = new ServiceAccountCredentials($scopes, $this->credentialsPath);
+
+        $token = $credentials->fetchAuthToken();
+
+        return $token['access_token'] ?? null;
+    }
+}
+
+
