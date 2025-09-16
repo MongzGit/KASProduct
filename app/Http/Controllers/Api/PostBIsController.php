@@ -1012,7 +1012,7 @@ class PostBIsController extends Controller
     public function postBIs()
     {
         try {
-            $posts = PostBI::orderBy('id', 'desc')->get();
+            $posts = PostBI::orderBy('updated_at')->get();
             foreach ($posts as $post) {
                 //get user of post
                 $post->user;
