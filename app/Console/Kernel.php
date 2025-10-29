@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
         \APP\Console\Commands\updatePostGenInforE::class,
         \APP\Console\Commands\updatePostGenInforF::class,
         \APP\Console\Commands\updatePostGenInforG::class,
-        \App\Console\Commands\UpdateTeamStats::class,
+        \App\Console\Commands\updateTeamStats::class,
 
         ];
     /**

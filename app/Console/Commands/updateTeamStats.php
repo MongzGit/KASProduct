@@ -7,7 +7,7 @@ use App\Models\Game;
 use App\Models\Team;
 use DB;
 
-class UpdateTeamStats extends Command
+class updateTeamStats extends Command
 {
     protected $signature = 'games:update-team-stats';
     protected $description = 'Update team stats based on completed games';
