@@ -10,19 +10,15 @@ class updatePostGenInforB extends Command
 {
     /**
      * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'command:updatePostGenInforB';
 
     /**
      * The console command description.
-     *
      * @var string
      */
     protected $description = 'command updatePostGenInforB';
-
-    
     public function handle()
     {
         PostBI::where('post_general_infor1', 'b')->increment('relation_counter');

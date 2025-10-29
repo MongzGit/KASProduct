@@ -105,7 +105,7 @@ class AuthController extends Controller
     public function saveUserBusinessRegistered(Request $request)
     {
         try {
-            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $user = User::find(Auth::user()->id);
 
             $user->business_registered = $request->business_registered;//correct as it just shows string
@@ -148,7 +148,7 @@ class AuthController extends Controller
     public function saveWhatsappInfo(Request $request)
     {
         try {
-            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $user = User::find(Auth::user()->id);
 
             $user->whatsapp_url = $request->whatsapp_url;
@@ -171,7 +171,7 @@ class AuthController extends Controller
     public function updateWhatsappUrlInfo(Request $request)
     {
         try {
-            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $user = User::find(Auth::user()->id);
 
             $user->whatsapp_url = $request->whatsapp_url;
@@ -193,7 +193,7 @@ class AuthController extends Controller
     public function updateWhatsappEnabledInfo(Request $request)
     {
         try {
-            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $user = User::find(Auth::user()->id);
 
             $user->whatsapp_url = $request->whatsapp_url;
@@ -216,7 +216,7 @@ class AuthController extends Controller
     public function saveUserBusinessInfor(Request $request)
     {
         try {
-            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $user = User::find(Auth::user()->id);
 
             $user->business_name = $request->business_name;
@@ -241,10 +241,32 @@ class AuthController extends Controller
     public function updateUserBusinessPassword(Request $request)
     {
         try {
-            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $user = User::find(Auth::user()->id);
 
             $user->business_password = $request->business_password;
+
+
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+    }
+    public function updateUserEmail(Request $request)
+    {
+        try {
+            // $validator4 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
+            $user = User::find(Auth::user()->id);
+
+            $user->email = $request->email;
 
 
             $user->update();
@@ -268,7 +290,7 @@ class AuthController extends Controller
     public function saveUserInfo(Request $request)
     {
         try {
-            // $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            // $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
 
             $user = User::find(Auth::user()->id);
             $user->lastname = $request->lastname;
@@ -396,7 +418,7 @@ class AuthController extends Controller
     public function updateUserPhoto(Request $request)
     {
         try {
-            $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:3500',]);
 
             $user = User::find(Auth::user()->id);
 
@@ -436,7 +458,7 @@ class AuthController extends Controller
     public function updateUserBusinessPhoto(Request $request)
     {
         try {
-            $validator3 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator3 = Validator::make($request->all(), ['business_photo' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
 
             $user = User::find(Auth::user()->id);
 
@@ -504,6 +526,29 @@ class AuthController extends Controller
 
             $user->business_general_infor = $request->business_general_infor;
 
+            $user->update();
+
+            return response()->json([
+                'success' => true,
+                'user' => $user
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => '' . $e
+            ]);
+        }
+
+    }
+
+    public function updateAddressLocation(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $user->address_location = $request->address_location;
+            $user->business_address_location = $request->address_location;
+            
             $user->update();
 
             return response()->json([

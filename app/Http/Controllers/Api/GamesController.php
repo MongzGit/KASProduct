@@ -227,6 +227,34 @@ class GamesController extends Controller
         }
     }
 
+    public function updateGameScore(Request $request){
+
+        try{
+            $game = Game::find($request->id);
+            if (Auth::user()->id != $game->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $game->home_team_score = $request->home_team_score;
+             $game->away_team_score = $request->away_team_score;
+
+            $game->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated',
+                'game' => $game
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
     public function updateHomeTeamScore(Request $request){
 
         try{
@@ -498,7 +526,7 @@ class GamesController extends Controller
     public function games()
     {
         try {
-            $games = Game::orderBy('id', 'desc')->get();
+            $games = Game::orderBy('id')->get();
             foreach ($games as $game) {
                 //get user of post
                 $game->user;
@@ -537,7 +565,7 @@ class GamesController extends Controller
     public function leagueGames(Request $request)
     {
         try {
-            $game = Game::where('post_b_i_id', $request->id)->orderBy('id', 'desc')->get();;
+            $game = Game::where('post_b_i_id', $request->id)->orderBy('id')->get();;
 
             return response()->json([
                 'success' => true,
@@ -551,10 +579,12 @@ class GamesController extends Controller
             ]);
         }
     }
+    
+    
     public function teamGames(Request $request)
     {
         try {
-            $game = Game::where('team_id', $request->id)->orderBy('id', 'desc')->get();;
+            $game = Game::where('team_id', $request->id)->orderBy('id')->get();;
 
             return response()->json([
                 'success' => true,
@@ -572,7 +602,25 @@ class GamesController extends Controller
     public function awayTeamGames(Request $request)
     {
         try {
-            $game = Game::where('away_team_id', $request->id)->orderBy('id', 'desc')->get();;
+            $game = Game::where('away_team_id', $request->id)->orderBy('id')->get();;
+
+            return response()->json([
+                'success' => true,
+                'Game' => $game
+            ]);
+
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function userGames(Request $request)
+    {
+        try {
+            $game = Game::where('user_id', $request->id)->orderBy('post_b_i_id')->get();;
 
             return response()->json([
                 'success' => true,

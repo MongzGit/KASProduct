@@ -21,7 +21,9 @@ class Kernel extends ConsoleKernel
         \APP\Console\Commands\updatePostGenInforE::class,
         \APP\Console\Commands\updatePostGenInforF::class,
         \APP\Console\Commands\updatePostGenInforG::class,
-    ];
+        \App\Console\Commands\UpdateTeamStats::class,
+
+        ];
     /**
      * Define the application's command schedule.
      *
@@ -38,14 +40,14 @@ class Kernel extends ConsoleKernel
             });
 
         // Schedule for posts with posty_type 'b'
-        $schedule->command('command:updatePostGenInforB')
+            $schedule->command('command:updatePostGenInforB')
             ->everyFourHours()
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'b')->exists();
             });
 
         // Schedule for posts with posty_type 'b'
-        $schedule->command('command:updatePostGenInforC')
+            $schedule->command('command:updatePostGenInforC')
             ->everySixHours()
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'c')->exists();
@@ -72,6 +74,9 @@ class Kernel extends ConsoleKernel
             ->when(function () {
                 return PostBI::where('post_general_infor1', 'g')->exists();
             });
+
+            $schedule->command('games:update-team-stats')->hourly(); // or daily()
+
     }
 
     /**

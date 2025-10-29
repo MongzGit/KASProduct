@@ -16,8 +16,8 @@ class TeamsController extends Controller
     public function create(Request $request)
     {
         try {
-            $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
-            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $team = new Team;
             $team->user_id = Auth::user()->id;
             $team->post_b_i_id = $request->post_b_i_id;
@@ -444,8 +444,8 @@ class TeamsController extends Controller
                     'message' => 'unauthorized access'
                 ]);
             }
-            $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
-            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:2048',]);
+            $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
 
             $team->post_photo1_width = $request->post_photo1_width;
             $team->post_photo1_height = $request->post_photo1_height;

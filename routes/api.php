@@ -22,6 +22,7 @@ Route::post('save_user_business_registered','App\Http\Controllers\Api\AuthContro
 Route::get('get_user_info','App\Http\Controllers\Api\AuthController@getUserInfo')->middleware('jwtAuth');
 Route::post('update_name_password', 'App\Http\Controllers\Api\AuthController@updateNamePassword')->middleware('jwtAuth');
 Route::post('update_user_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
+Route::post('update_user_address_location', 'App\Http\Controllers\Api\AuthController@updateAddressLocation')->middleware('jwtAuth');
 Route::post('update_user_business_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
 Route::post('update_user_photo', 'App\Http\Controllers\Api\AuthController@updateUserPhoto')->middleware('jwtAuth');
 Route::post('update_user_business_photo', 'App\Http\Controllers\Api\AuthController@updateUserBusinessPhoto')->middleware('jwtAuth');
@@ -126,6 +127,7 @@ Route::post('post_b_i_s/update_post_type','App\Http\Controllers\Api\PostBIsContr
 Route::post('post_b_i_s/update_prod_business_name','App\Http\Controllers\Api\PostBIsController@updateProdBusinessName')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_prod_name','App\Http\Controllers\Api\PostBIsController@updateProdName')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_prod_desc','App\Http\Controllers\Api\PostBIsController@updateProdDesc')->middleware('jwtAuth');
+Route::post('post_b_i_s/update_prod_location','App\Http\Controllers\Api\PostBIsController@updateProdLocation')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_prod_status','App\Http\Controllers\Api\PostBIsController@updateProdStatus')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_post_general_infor','App\Http\Controllers\Api\PostBIsController@updatePostGeneralInfor')->middleware('jwtAuth');
 Route::post('post_b_i_s/update_post_general_infor1','App\Http\Controllers\Api\PostBIsController@updatePostGeneralInfor1')->middleware('jwtAuth');
@@ -196,6 +198,7 @@ Route::post('games/update_home_team_id','App\Http\Controllers\Api\GamesControlle
 Route::post('games/update_away_team_id','App\Http\Controllers\Api\GamesController@updateAwayTeamId')->middleware('jwtAuth');
 Route::post('games/update_home_team_name','App\Http\Controllers\Api\GamesController@updateHomeTeamName')->middleware('jwtAuth');
 Route::post('games/update_away_team_name','App\Http\Controllers\Api\GamesController@updateAwayTeamName')->middleware('jwtAuth');
+Route::post('games/update_game_score','App\Http\Controllers\Api\GamesController@updateGameScore')->middleware('jwtAuth');
 Route::post('games/update_home_team_score','App\Http\Controllers\Api\GamesController@updateHomeTeamScore')->middleware('jwtAuth');
 Route::post('games/update_away_team_score','App\Http\Controllers\Api\GamesController@updateAwayTeamScore')->middleware('jwtAuth');
 Route::post('games/update_game_results','App\Http\Controllers\Api\GamesController@updateGameResults')->middleware('jwtAuth');
@@ -211,6 +214,8 @@ Route::get('games/game','App\Http\Controllers\Api\GamesController@game')->middle
 Route::get('games/league_games','App\Http\Controllers\Api\GamesController@leagueGames')->middleware('jwtAuth');
 Route::get('games/team_games','App\Http\Controllers\Api\GamesController@teamGames')->middleware('jwtAuth');
 Route::get('games/away_team_games','App\Http\Controllers\Api\GamesController@awayTeamGames')->middleware('jwtAuth');
+Route::get('games/user_games','App\Http\Controllers\Api\GamesController@userGames')->middleware('jwtAuth');
+
 
 Route::post('components/create','App\Http\Controllers\Api\ComponentsController@create')->middleware('jwtAuth');
 Route::post('components/update','App\Http\Controllers\Api\ComponentsController@update')->middleware('jwtAuth');
