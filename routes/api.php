@@ -168,6 +168,7 @@ Route::post('teams/update_post_photo','App\Http\Controllers\Api\TeamsController@
 Route::get('teams','App\Http\Controllers\Api\TeamsController@teams')->middleware('jwtAuth');
 Route::get('teams/team','App\Http\Controllers\Api\TeamsController@team')->middleware('jwtAuth');
 Route::get('teams/my_teams','App\Http\Controllers\Api\TeamsController@myTeams')->middleware('jwtAuth');
+Route::get('teams/league_teams','App\Http\Controllers\Api\TeamsController@leagueTeams')->middleware('jwtAuth');
 Route::post('teams/delete','App\Http\Controllers\Api\TeamsController@delete')->middleware('jwtAuth');
 
 

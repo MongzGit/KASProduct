@@ -27,7 +27,7 @@ return new class extends Migration
             $table->unsignedInteger('matches_drawn')->default(0)->nullable();
             $table->unsignedInteger('matches_lost')->default(0)->nullable();
             $table->unsignedInteger('points')->default(0)->nullable();
-            $table->unsignedInteger('goals')->default(0)->nullable();
+            $table->integer('goals')->default(0)->nullable();
             $table->string('current_news')->default('')->nullable();
             $table->string('post_photo1')->default('')->nullable();
             $table->unsignedDouble('post_photo1_width')->default(0.0)->nullable();

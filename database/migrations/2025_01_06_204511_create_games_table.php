@@ -23,13 +23,13 @@ return new class extends Migration
             $table->string('away_team_name')->default('')->nullable();
             $table->unsignedInteger('home_team_score')->default(0)->nullable();
             $table->unsignedInteger('away_team_score')->default(0)->nullable();
-            $table->string('game_results')->default('c')->nullable();//a-home team win, b- away team win, c/null- drawn
+            $table->string('game_results')->default('c')->nullable();//w-home team win, l- away team win, d/null- drawn
             $table->string('game_status')->default('a')->nullable();//a-not_played, b-in progress, c-played, d-forfieted
             $table->string('game_date')->default('')->nullable();
             $table->string('game_time')->default('')->nullable();
             $table->string('game_location')->default('')->nullable();
-            $table->string('game_info')->default('')->nullable();
-            $table->string('game_info2')->default('')->nullable();
+            $table->string('game_info')->default('')->nullable();//referree
+            $table->string('game_info2')->default('')->nullable();//stadium
             $table->boolean('updated_stats')->default(false);
 
 

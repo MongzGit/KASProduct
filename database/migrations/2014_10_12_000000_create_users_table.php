@@ -49,7 +49,7 @@ return new class extends Migration
             $table->string('business_address_city')->default('')->nullable();
             $table->string('business_address_postal_code')->default('')->nullable();
             $table->string('business_phone_number')->default('')->nullable();
-            $table->String('business_type')->default('')->nullable();
+            $table->String('business_type')->default('')->nullable(); //makes sure to define (i = sports)
             $table->String('business_delivery_infor1')->default('')->nullable();//ETD business specific(PT1H30M), this diffines the time difference from when order is made
             $table->String('business_delivery_infor2')->default('')->nullable();// any information about delivery
             $table->unsignedDouble('business_delivery_std_cost')->default(0.0)->nullable();

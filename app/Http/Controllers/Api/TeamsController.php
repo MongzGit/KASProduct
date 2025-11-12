@@ -533,7 +533,7 @@ class TeamsController extends Controller
     public function teams()
     {
         try {
-            $teams = Team::orderBy('id', 'desc')->get();
+            $teams = Team::orderBy('id')->get();
             foreach ($teams as $team) {
                 //get user of post
                 $team->user;
