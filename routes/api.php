@@ -216,6 +216,7 @@ Route::get('games/league_games','App\Http\Controllers\Api\GamesController@league
 Route::get('games/team_games','App\Http\Controllers\Api\GamesController@teamGames')->middleware('jwtAuth');
 Route::get('games/away_team_games','App\Http\Controllers\Api\GamesController@awayTeamGames')->middleware('jwtAuth');
 Route::get('games/user_games','App\Http\Controllers\Api\GamesController@userGames')->middleware('jwtAuth');
+Route::post('games/update_game_photo','App\Http\Controllers\Api\GamesController@updateGamePhoto')->middleware('jwtAuth');
 
 
 Route::post('components/create','App\Http\Controllers\Api\ComponentsController@create')->middleware('jwtAuth');

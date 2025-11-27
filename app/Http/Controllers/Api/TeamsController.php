@@ -579,8 +579,16 @@ class TeamsController extends Controller
     public function myTeams()
     {
         try {
-            $teams = Team::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+            $teams = Team::where('user_id', Auth::user()->id)->orderBy('id')->get();
             $user = Auth::user();
+            foreach ($teams as $team) {
+                //get user of post
+                $team->user;
+
+                $team['playersCount'] = $team->players->count();
+
+                $team['gamesCount'] = $team->games->count();
+            }
             return response()->json([
                 'success' => true,
                 'teams' => $teams,
@@ -597,7 +605,7 @@ class TeamsController extends Controller
     public function leagueTeams(Request $request)
     {
         try {
-            $teams = Team::where('post_b_i_id', $request->id)->orderBy('id', 'desc')->get();;
+            $teams = Team::where('post_b_i_id', $request->id)->orderBy('id')->get();;
             foreach ($teams as $team) {
                 //get user of post
                 $team->user;

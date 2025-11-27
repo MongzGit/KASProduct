@@ -16,6 +16,8 @@ class GamesController extends Controller
     public function create(Request $request)
     {
         try {
+            $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
             $game = new Game;
             $game->user_id = Auth::user()->id;
             $game->team_id = $request->team_id;
@@ -32,6 +34,42 @@ class GamesController extends Controller
             $game->game_location = $request->game_location;
             $game->game_info = $request->game_info;
             $game->game_info2 = $request->game_info2;
+            $game->post_photo1_width = $request->post_photo1_width;
+            $game->post_photo1_height = $request->post_photo1_height;
+            $game->post_photo2_width = $request->post_photo2_width;
+            $game->post_photo2_height = $request->post_photo2_height;
+
+            if ($request->file('post_photo1') != null) {
+                if ($validator1->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator1->messages()
+                    ]);
+                }
+                $file = $request->file('post_photo1')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $game->post_photo1 = $imageUrl;
+
+            } else {
+                $game->post_photo1 = null;
+            }
+
+            if ($request->file('post_photo2') != null) {
+                if ($validator2->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator2->messages()
+                    ]);
+                }
+                $file = $request->file('post_photo2')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $game->post_photo2 = $imageUrl;
+
+            } else {
+                $game->post_photo2 = null;
+            }
 
             $game->save();
             $game->user;
@@ -46,6 +84,69 @@ class GamesController extends Controller
             return response()->Json([
                 'success' => false,
                 'message' => '' . $e
+            ]);
+        }
+    }
+
+    public function updateGamePhoto(Request $request){
+        try{
+            $game = Game::find($request->id);
+            if (Auth::user()->id != $game->user_id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'unauthorized access'
+                ]);
+            }
+            $validator1 = Validator::make($request->all(), ['post_photo1' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
+            $validator2 = Validator::make($request->all(), ['post_photo2' => 'required|image|mimes:jpg,jpeg,png,jpeg,gif,svg|max:4000',]);
+
+            $game->post_photo1_width = $request->post_photo1_width;
+            $game->post_photo1_height = $request->post_photo1_height;
+            $game->post_photo2_width = $request->post_photo2_width;
+            $game->post_photo2_height = $request->post_photo2_height;
+
+            if ($request->file('post_photo1') != null) {
+                if ($validator1->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator1->messages()
+                    ]);
+                }
+                $file = $request->file('post_photo1')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $game->post_photo1 = $imageUrl;
+
+            } else {
+                $game->post_photo1 = null;
+            }
+
+            if ($request->file('post_photo2') != null) {
+                if ($validator2->fails()) {
+                    return response()->Json([
+                        'success' => false,
+                        'message' => $validator2->messages()
+                    ]);
+                }
+                $file = $request->file('post_photo2')->store('images', 'public');
+                $imageFilename = $file; // Replace with your actual image filename
+                $imageUrl = asset('storage/' . $imageFilename);
+                $game->post_photo2 = $imageUrl;
+            } else {
+                $game->post_photo2 = null;
+            }
+
+            $game->update();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'updated Photo',
+                'team' =>   $game
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
             ]);
         }
     }
@@ -508,7 +609,12 @@ class GamesController extends Controller
                 ]);
             }
             //check if post has photo to delete
-            
+            if ($game->post_photo1 != null) {
+                Storage::delete('public/posts/' . $game->post_photo1);
+            }
+            if ($game->post_photo2 != null) {
+                Storage::delete('public/posts/' . $game->post_photo2);
+            }
 
             $game->delete();
             return response()->json([

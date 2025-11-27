@@ -28,8 +28,14 @@ return new class extends Migration
             $table->string('game_date')->default('')->nullable();
             $table->string('game_time')->default('')->nullable();
             $table->string('game_location')->default('')->nullable();
-            $table->string('game_info')->default('')->nullable();//referree
-            $table->string('game_info2')->default('')->nullable();//stadium
+            $table->string('game_info')->default('')->nullable();//stadium
+            $table->string('game_info2')->default('')->nullable();//refereee
+            $table->string('post_photo1')->default('')->nullable();
+            $table->unsignedDouble('post_photo1_width')->default(0.0)->nullable();
+            $table->unsignedDouble('post_photo1_height')->default(0.0)->nullable();
+            $table->string('post_photo2')->default('')->nullable();
+            $table->unsignedDouble('post_photo2_width')->default(0.0)->nullable();
+            $table->unsignedDouble('post_photo2_height')->default(0.0)->nullable();
             $table->boolean('updated_stats')->default(false);
 
 
