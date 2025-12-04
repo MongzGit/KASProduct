@@ -24,6 +24,7 @@ Route::post('update_name_password', 'App\Http\Controllers\Api\AuthController@upd
 Route::post('update_user_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
 Route::post('update_user_address_location', 'App\Http\Controllers\Api\AuthController@updateAddressLocation')->middleware('jwtAuth');
 Route::post('update_user_business_address', 'App\Http\Controllers\Api\AuthController@updateUserAddress')->middleware('jwtAuth');
+Route::post('update_user_email', 'App\Http\Controllers\Api\AuthController@updateUserEmail')->middleware('jwtAuth');
 Route::post('update_user_photo', 'App\Http\Controllers\Api\AuthController@updateUserPhoto')->middleware('jwtAuth');
 Route::post('update_user_business_photo', 'App\Http\Controllers\Api\AuthController@updateUserBusinessPhoto')->middleware('jwtAuth');
 Route::post('update_delivery_std_cost_infor', 'App\Http\Controllers\Api\AuthController@updateDeliveryStdCostInfor')->middleware('jwtAuth');

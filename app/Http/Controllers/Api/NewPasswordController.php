@@ -57,94 +57,40 @@ class NewPasswordController extends Controller
 
     public function reset(Request $request)
     {
-        try {
-            // $request->validate([
-            //     'token' => 'required',
-            //     'email' => 'required|email',
-            //     'password' => ['required', 'confirmed', RulesPassword::defaults()],
-            // ]);
+        $validator = Validator::make($request->all(), [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', RulesPassword::defaults()],
+            'password_confirmation' => 'required|same:password',
+        ]);
 
-            // Check if validation fails
-            $validator = Validator::make($request->all(), [
-                'token' => 'required',
-                'email' => 'required|email',
-                'password' => ['required', RulesPassword::defaults()],
-                'password_confirmation' => 'required|same:password',
-            ]);
-
-            $status = Password::reset(
-                $request->only('email', 'password', 'password_confirmation', 'token'),
-                function ($user) use ($request) {
-                    $user->forceFill([
-                        'password' => Hash::make($request->password),
-                        'remember_token' => Str::random(60),
-                    ])->save();
-
-                    $user->tokens()->delete();
-
-                    event(new PasswordReset($user));
-                }
-            );
-
-            if ($status == Password::PASSWORD_RESET) {
-                return view('reset-password-successful')->withErrors($validator->errors());
-                // return response()->json([
-                //     'success' => true,
-                //     'message' => $validator->errors(),
-                //     //'email' => Auth::user()->email,
-                //     'password' => $request->password,
-                //     'request' => $request->all(),
-                //     'offical message' => 'Password reset successfully'
-                // ]);
-            } else {
-                return view('reset-password')->withErrors($validator->errors());
-                // return response()->json([
-                //     'success' => false,
-                //     'message' => $validator->errors(),
-                //     //'email' => Auth::user()->email,
-                //     'password' => $request->password,
-                //     'request' => $request->all(), 
-                //     'offical message' => 'Password not reset successfully'
-                // ]);
-            }
-
-        } catch (ValidationException $e) {
-            //     // Return the reset-password view with validation errors
-            return view('reset-password')->withErrors($e->errors());
+        if ($validator->fails()) {
+            return view('reset-password', ['errors' => $validator->errors()]);
         }
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($request->password),
+                    'remember_token' => Str::random(60),
+                ])->save();
+
+                $user->tokens()->delete();
+                event(new PasswordReset($user));
+            }
+        );
+
+        if ($status == Password::PASSWORD_RESET) {
+            return view('reset-password-successful');
+        }
+
+        return view('reset-password', ['errors' => ['email' => [__($status)]]]);
     }
 
     public function updatePassword(Request $request)
     {
         return view('reset-password');
-        // $request->validate([
-        //     'token' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => ['required', 'confirmed', RulesPassword::defaults()],
-        // ]);
 
-        // $status = Password::reset(
-        //     $request->only('email', 'password', 'password_confirmation', 'token'),
-        //     function ($user) use ($request) {
-        //         $user->forceFill([
-        //             'password' => Hash::make($request->password),
-        //             'remember_token' => Str::random(60),
-        //         ])->save();
-
-        //         $user->tokens()->delete();
-
-        //         event(new PasswordReset($user));
-        //     }
-        // );
-
-        // if ($status == Password::PASSWORD_RESET) {
-        //     return response([
-        //         'message'=> 'Password reset successfully'
-        //     ]);
-        // }
-
-        // return response([
-        //     'message'=> __($status)
-        // ], 500);
     }
 }
