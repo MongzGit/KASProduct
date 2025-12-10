@@ -559,13 +559,13 @@ class TeamsController extends Controller
         try {
             $team = Team::find($request->id);
 
-            $team['playersCount'] = count($team->players);
+            $team['playersCount'] = $team->players->count();
 
-            $team['gamesCount'] = count($team->games);
+            $team['gamesCount'] = $team->games->count();
 
             return response()->json([
                 'success' => true,
-                'team' => $team
+                'teams' => $team
             ]);
 
         } catch (Exception $e) {
@@ -592,7 +592,6 @@ class TeamsController extends Controller
             return response()->json([
                 'success' => true,
                 'teams' => $teams,
-                'user' => $user
             ]);
         } catch (Exception $e) {
             return response()->Json([
