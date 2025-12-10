@@ -598,12 +598,28 @@ class PlayersController extends Controller
     public function players()
     {
         try {
-            $players = Player::orderBy('id', 'desc')->get();
+            $players = Player::orderBy('id')->get();
             foreach ($players as $player) {
                 //get user of post
                 $player->user;
 
             }
+            return response()->json([
+                'success' => true,
+                'players' => $players
+            ]);
+        } catch (Exception $e) {
+            return response()->Json([
+                'success' => false,
+                'message' => null . $e
+            ]);
+        }
+    }
+
+    public function teamPlayers(Request $request)
+    {
+        try {
+            $players = Player::where('team_id', $request->id)->orderBy('id')->get();
             return response()->json([
                 'success' => true,
                 'players' => $players

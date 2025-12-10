@@ -189,10 +189,12 @@ Route::post('players/update_goals','App\Http\Controllers\Api\PlayersController@u
 Route::post('players/update_assists','App\Http\Controllers\Api\PlayersController@updateAssists')->middleware('jwtAuth');
 Route::post('players/update_player_info','App\Http\Controllers\Api\PlayersController@updatePlayerInfo')->middleware('jwtAuth');
 Route::post('players/update_player_info2','App\Http\Controllers\Api\PlayersController@updatePlayerInfo2')->middleware('jwtAuth');
-Route::post('players/update_post_photo','App\Http\Controllers\Api\PlayersController@updatePlayerInfo')->middleware('jwtAuth');
+Route::post('players/update_player_photo','App\Http\Controllers\Api\PlayersController@updatePostPhoto')->middleware('jwtAuth');
 Route::post('players/delete','App\Http\Controllers\Api\PlayersController@delete')->middleware('jwtAuth');
 Route::get('players','App\Http\Controllers\Api\PlayersController@players')->middleware('jwtAuth');
 Route::get('players/player','App\Http\Controllers\Api\PlayersController@player')->middleware('jwtAuth');
+Route::get('players/team_players','App\Http\Controllers\Api\PlayersController@teamPlayers')->middleware('jwtAuth');
+
 
 Route::post('games/create','App\Http\Controllers\Api\GamesController@create')->middleware('jwtAuth');
 Route::post('games/update','App\Http\Controllers\Api\GamesController@update')->middleware('jwtAuth');
