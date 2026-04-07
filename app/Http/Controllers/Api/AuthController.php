@@ -78,27 +78,66 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $encryptedPass = Hash::make($request->password);
+        // Step 1: Basic validation rules
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'password' => 'required|string|min:4',
+            'phone_number' => 'nullable|string|max:20',
+            'address_location' => 'nullable|string|max:255',
+        ]);
 
-        $user = new User;
+        if ($validator->fails()) {
+            // Check if password validation failed specifically
+            if ($validator->errors()->has('password')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Password must be at least 4 characters long'
+                ], 422);
+            }
+
+            // Generic validation failure
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         try {
+            // Step 2: Check if a user with same name AND same password already exists
+            $existingUser = User::where('name', $request->name)->get()
+                ->first(function ($user) use ($request) {
+                    return Hash::check($request->password, $user->password);
+                });
+
+            if ($existingUser) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User with the same name and password already exists'
+                ], 409);
+            }
+
+            // Step 3: Create new user (allowed if same name but different password)
+            $user = new User;
             $user->name = $request->name;
-            $user->password = $encryptedPass;
+            $user->password = Hash::make($request->password);
             $user->phone_number = $request->phone_number;
             $user->address_location = $request->address_location;
             $user->save();
 
+            // Step 4: Auto-login after registration
             $request_login = Request::create('/login', 'POST', [
                 'name' => $request->name,
                 'password' => $request->password
             ]);
+
             return $this->login($request_login);
+
         } catch (Exception $e) {
-            return response()->Json([
+            return response()->json([
                 'success' => false,
-                'message' => '' . $e
-            ]);
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
         }
     }
 
@@ -548,7 +587,7 @@ class AuthController extends Controller
             $user = User::find(Auth::user()->id);
             $user->address_location = $request->address_location;
             $user->business_address_location = $request->address_location;
-            
+
             $user->update();
 
             return response()->json([
@@ -733,5 +772,69 @@ class AuthController extends Controller
         $token = $tokenService->generateAccessToken();
 
         return response()->json(['access_token' => $token]);
+    }
+
+    public function deleteOnApp()
+    {
+        try {
+            $user = Auth::user();
+
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthorized'
+                ]);
+            }
+
+            $user->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User account deleted successfully'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting user: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+    public function loginDeletion(Request $request)
+    {
+        $credentials = $request->only('name', 'password');
+
+        if (!$token = auth()->attempt($credentials)) {
+            return back()->withErrors(['Invalid credentials']);
+        }
+
+        // Redirect to delete view with token
+        return view('delete', ['token' => $token]);
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $user = auth()->user(); // user resolved by jwtAuth middleware
+
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthorized'
+                ], 401);
+            }
+
+            $user->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User account deleted successfully'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting user: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }

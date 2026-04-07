@@ -43,6 +43,27 @@ Route::post('save_whatsapp_info', 'App\Http\Controllers\Api\AuthController@saveW
 Route::post('update_whatsapp_url_info', 'App\Http\Controllers\Api\AuthController@updateWhatsappUrlInfo')->middleware('jwtAuth');
 Route::post('update_whatsapp_enabled_info', 'App\Http\Controllers\Api\AuthController@updateWhatsappEnabledInfo')->middleware('jwtAuth');
 
+Route::post('user/delete_on_app','App\Http\Controllers\Api\AuthController@deleteOnApp')->middleware('jwtAuth');
+
+// Show login form
+Route::get('user/loginDeletion', function () {
+    return view('loginDeletion');
+})->name('user.loginDeletionForm');
+
+// Handle login and redirect to delete view
+Route::post('user/loginDeletion', [App\Http\Controllers\Api\AuthController::class, 'loginDeletion'])
+    ->name('user.loginDeletion');
+
+// Show delete view (optional direct route)
+Route::get('user/deleteView', function () {
+    return view('delete');
+})->name('user.deleteView');
+
+// Handle account deletion
+Route::delete('user/delete', [App\Http\Controllers\Api\AuthController::class, 'delete'])
+    ->middleware('jwtAuth')
+    ->name('user.delete');
+
 
 //for posts
 Route::post('posts/create','App\Http\Controllers\Api\PostsController@create')->middleware('jwtAuth');

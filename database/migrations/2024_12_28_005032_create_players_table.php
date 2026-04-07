@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('goals')->default('')->nullable();
             $table->string('assists')->default('')->nullable();
             $table->string('matches_played')->default('')->nullable();
-            $table->string('player_info')->default('')->nullable();
+            $table->string('player_info')->default('')->nullable();//for aka name of player
             $table->string('player_info2')->default('')->nullable();
             $table->string('post_photo1')->default('')->nullable();
             $table->unsignedDouble('post_photo1_width')->default(0.0)->nullable();

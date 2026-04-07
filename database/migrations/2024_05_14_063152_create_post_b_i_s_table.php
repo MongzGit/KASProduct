@@ -21,13 +21,13 @@ return new class extends Migration
             $table->string('prod_name')->default('')->nullable();
             $table->string('prod_desc', 1500)->default('')->nullable();
             $table->unsignedDouble('prod_price')->default(0.0)->nullable();
-            $table->string('prod_status')->default('')->nullable();//a-available, b-outOfStock
+            $table->string('prod_status')->default('')->nullable();//a-available, b-outOfStock, d - underlying (not to be seen but at the shop)
             $table->string('consumable_prod_special')->default('')->nullable();
             $table->string('consumable_prod_item_desc')->default('')->nullable();
             $table->String('consumable_prod_delivery_infor1')->default('')->nullable();//ETD 
             $table->String('consumable_prod_delivery_infor2')->default('')->nullable();
             $table->unsignedDouble('consumable_prod_delivery_std_cost')->default(0.0)->nullable();
-            $table->string('prod_location')->default('')->nullable();//critical to show post location vs user current location
+            $table->string('prod_location')->default('')->nullable();//critical to show post location vs user current location, "a" location means overall and general priority is given
             $table->string('news_headline')->default('')->nullable();
             $table->string('news_byline')->default('')->nullable();
             $table->string('news_lead_paragraph', 1500)->default('')->nullable();
@@ -57,8 +57,8 @@ return new class extends Migration
             $table->string('event_ticket_price_vvip_desc')->default('')->nullable();
             $table->string('event_artist_lineup', 1500)->default('')->nullable();
             $table->string('event_specials')->default('')->nullable();
-            $table->string('post_general_infor1')->default('')->nullable(); //used for sorting internally(Cron Job) and grouping with item description.
-            $table->string('post_general_infor2')->default('')->nullable(); //for food, it types the different food cateries (sphatlo or Pap&vlais), for 
+            $table->string('post_general_infor1')->default('')->nullable(); //used for sorting internally(Cron Job)   (and  grouping with item description?).
+            $table->string('post_general_infor2')->default('')->nullable(); //for food it types the different food cateries (sphatlo or Pap&vlais), for Sports show main league post and general sports news posts, if "u" they are filtered as extras
             $table->unsignedDouble('post_general_infor3')->default(0.0)->nullable();
             $table->string('post_general_infor4')->default('')->nullable(); //used for notifications related to product
             $table->string('post_photo1')->default('')->nullable();
